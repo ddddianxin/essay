@@ -542,6 +542,12 @@ template {
     margin: auto;
 }
 
+@media screen and (max-width: 800px) {
+    .container {
+        width: 100%;
+    }
+}
+
 .wto {
     white-space: nowrap;
     overflow: hidden;

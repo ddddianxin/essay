@@ -40,24 +40,6 @@
                 </div>
             </div>
         </div>
-        <div id="mHead">
-            <div class="wapTop">
-                <div class="mLfBtn">
-                    <img src="../../images/menu.png">
-                    <span>首页</span>
-                </div>
-                <div class="mSearch">
-                    <div class="mSearBox">
-                        <i class="el-icon-search"></i>
-                        <input type="text" value="搜索" placeholder="搜索">
-                    </div>
-                    <span>English</span>
-                </div>
-            </div>
-            <div class="mLogo">
-                <img src="../../images/mlogo.png">
-            </div>
-        </div>
     </header>
 </template>
 
@@ -104,12 +86,6 @@
 
 <style lang="scss">
  @import '../../style/mixin';
-.webTop{
-    display: block;
-}
-#mHead{
-    display: none;
-}
 #head_top{
     width:100%;
     text-align: center;

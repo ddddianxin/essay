@@ -8,8 +8,6 @@
                         <div class="coverBg">
                             <div class="bannerText">
                                 <h2 class="wto">{{item.title}}</h2>
-                                <p>{{item.description}}</p>
-                                <router-link :to="item.url">查看更多</router-link>
                             </div>
                         </div>
                         <img :src="item.img">
@@ -26,11 +24,6 @@
                                 <img :src="item.img">
                                 <h4>{{item.title}}</h4>
                                 <p>{{item.date}}</p>
-                                <div class="tc">
-                                    <span class="arrow">
-                                        <img src="../../images/arrow.png">
-                                    </span>
-                                </div>
                             </div>
                         </div>
                         <div class="sciRg">
@@ -72,11 +65,6 @@
                                     <img :src="item.img">              
                                     <h4 class="wto">{{item.name}}</h4>
                                     <p>{{item.description}}</p>
-                                    <div class="tc">
-                                        <span class="arrow">
-                                            <img src="../../images/arrow.png">
-                                        </span>
-                                    </div>
                                 </div>
                             </div>
                             <div class="lfArrow"><img src="../../images/lfArrow.png"></div>
@@ -96,11 +84,6 @@
                             <h4>{{item.title}}</h4>
                             <h5>岗位简介</h5>
                             <p>{{item.des}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -110,7 +93,7 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
+    import headTop from '../../components/mobile/headTop';
     import Swiper from 'swiper';
     import {mapActions} from 'vuex'
 
@@ -259,12 +242,11 @@
             if(document.body.clientWidth<=1024){
                 this.bannerHeight = '218px';
                 this.newsShowNum = 3;
-                this.teamShowNum = 4;
             }
             new Swiper ('.swiper-container', {
                 loop: true,
                 speed:1000,
-                slidesPerView : 4,
+                slidesPerView : 3,
                 spaceBetween : 20,
                 slidesPerGroup : 1,
                 navigation: {
@@ -300,11 +282,12 @@
     @import '../../style/mixin';
     @import '../../style/swiper.min.css';
    .banner{
-       height: 613px;
-       position: relative;
+        height:218px;
+        margin-top:px2rem(180);
+        position: relative;
    }
    .banner img{
-       height: 613px;
+       height:218px;
        width:100%;
        object-fit: cover;
    }
@@ -312,12 +295,12 @@
    .coverBg{
        background-color:rgba(21,43,89,.75);
        position: absolute;
-       top:0;
-       left: 0;
+       top:px2rem(384);
+        left:0;
+        width:100%;
+        height:26px;
+        padding:0;
        z-index:10;
-       height: 613px;
-       width:40%;  
-       padding:45px;
    }
    .bannerText{
        color:#fff;
@@ -325,73 +308,79 @@
        float: right;
    }
    .bannerText h2{
-       margin-top:130px;
-       font-size: 30px;
+       margin:0;
+       font-size:px2rem(14);
+       line-height:26px;
        font-weight: bold;
-       margin-bottom: 20px;
-       line-height: 40px;
    }
-   .bannerText p{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 7 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-   }
-   .bannerText a{
-       border:2px solid #fff;
-       width:120px;
-       height: 30px;
-       line-height: 30px;
-       text-align: center;
-       display: block;
-       margin-top:20px;
-   }
+   .bannerText p,.bannerText a{
+        display: none;
+    }
+    .el-carousel__indicators.el-carousel__indicators--horizontal{
+        right:0;
+        left:initial;
+    }
+    .el-carousel__indicators--horizontal li{
+        float:right;
+    }
+    .el-carousel__indicator--horizontal{
+        padding:0 6px 8px 0;
+    }
+    .el-carousel__button{
+        width:10px;
+        height: 10px;
+        border-radius: 30px;
+    }
 
    /* 科研动态 */
    .sciBg{
        background-color:#f7f7f7;
    }
    .sciNews{
-       width:1024px;
+       width:100%;
+    padding:px2rem(20) 0;
        margin:0 auto;
-       padding:30px 0;
    }
    h3{
-       font-size: 25px;
+       font-size:px2rem(32);
+        padding:0 px2rem(40);
+        height:px2rem(22);
        font-weight: bold;
        color:#152b59;
-       padding:5px 0 8px;
    }
    .h3BLine{
-       width:70px;
-       height: 3px;
+       margin-left:px2rem(40);
+        width:px2rem(80);
+        height: px2rem(4);
+        display: inline-block;
        background-color: #152b59;
-       display: inline-block;
    }
    .sciBox{
        display: flex;
-       flex-wrap: nowrap;
+       flex-wrap: wrap;
        justify-content: space-between;
-       margin-top:10px;
+       margin-top:0;
    }
    .sciRg{
-       width:200px;
-       height: 590px;
-       padding:20px;
+       width:100%;
+        height:px2rem(840);
+        margin:0 px2rem(40);
+        padding:px2rem(20) px2rem(40);
        background-image: linear-gradient( #162a59, #530760);
    }
    .sciRg h3{
-       margin-top:15px;
+       padding:0;
+        margin:0;
        color:#fff;
    }
    .sciRg .h3BLine{
        background-color: #fff;
-       
+       margin:0;
    }
    .sciRgItem{
        color:#fff;
-       margin-top:15px;
+       font-size:px2rem(24);
+        margin-top:px2rem(0);
    }
    .sciRgItem h4{
         overflow: hidden ;
@@ -399,126 +388,130 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        font-weight: bold;
-        font-size: 12px;
+       line-height: px2rem(40);
+        font-weight: normal;
         line-height: 22px;
    }
    .sciRgItem p{
        color:#b4b2c7;
-       font-size:12px;
        border-bottom:1px solid #5d5281;
-       padding:5px 0 13px;
-       margin-bottom:13px;
+       font-size:px2rem(24);
+        padding:px2rem(4) 0 px2rem(4);
+        margin-bottom:px2rem(8);
    }
    .sciLf{
-       width:764px;
-       height: 630px;
+       width:100%;
+        height: px2rem(440);
+        padding:0 px2rem(40);
        display: flex;
        flex-wrap: wrap;
        justify-content: space-between;
        align-content: space-between;
    }
    .sciLfItem{
-       width:240px;
-       height: 306px;
+       width:px2rem(215);
+        height:px2rem(400);
        background-color: #fff;
    }
    .sciLfItem img{
-       width:240px;
-       height: 140px;
+       width:px2rem(215);
+        height:px2rem(136);
        object-fit: cover;
    }
    .sciLfItem h4{
-       font-size: 13px;
+      font-size: px2rem(24);
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 5;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        font-weight: bold;
+        font-weight: normal;
+        margin: 0;
+        padding:0 px2rem(12);
+        line-height: px2rem(38);
         color:#333;
-        padding:0 20px;
-        margin:5px 0;
-        height:88px;
-        /* font-family: 'PingFang SC'; */
-        line-height: 22px;
-
+        height:px2rem(190);
    }
    .sciLfItem p{
        color:#666;
-       font-size: 10px;
-       padding:0 20px 5px 20px;
+       font-size: px2rem(24);
+        padding:px2rem(4) px2rem(12);
+   }
 
-   }
-   .sciLf .arrow{
-       width:30px;
-       height: 32px;
-       background-color: #152b59;
-       border-radius: 30px 30px 0 0;
-       display: inline-block;
-       text-align: center;
-   }
-   .sciLf .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;
-       
-   }
     /* 中心介绍 */
     .centerBg{
         background-color: #f0edf1;
-        height: 516px;
-        padding:15px 0;
+        padding:px2rem(20) px2rem(40);
+        height:px2rem(352);
     }
     .centerIntro{
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
+    .centerIntro img{
+        width:px2rem(352);
+        height:px2rem(352);
+    }
     .ctIntro{
-        width:426px;
-        height: 473px;
-        padding-top:40px;
+        width:50%;
+        height:px2rem(352);
+        padding:0 0 0 px2rem(40);
         position: relative;
     }
+    .ctIntro h3{
+        padding:0;
+    }
+    .ctIntro .h3BLine{
+        margin:0;
+    }
     .ctText{
-        padding-top:20px;
+        padding:0;
+        height:px2rem(190);
+        overflow: hidden;
     }
     .ctText p{
-        font-size:13px;
+        font-size:px2rem(24);
+        line-height: px2rem(40);
         text-indent: 2em;
         color:#333;
     }
     .ctText a{
-        width:120px;
-        height: 30px;
-        line-height: 30px;
         color:#152b59;
-        border:2px solid #152b59;
         display: block;
         text-align: center;
-        font-size:13px;
         position: absolute;
-        bottom:36px;
         right: 0;
+        width:px2rem(180);
+        height: px2rem(40);
+        line-height: px2rem(40);
+        font-size:px2rem(24);
+        bottom: 0;
+        border:1px solid #152b59;
     }
     /* 科研团队 */
     .teamBg{
         background-color:#f7f7f7;
-        padding:35px 0 0 0;
+        padding:px2rem(20) 0 0 0;
+    }
+    .teamTit .h3BLine{
+        margin:0;
     }
     .teamTit{
         text-align: center;
-        margin-bottom:15px;
+        margin-bottom:px2rem(4);
+    }
+    .teamContainer{
+        padding:0 px2rem(40);
     }
     .teamItem{
-       width:240px;
-       height: 306px;
+       width:px2rem(232);
+        height:px2rem(300);
        background-color: #fff;
    }
    .teamItem img{
-       width:240px;
-       height: 140px;
+        width:px2rem(232);
+        height:px2rem(140);
        object-fit: cover;
    }
    .teamItem h4{
@@ -554,7 +547,7 @@
        padding-top:6px;
     }
     .teamSwiper{
-        width:1024px;
+        width:px2rem(750);
         height: 360px;
         position:relative;
         overflow: hidden;
@@ -652,179 +645,4 @@
        height: 20px;
        padding-top:6px;  
    }
-
-   @media screen and (max-width: 1024px){
-    .banner{
-        height:218px;
-        margin-top:px2rem(180);
-    }
-    .banner img{
-         height:218px;
-    }
-    .coverBg{
-        top:px2rem(384);
-        left:0;
-        width:100%;
-        height:26px;
-        padding:0;
-    }
-    .bannerText h2{
-        margin:0;
-        font-size:px2rem(14);
-        line-height:26px;
-    }
-    .bannerText p,.bannerText a{
-        display: none;
-    }
-    .el-carousel__indicators.el-carousel__indicators--horizontal{
-        right:0;
-        left:initial;
-    }
-    .el-carousel__indicators--horizontal li{
-        float:right;
-    }
-    .el-carousel__indicator--horizontal{
-        padding:0 6px 8px 0;
-    }
-    .el-carousel__button{
-        width:10px;
-        height: 10px;
-        border-radius: 30px;
-    }
-
-    .sciNews{
-        width:100%;
-        padding:px2rem(20) 0;
-    }
-    h3{
-        font-size:px2rem(32);
-        padding:0 px2rem(40);
-        height:px2rem(22);
-    }
-    .h3BLine{
-        margin-left:px2rem(40);
-        width:px2rem(80);
-        height: px2rem(4);
-        display: inline-block;
-    }
-    .sciBox{
-        flex-wrap: wrap;
-        margin-top:0;
-    }
-    .sciLf{
-        width:100%;
-        height: px2rem(440);
-        padding:0 px2rem(40);
-    }
-    .sciLfItem{
-        width:px2rem(215);
-        height:px2rem(400);
-    }
-    .sciLfItem img{
-        width:px2rem(215);
-        height:px2rem(136);
-    }
-    .sciLfItem h4{
-        font-size: px2rem(24);
-        font-weight: normal;
-        margin: 0;
-        padding:0 px2rem(12);
-        line-height: px2rem(38);
-        -webkit-line-clamp: 5;
-        height:px2rem(190);
-    }
-    .sciLfItem p{
-        font-size: px2rem(22);
-        padding:px2rem(4) px2rem(12);
-    }
-    .sciLf .arrow{
-        display: none;
-    }
-    .sciRg{
-        width:100%;
-        height:px2rem(800);
-        margin:0 px2rem(40);
-        padding:px2rem(20) px2rem(40);
-    }
-    .sciRg h3{
-        padding:0;
-        margin:0;
-    }
-    .sciRg .h3BLine{
-        margin:0;
-    }
-    .sciRgItem{
-        font-size:px2rem(24);
-        margin-top:px2rem(0);
-    }
-    .sciRgItem h4{
-        line-height: px2rem(40);
-        font-weight: normal;
-    }
-    .sciRgItem p{
-        font-size:px2rem(24);
-        padding:px2rem(4) 0 px2rem(8);
-        margin-bottom:px2rem(8);
-    }
-    .centerBg{
-        padding:px2rem(20) px2rem(40);
-        height:px2rem(352);
-    }
-    .centerIntro img{
-        width:px2rem(352);
-        height:px2rem(352);
-    }
-    .ctIntro{
-        width:50%;
-        height:px2rem(352);
-        padding:0 0 0 px2rem(40);
-    }
-    .ctIntro h3{
-        padding:0;
-    }
-    .ctIntro .h3BLine{
-        margin:0;
-    }
-    .ctText{
-        padding:0;
-        height:px2rem(190);
-        overflow: hidden;
-    }
-    .ctText p{
-        font-size:px2rem(24);
-        line-height: px2rem(40);
-    }
-    .ctText a{
-        width:px2rem(180);
-        height: px2rem(40);
-        line-height: px2rem(40);
-        font-size:px2rem(24);
-        bottom: 0;
-        border:1px solid #152b59;
-    }
-    .teamBg{
-        padding:px2rem(20) 0 0 0;
-    }
-    .teamTit .h3BLine{
-        margin:0;
-    }
-    .teamTit{
-        margin-bottom:px2rem(4);
-    }
-    .teamSwiper{
-        width:px2rem(750);
-    }
-    .teamContainer{
-        padding:0 px2rem(40);
-    }
-    .teamItem{
-        width:px2rem(232);
-        height:px2rem(300);
-    }
-    .teamItem img{
-        width:px2rem(232);
-        height:px2rem(140);
-    }
-
-}
 </style>
