@@ -1,60 +1,62 @@
 <template>
     <div id='webfoot'>
-<!--        <div class="bg1">-->
-<!--            <div class="container flex j-bet">-->
-<!--                <div class="bgItem flex">-->
-<!--                    <div class="bgNum">1</div>-->
-<!--                    <div class="bgInfo">-->
-<!--                        <h2>品质保障</h2>-->
-<!--                        <p>品质护航 购物无忧</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="bgItem flex">-->
-<!--                    <div class="bgNum">2</div>-->
-<!--                    <div class="bgInfo">-->
-<!--                        <h2></h2>-->
-<!--                        <p>品质护航 购物无忧</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="bgItem flex">-->
-<!--                    <div class="bgNum">3</div>-->
-<!--                    <div class="bgInfo">-->
-<!--                        <h2>品质保障</h2>-->
-<!--                        <p>品质护航 购物无忧</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--                <div class="bgItem flex">-->
-<!--                    <div class="bgNum">4</div>-->
-<!--                    <div class="bgInfo">-->
-<!--                        <h2>品质保障</h2>-->
-<!--                        <p>品质护航 购物无忧</p>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--        </div>-->
-        <div class="bg2">
-            <div class="container">
-<!--                <div class="bgLink">--> 
-<!--                    <a href="" target="_blank">如何注册</a>-->
-<!--                    <a href="" target="_blank">交易流程</a>-->
-<!--                    <a href="" target="_blank">如何购买</a>-->
-<!--                    <a href="" target="_blank">如何支付</a>-->
-<!--                    <a href="" target="_blank">关于我们</a>-->
-<!--                    <a href="" target="_blank">联系我们</a>-->
-<!--                </div>-->
-                <div class="bgText">
-                    <p>版权所有 ©广州萃英化学科技有限公司 <a href="http://www.beian.miit.gov.cn/" target="_blank">粤ICP备15047151号</a></p>
-                    <p>地址：广州市黄埔区黄埔东路266号怡港大厦A栋606-607室、B栋708-709室</p>
-                </div>
+        <div class="container foot">
+            <div class="footItem">
+                <h3>首页</h3>
+                <router-link to="">支撑载体</router-link>
+                <router-link to="">中心简介</router-link>
+                <router-link to="">科研队伍</router-link>
+                <router-link to="">人才招聘</router-link>
+                <router-link to="">联系我们</router-link>
+            </div>
+            <div class="footItem">
+                <h3>中心简介</h3>
+                <router-link to="">中心概况</router-link>
+                <router-link to="">研究方向</router-link>
+                <router-link to="">介绍视频</router-link>
+            </div>
+            <div class="footItem">
+                <h3>新闻动态</h3>
+                <router-link to="">科研动态</router-link>
+                <router-link to="">学术交流</router-link>
+                <router-link to="">中心活动</router-link>
+            </div>
+            <div class="footItem">
+                <h3>科研队伍</h3>
+                <router-link to="">高级职称</router-link>
+                <router-link to="">中级职称</router-link>
+                <router-link to="">初级职称</router-link>
+                <router-link to="">支撑管理</router-link>
+                <router-link to="">学生</router-link>
+            </div>
+            <div class="footItem">
+                <h3>科研成果</h3>
+                <router-link to="">科研项目</router-link>
+                <router-link to="">期刊论文</router-link>
+                <router-link to="">专利专著</router-link>
+                <router-link to="">成果奖励</router-link>
+            </div>
+            <div class="footItem">
+                <h3>实验平台</h3>
+                <router-link to="">支撑载体</router-link>
+                <router-link to="">实验室</router-link>
+                <router-link to="">仪器设备</router-link>
+            </div>
+            <div class="contact">
+                <div class="erCode"><img></div>
+                <p>联系我们</p>
             </div>
         </div>
-        
+        <div class="container footText">
+            <span class="mr15">中国科学院深圳先进技术研究院</span>
+            <span class="mr15">版权所有</span>
+            <span>地址：深圳市南山区西丽深圳大学城学苑大道1068号*****号</span>
+        </div>
     </div>
     
 </template>
 
 <script>
-    import {wxjssdk} from '../../service/api';
     import wxapi from '../../service/wxapi.js';
     export default {
         name: 'foot',
@@ -65,15 +67,7 @@
         },
         methods:{
             async initData(){
-                var url=encodeURIComponent(location.href.split('#')[0]);
-                var data = await wxjssdk(url);
-                var option = {
-                    title:window.location.title?window.location.title:'六摩尔直营商城 www.sixmol.com',
-                    desc:'主营医药中间体、原料药、化妆品高端原料、日化清洗行业原材料，包括进出口国际贸易业务。',
-                    link:window.location.href,
-                    imgUrl:'http://www.huaxuejia.cn/Public/home/images/logo.jpg'
-                }
-                wxapi.wxRegister(data,option);//data是微信配置信息，option是分享要配置的内容
+                
             }
         },
         created(){
@@ -84,52 +78,51 @@
 </script>
 
 <style scoped>
-    #webfoot{height: auto;}
-    .bg1{
-        background-color:#202020;
-        padding:20px 0;
-        margin:0 auto;
+    #webfoot{
+        height: auto;
+        background-color:#152b59;
+        padding:30px 0;
     }
-    .bgNum{
-        background-color:#0bb8b2;
-        color:#fff;
-        font-size:24px;
-        font-weight: bold;
-        width:42px;
-        height:42px;
-        border-radius: 100px;
+    .foot{
+        display:flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .footItem{
         text-align: center;
-        line-height: 42px;
-    }
-    .bgInfo{
-        padding-left: 10px;
-    }
-    .bgInfo h2{
         color:#fff;
-        font-size:16px;
+        width:60px;
+    }
+    .footItem h3{
+        font-size:13px;
         font-weight: bold;
+        margin:0 0 25px 0;
     }
-    .bgInfo p{
-        color:#999;
+    .footItem a{
+        font-size: 12px;
+        display: block;
+        color:#ddd;
     }
-    .bg2{
-        background-color:#111111;
-        padding:20px 0;
-        margin:0 auto;
+    .contact{
+        width:100px;
+        height: 100px;
+    }
+    .erCode{
+        width:100px;
+        height: 100px; 
+        background-color: #fff;
+    }
+    .contact p{
+        color:#fff;
+        font-size: 12px;
         text-align: center;
-    }
-    .bgLink{
-        margin-bottom:15px;
-    }
-    .bgLink a{
-        color:#999;
-        padding:0 15px;
-    }
-    .bgText{
-        color:#666;
-    }
-    .bgText a{
-        color:#0e79cc;
-    }
 
+    }
+    .footText{
+        font-size: 13px;
+        font-weight: bold;
+        color:#fff;
+        margin-top:30px;
+    }
+    
 </style>

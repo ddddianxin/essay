@@ -1,8 +1,8 @@
 <template>
   <div id="mApp">
-<!--    <head-top></head-top>-->
+   <head-top></head-top>
     <router-view></router-view>
-<!--    <nav-foot></nav-foot>-->
+   <nav-foot></nav-foot>
   </div>
 </template>
 

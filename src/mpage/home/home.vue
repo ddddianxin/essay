@@ -65,6 +65,11 @@
                                     <img :src="item.img">              
                                     <h4 class="wto">{{item.name}}</h4>
                                     <p>{{item.description}}</p>
+                                    <div class="tc">
+                                        <span class="arrow">
+                                            <img src="../../images/arrow.png">
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
                             <div class="lfArrow"><img src="../../images/lfArrow.png"></div>
@@ -84,6 +89,11 @@
                             <h4>{{item.title}}</h4>
                             <h5>岗位简介</h5>
                             <p>{{item.des}}</p>
+                            <div class="tc">
+                                <span class="arrow">
+                                    <img src="../../images/arrow.png">
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -247,7 +257,7 @@
                 loop: true,
                 speed:1000,
                 slidesPerView : 3,
-                spaceBetween : 20,
+                spaceBetween : 10,
                 slidesPerGroup : 1,
                 navigation: {
                     nextEl: '.rgArrow',
@@ -499,56 +509,59 @@
     }
     .teamTit{
         text-align: center;
-        margin-bottom:px2rem(4);
+        margin-bottom:px2rem(8);
     }
     .teamContainer{
         padding:0 px2rem(40);
     }
     .teamItem{
-       width:px2rem(232);
-        height:px2rem(300);
+       width:px2rem(247);
+        height:px2rem(310);
        background-color: #fff;
    }
    .teamItem img{
-        width:px2rem(232);
+        width:px2rem(213);
         height:px2rem(140);
        object-fit: cover;
    }
    .teamItem h4{
-       font-size: 15px;
-       font-weight: bold;
+       font-size: px2rem(28);
+       font-weight: normal;
        color:#333;
-       padding:5px 20px 0 20px;
+       padding:0 px2rem(20);
+       line-height: px2rem(40);
+       color:#152b59;
    }
     .teamItem p{
-        font-size: 12px;
+        font-size: px2rem(24);
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
         color:#333;
-        padding:0 20px;
-        margin-bottom:10px;
-        height:88px;
-        line-height: 22px;
+        padding:0 px2rem(20);
+        margin:px2rem(10) 0;
+        height:auto;
+        line-height: px2rem(34);
     }
     .teamItem .arrow{
-       width:30px;
-       height: 32px;
+       width:px2rem(34);
+       height: px2rem(34);
        background-color: #152b59;
-       border-radius: 30px 30px 0 0;
+       border-radius: px2rem(60) px2rem(60) 0 0;
        display: inline-block;
        text-align: center;
+      
     }
     .teamItem .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;
+       width:px2rem(28);
+       height: px2rem(28);
+       
     }
     .teamSwiper{
         width:px2rem(750);
-        height: 360px;
+        height: px2rem(320);
         position:relative;
         overflow: hidden;
     }
@@ -556,32 +569,32 @@
         overflow: visible;
     }
     .lfArrow{
-        width:40px;
-        height: 25px;
-        border:1px solid #d0d0d0;
+        width:px2rem(80);
+        height: px2rem(50);
+        border:px2rem(2) solid #d0d0d0;
         position:absolute;
-        bottom:-45px;
-        left:460px;
+        bottom:px2rem(-90);
+        left:px2rem(920);
         z-index:100;
     }
     .lfArrow img{
-        width:23px;
-        height: 23px;
-        padding:2px 0 0 10px;
+        width:px2rem(46);
+        height: px2rem(46);
+        padding:px2rem(4) 0 0 px2rem(20);
     }
     .rgArrow{
-        width:40px;
-        height: 25px;
-        border:1px solid #d0d0d0;
+        width:px2rem(80);
+        height: px2rem(50);
+        border:px2rem(2) solid #d0d0d0;
         position:absolute;
-        bottom:-45px;
-        left:522px;
+        bottom:px2rem(-90);
+        left:px2rem(1044);
         z-index:100;
     }
     .rgArrow img{
-        width:23px;
-        height: 23px;
-        padding:2px 0 0 6px;
+        width:px2rem(46);
+        height: px2rem(46);
+        padding:px2rem(4) 0 0 px2rem(12);
     }
     .rgArrow:hover,.lfArrow:hover{
         cursor:pointer;
@@ -590,37 +603,41 @@
     /* 人才招聘 */
     .recruitBg{
         background-color:#f7f7f7;
-        padding:35px 0 60px 0;
+        padding:px2rem(20) 0 px2rem(20) 0;
     }
     .recruitTit{
         text-align: center;
-        margin-bottom:15px;
+        margin-bottom:px2rem(30);
+    }
+    .recruitTit .h3BLine{
+        margin:0;
     }
     .recruitBox{
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
+        padding:0 px2rem(40);
     }
     .recItem{
         background-color:#fff;
-        width:254px;
-        height: 258px;
-        padding:0 35px;
+        width:px2rem(170);
+        height: px2rem(328);
+        padding:0 px2rem(20);
     }
     .recItem h4{
-        font-size:20px;
+        font-size:px2rem(28);
         color:#152b59;
-        font-weight: bold;
-        padding:30px 0 15px 0;
+        padding: px2rem(18) 0 px2rem(10) 0;
     }
     .recItem h5{
-        font-size:16px;
+        font-size:px2rem(24);
         color:#333;
         font-weight: bold;
-        line-height: 32px;
+        line-height: px2rem(28);
+        padding-bottom:px2rem(10);
     }
     .recItem p{
-        font-size: 12px;
+        font-size: px2rem(24);
         overflow: hidden ;
         display: -webkit-box ;
         -webkit-line-clamp: 5;
@@ -629,20 +646,20 @@
         color:#333;
         margin-bottom:10px;
         height:auto;
-        height:115px;
-        line-height: 23px;
+        line-height: px2rem(32);
     }
-    .recItem .arrow{
-       width:30px;
-       height: 32px;
+    .recItem  .arrow{
+       width:px2rem(34);
+       height: px2rem(34);
        background-color: #152b59;
-       border-radius: 30px 30px 0 0;
+       border-radius: px2rem(60) px2rem(60) 0 0;
        display: inline-block;
        text-align: center;
-   }
-   .recItem .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;  
-   }
+      
+    }
+    .recItem .arrow img{
+       width:px2rem(28);
+       height: px2rem(28);
+       
+    }
 </style>
