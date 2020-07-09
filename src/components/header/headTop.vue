@@ -10,26 +10,38 @@
             </div>
             <div class="nav">
                 <div class="logo">
-                    <img src="../../images/logo.png">
+                    <router-link to="/home">
+                        <img src="../../images/logo.png">
+                    </router-link>
                 </div>
                 <div class="menu">
                     <span :class="webActive=='home'?'active':''">
-                        <router-link to="">首页</router-link>
+                        <router-link to="/home">首页</router-link>
                     </span>
                     <span :class="webActive=='centerIntro'?'active':''">
-                        <router-link to="">中心介绍</router-link>
+                        <router-link to="/centerIntro/index">中心介绍</router-link>
                     </span>
-                    <span :class="webActive=='news'?'active':''">
-                        <router-link to="">新闻动态</router-link>
+                    <span :class="webActive=='news'?'active newsBtn':'newsBtn'">
+                        <router-link to="/news/index">新闻动态</router-link>
+                        <img class="menuArrow" src="../../images/menuArrow.png">
+                        <div class="childItem">
+                            <ul>
+                                <li>科研动态</li>
+                                <li>学术交流</li>
+                                <li>
+                                    <router-link to="/centerNews/index">中心动态</router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </span>
                     <span :class="webActive=='team'?'active':''">
-                        <router-link to="">科研队伍</router-link>
+                        <router-link to="/team/index">科研队伍</router-link>
                     </span>
                     <span :class="webActive=='achievement'?'active':''">
                         <router-link to="">科研成果</router-link>
                     </span>
                     <span :class="webActive=='experiment'?'active':''">
-                        <router-link to="">实验平台</router-link>
+                        <router-link to="/experiment/index">实验平台</router-link>
                     </span>
                     <span :class="webActive=='recruit'?'active':''">
                         <router-link to="">人才招聘</router-link>
@@ -158,89 +170,44 @@
 .menu span.active{
     color:#213662;
 }
+.newsBtn{
+    position: relative;
+}
+.newsBtn:hover{
+    .childItem,.menuArrow{
+        display: block;
+    }
+}
 
-/* 手机端头部 */
-#mHead{
-    width:100%;
-    height: px2rem(180);
-    position: fixed;
-    top:0;
-    left:0;
-    background-color:#fff;
-    border-bottom:1px solid #eee;
-    z-index: 1000;
+.childItem{
+    display: none;
+    position:absolute;
+    bottom:-174px;
+    right:-35px;
+    background-color: #f2eeee;
+    width:140px;
+    height:174px;
 }
-.wapTop{
-    width:px2rem(750);
-    height: px2rem(90);
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-.mLfBtn{
-    width:px2rem(200);
-    padding-left:px2rem(40);
-}
-.mLfBtn img{
-    width:px2rem(40);
-    height: px2rem(40);
-    padding-top:px2rem(26);
-    float:left;
-}
-.mLfBtn span{
-    font-size: px2rem(32);
+.childItem li{
+    height:58px;
+    line-height: 58px;
+    text-align: center;
+    font-size: 17px;
     color:#555;
-    font-weight:bold;
-    line-height: px2rem(90);
-    padding-left:px2rem(14);
-    float:left;
+    font-weight: bold;
 }
-.mSearch{
-    width:px2rem(550);
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: flex-end;
-    display: inline-block;
-    padding-right:px2rem(40);
+.childItem li:hover{
+    cursor:pointer;
+    color:#152b59;
 }
-.mSearBox{
-    width:px2rem(126);
-    height: px2rem(46);
-    border:1px solid #707070;
-    border-radius: 30px;
-    float:right;
-    margin-top:px2rem(20)
-}
-.mSearch span{
-    width:px2rem(120);
-    font-size:px2rem(24);
-    float:right;
-    line-height: px2rem(90);
-}
-.mSearBox{
-    overflow: hidden;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-.mSearBox i{
-    font-size:px2rem(34);
-    padding:px2rem(6) 0 0 px2rem(6);
-    width:px2rem(26);
-}
-.mSearBox input{
-    background-color: #fff;
-    font-size: px2rem(24);
+.menuArrow{
+    display: none;
+    width:29px;
+    height:29px;
+    position: absolute;
+    bottom:0px;
+    right:16px;
     z-index:100;
-    width:px2rem(88);
-}
-.mLogo{
-    height:px2rem(90);
-    background-color: #fff;
-}
-.mLogo img{
-    height:px2rem(80);
-    width:auto;
 }
 
 

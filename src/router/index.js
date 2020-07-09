@@ -2,6 +2,10 @@ import App from '../App' //PC端
 import mApp from '../mApp' //移动端
 //PC端
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home');
+const team = r => require.ensure([], () => r(require('../page/team/index')), 'team');
+const news = r => require.ensure([], () => r(require('../page/news/index')), 'news');
+const experiment = r => require.ensure([], () => r(require('../page/experiment/index')), 'experiment');
+const centerNews = r => require.ensure([], () => r(require('../page/centerNews/index')), 'centerNews');
 
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
@@ -21,6 +25,26 @@ var pc = [{
             path: '/home',
             name: 'home',
             component: home
+        },
+        {
+            path: '/team/index',
+            name: 'team',
+            component: team
+        },
+        {
+            path: '/news/index',
+            name: 'news',
+            component: news
+        },
+        {
+            path: '/experiment/index',
+            name: 'experiment',
+            component: experiment
+        },
+        {
+            path: '/centerNews/index',
+            name: 'centerNews',
+            component: centerNews
         }
     ]
 }];
