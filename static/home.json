@@ -1,0 +1,85 @@
+[
+    {
+        "goods_id":1,
+        "cas":"7732-18-5",
+        "goods_name":"水",
+        "upphotos":[
+            "http://saasimg.molbase.net/molbase/image/ffec54099127875f63bad8e1c02baea91563419301544.png",
+            "http://saasimg.molbase.net/molbase/image/fee5b4f21496561c8ae567ab7c49a7761528609480273.jpg",
+            "http://saasimg.molbase.net/molbase/image/071e21a8ae65965a7c5694213fffe20b1528584036156.jpg"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥650.00",
+        "spec_unit": "瓶",
+        "isCollect":false
+    },
+    {
+        "goods_id":2,
+        "cas":"1644466-71-6",
+        "goods_name":"9,9-二苯基芴-3-硼酸频哪醇酯",
+        "upphotos":[
+            "http://saasimg.molbase.net/molbase/image/fee5b4f21496561c8ae567ab7c49a7761528609480273.jpg",
+            "http://saasimg.molbase.net/molbase/image/071e21a8ae65965a7c5694213fffe20b1528584036156.jpg"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥65.00",
+        "spec_unit": "包",
+        "isCollect":false
+    },
+    {
+        "goods_id":1,
+        "cas":"7732-18-5",
+        "goods_name":"水",
+        "upphotos":[
+            "http://saasimg.molbase.net/molbase/image/071e21a8ae65965a7c5694213fffe20b1528584036156.jpg"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥65.00",
+        "spec_unit": "包",
+        "isCollect":false
+    },
+    {
+        "goods_id":2,
+        "cas":"1644466-71-6",
+        "goods_name":"9,9-二苯基芴-3-硼酸频哪醇酯",
+        "upphotos":[
+            "http://www.huaxuejia.cn/Public/SixMol/Uploads_goods/2019-05-20/1558339912_2473.png",
+            "http://www.huaxuejia.cn/Public/SixMol/Uploads_goods/2019-05-20/1558339915_6002.png"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥65.00",
+        "spec_unit": "包",
+        "isCollect":false
+    },
+    {
+        "goods_id":1,
+        "cas":"7732-18-5",
+        "goods_name":"水",
+        "upphotos":[
+            "http://saasimg.molbase.net/molbase/image/071e21a8ae65965a7c5694213fffe20b1528584036156.jpg"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥650.00",
+        "spec_unit": "瓶",
+        "isCollect":false
+    },
+    {
+        "goods_id":2,
+        "cas":"1644466-71-6",
+        "goods_name":"9,9-二苯基芴-3-硼酸频哪醇酯",
+        "upphotos":[
+            "http://www.huaxuejia.cn/Public/SixMol/Uploads_goods/2019-05-20/1558339912_2473.png",
+            "http://www.huaxuejia.cn/Public/SixMol/Uploads_goods/2019-05-20/1558339915_6002.png"
+        ],
+        "specifications_id":1,
+        "specifications":1,
+        "unit_price": "￥650.00",
+        "spec_unit": "瓶",
+        "isCollect":false
+    }
+]
