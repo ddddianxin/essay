@@ -18,6 +18,64 @@
                 <img src="../../images/mlogo.png">
             </div>
         </div>
+        <div class="sideMenu">
+            <div class="sideMenuIcon">
+                <img src="../../images/menu.png">
+            </div>
+            <div class="sideMList">
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">首页</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <span>中心介绍</span>
+                        <img src="../../images/lfArrow.png">
+                    </div>
+                    <div class="sidechild">
+                        <router-link to="">中心概况</router-link>
+                        <router-link to="">研究方向</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <span>新闻动态</span>
+                        <img src="../../images/lfArrow.png">
+                    </div>
+                    <div class="sidechild">
+                        <router-link to="">科研动态</router-link>
+                        <router-link to="">学术交流</router-link>
+                        <router-link to="">中心活动</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">科研队伍</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">科研成果</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">实验平台</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">人才招聘</router-link>
+                    </div>
+                </div>
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">联系我们</router-link>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 </template>
 
@@ -64,6 +122,64 @@
 
 <style lang="scss">
  @import '../../style/mixin';
+
+.sideMenu{
+    position:fixed;
+    top:0;
+    left:0;
+    width:px2rem(380);
+    height:px2rem(1334);
+    z-index:1000;
+    color:#fff;
+}
+.sideMenuIcon{
+    width:px2rem(80);
+    height:px2rem(90);
+    padding-left:px2rem(40);
+    display:block;
+    background-color:rgba(21,43,89,.75);
+}
+.sideMenuIcon img{
+    width:px2rem(40);
+    height: px2rem(40);
+    padding-top:px2rem(26); 
+    float:left;
+}
+.sideMList{
+    background-color:rgba(21,43,89,.75);
+    height:100%;
+}
+.sideItem{
+    padding:0 px2rem(30);
+    
+}
+.sideBtn{
+    font-size:px2rem(32);
+    height:px2rem(120);
+    line-height: px2rem(120);
+    text-align: center;
+    position: relative;
+    border-bottom:2px solid rgba(255,255,255,.5);
+}
+.sideBtn img{
+    width:px2rem(40);
+    height:px2rem(40);
+    position:absolute;
+    right:px2rem(20);
+    top:px2rem(40);
+    transform:rotate(90deg);
+}
+.sidechild{
+    padding:px2rem(20) 0 0 0;
+}
+.sidechild a{
+    height:px2rem(60);
+    line-height: px2rem(60);
+    display:block;
+    text-align: right;
+}
+
+
 #head_top{
     width:100%;
     text-align: center;
