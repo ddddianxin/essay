@@ -1,7 +1,7 @@
 <template>
     <div class="bg">
         <head-top webActive="centerIntro"></head-top>
-        <img class="bgTop" src="../../images/ctIntro.png">
+        <img class="bgTop" src="">
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">

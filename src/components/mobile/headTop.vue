@@ -2,9 +2,9 @@
     <header id='head_top'>
         <div id="mHead">
             <div class="wapTop">
-                <div class="mLfBtn">
+                <div class="mLfBtn" @click="menuShow=!menuShow">
                     <img src="../../images/menu.png">
-                    <span>首页</span>
+                    <span>{{title?title:'首页'}}</span>
                 </div>
                 <div class="mSearch">
                     <div class="mSearBox">
@@ -18,58 +18,58 @@
                 <img src="../../images/mlogo.png">
             </div>
         </div>
-        <div class="sideMenu">
-            <div class="sideMenuIcon">
+        <div class="sideMenu" v-show="menuShow">
+            <div class="sideMenuIcon" @click="menuShow=!menuShow">
                 <img src="../../images/menu.png">
             </div>
             <div class="sideMList">
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
                         <router-link to="/home">首页</router-link>
                     </div>
                 </div>
                 <div class="sideItem">
-                    <div class="sideBtn">
+                    <div class="sideBtn" @click="ctShow = !ctShow">
                         <span>中心介绍</span>
-                        <img src="../../images/lfArrow.png">
+                        <img src="../../images/lfArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
                     </div>
-                    <div class="sidechild">
-                        <router-link to="">中心概况</router-link>
+                    <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
+                        <router-link to="/centerIntro/index">中心概况</router-link>
                         <router-link to="">研究方向</router-link>
                     </div>
                 </div>
                 <div class="sideItem">
-                    <div class="sideBtn">
+                    <div class="sideBtn" @click="newsShow = !newsShow">
                         <span>新闻动态</span>
-                        <img src="../../images/lfArrow.png">
+                        <img src="../../images/lfArrow.png" :style="newsShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
                     </div>
-                    <div class="sidechild">
-                        <router-link to="">科研动态</router-link>
-                        <router-link to="">学术交流</router-link>
-                        <router-link to="">中心活动</router-link>
+                    <div class="sidechild" v-show="newsShow" @click="menuShow=!menuShow">
+                        <router-link to="/news/index">科研动态</router-link>
+                        <router-link to="/sciExchange/index">学术交流</router-link>
+                        <router-link to="/centerNews/index">中心活动</router-link>
                     </div>
                 </div>
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
-                        <router-link to="/home">科研队伍</router-link>
+                        <router-link to="/team/index">科研队伍</router-link>
                     </div>
                 </div>
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
                         <router-link to="/home">科研成果</router-link>
                     </div>
                 </div>
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
-                        <router-link to="/home">实验平台</router-link>
+                        <router-link to="/experiment/index">实验平台</router-link>
                     </div>
                 </div>
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
                         <router-link to="/home">人才招聘</router-link>
                     </div>
                 </div>
-                <div class="sideItem">
+                <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
                         <router-link to="/home">联系我们</router-link>
                     </div>
@@ -85,10 +85,13 @@
         name: 'headTop',
         data(){
             return{
+                menuShow:false,
+                ctShow:true,
+                newsShow:true,
                 menu:['home','centerIntro','news','team','achievement','experiment','recruit','contactUs'],
             }
         },
-        props: ['webActive'],
+        props: ['webActive','title'],
         created(){
             //获取用户信息
             //this.getUserInfo();
@@ -155,8 +158,8 @@
 }
 .sideBtn{
     font-size:px2rem(32);
-    height:px2rem(120);
-    line-height: px2rem(120);
+    height:px2rem(110);
+    line-height: px2rem(110);
     text-align: center;
     position: relative;
     border-bottom:2px solid rgba(255,255,255,.5);
@@ -167,7 +170,6 @@
     position:absolute;
     right:px2rem(20);
     top:px2rem(40);
-    transform:rotate(90deg);
 }
 .sidechild{
     padding:px2rem(20) 0 0 0;
@@ -178,7 +180,6 @@
     display:block;
     text-align: right;
 }
-
 
 #head_top{
     width:100%;
@@ -271,13 +272,13 @@
     justify-content: space-between;
 }
 .mLfBtn{
-    width:px2rem(200);
+    width:px2rem(250);
     padding-left:px2rem(40);
 }
 .mLfBtn img{
     width:px2rem(40);
     height: px2rem(40);
-    padding-top:px2rem(26);
+    padding-top:px2rem(24);
     float:left;
 }
 .mLfBtn span{
@@ -289,7 +290,7 @@
     float:left;
 }
 .mSearch{
-    width:px2rem(550);
+    width:px2rem(500);
     display: flex;
     flex-wrap: nowrap;
     justify-content: flex-end;

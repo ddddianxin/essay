@@ -1,14 +1,14 @@
 <template>
     <div class="bg">
-        <head-top webActive="centerIntro"></head-top>
+        <head-top webActive="experiment" title="中心概况"></head-top>
         <img class="bgTop" src="../../images/ctIntro.png">
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">
                     <h3>仿生触觉与智能传感研究中心</h3>
-                    <div class="tc"><img src="../../images/ctTitLine.png"></div>
+                    <h4>中心概况</h4>
                     <div class="ctText">
-                        代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了
+                        代课老师复健科多杜鹃花科拉多加湖可怜的就是看了好久疯狂的解放军队上看见好看的就是看少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了
                     </div>
                     <div class="ctVideo">
                         <video-player  class="video-player vjs-custom-skin"
@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
+    import headTop from '../../components/mobile/headTop';
     import { videoPlayer } from 'vue-video-player'
     export default {
         name: 'news',
@@ -85,35 +85,48 @@
 
 <style lang="scss">
     @import '../../style/mixin';
+    .bg{
+        background-color:#fff;
+    }
     .ctBg{
         padding-bottom:35px;
     }
     .bgTop{
-        height:528px;
-        width: 100%;
+        height:px2rem(400);
+        width: px2rem(750);
         object-fit: cover;
+        margin-top:px2rem(180);
+        text-align: center;
     }
     .ctBox{
-        width:1024px;
+        width:100%;
     }
     .ctBox h3{
-       margin:30px 0 0 0;
+       margin:px2rem(40) 0;
        color:#152b59;
-       font-weight: bold;
-       font-size: 30px;
+       font-size: px2rem(46);
+       font-weight: normal;
        text-align: center;
-       line-height: 40px;
-       margin-bottom:15px;
+    }
+    .ctBox h4{
+        text-align:center;
+        font-size:px2rem(40);
+        color:#152b59;
+        font-weight:bold;
+        
     }
     .ctText{
         color:#666;
-        font-size:16px;
-        line-height: 30px;
-        margin:20px 0 35px 0;
+        font-size:px2rem(32);
+        line-height: px2rem(60);
+        margin:px2rem(30) 0 px2rem(40) 0;
+        padding:0 px2rem(40);
+        height:auto;
     }
     .ctVideo{
-        border-radius: 40px;
+        border-radius: px2rem(40);
         overflow: hidden;
+        margin:0 px2rem(40);
     }
     .video-js .vjs-icon-placeholder {
         width: 100%;

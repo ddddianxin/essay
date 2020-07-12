@@ -6,9 +6,18 @@ const team = r => require.ensure([], () => r(require('../page/team/index')), 'te
 const news = r => require.ensure([], () => r(require('../page/news/index')), 'news');
 const experiment = r => require.ensure([], () => r(require('../page/experiment/index')), 'experiment');
 const centerNews = r => require.ensure([], () => r(require('../page/centerNews/index')), 'centerNews');
+const centerIntro = r => require.ensure([], () => r(require('../page/centerIntro/index')), 'centerIntro');
+const research = r => require.ensure([], () => r(require('../page/research/index')), 'research');
+const sciExchange = r => require.ensure([], () => r(require('../page/sciExchange/index')), 'sciExchange');
 
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
+const mTeam = r => require.ensure([], () => r(require('../mpage/team/index')), 'mTeam');
+const mNews = r => require.ensure([], () => r(require('../mpage/news/index')), 'mNews');
+const mExperiment = r => require.ensure([], () => r(require('../mpage/experiment/index')), 'mExperiment');
+const mCenterNews = r => require.ensure([], () => r(require('../mpage/centerNews/index')), 'mEnterNews');
+const mCenterIntro = r => require.ensure([], () => r(require('../mpage/centerIntro/index')), 'mCenterIntro');
+const mSciExchange = r => require.ensure([], () => r(require('../mpage/sciExchange/index')), 'mSciExchange');
 
 
 var pc = [{
@@ -45,6 +54,21 @@ var pc = [{
             path: '/centerNews/index',
             name: 'centerNews',
             component: centerNews
+        },
+        {
+            path: '/centerIntro/index',
+            name: 'centerIntro',
+            component: centerIntro
+        },
+        {
+            path: '/research/index',
+            name: 'research',
+            component: research
+        },
+        {
+            path: '/sciExchange/index',
+            name: 'sciExchange',
+            component: sciExchange
         }
     ]
 }];
@@ -63,6 +87,36 @@ var wap = [{
             path: '/home',
             name: 'mHome',
             component: mHome
+        },
+        {
+            path: '/team/index',
+            name: 'mTeam',
+            component: mTeam
+        },
+        {
+            path: '/news/index',
+            name: 'mNews',
+            component: mNews
+        },
+        {
+            path: '/experiment/index',
+            name: 'mExperiment',
+            component: mExperiment
+        },
+        {
+            path: '/centerNews/index',
+            name: 'mCenterNews',
+            component: mCenterNews
+        },
+        {
+            path: '/centerIntro/index',
+            name: 'mCenterIntro',
+            component: mCenterIntro
+        },
+        {
+            path: '/sciExchange/index',
+            name: 'mSciExchange',
+            component: mSciExchange
         }
     ]
 }];

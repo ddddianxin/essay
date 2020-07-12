@@ -1,40 +1,30 @@
 <template>
     <div class="bg">
-        <head-top webActive="experiment"></head-top>
+        <head-top webActive="news"></head-top>
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="expBg">
             <div class="container">
                 <div class="expBox">
-                    <h3>支撑载体</h3>
+                    <h3>中心动态</h3>
                     <span class="h3BLine"></span>
+                    <div class='viewShow'>
+                        <img src="../../images/banner2.png">
+                        <div class="ctNinfo">
+                            <h4>这里是标题</h4>
+                            <p>简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简</p>
+                            <span>2020年6月15日</span>
+                        </div>
+                        <div class="ctNSign">
+                            <span class="toTop">置顶</span>
+                        </div>
+                    </div>
                     <div class="expList">
-                        <div class="expItem" v-for="(item,index) in listData.slice(0,6)" :key="index">
-                            <img :src="item.img">
+                        <div class="expItem" v-for="(item,index) in listData" :key="index">
                             <div class="expInfo">
                                 <h4>{{item.title}}</h4>
                                 <p>{{item.des}}</p>
-                                <span>{{item.date}}</span>
                             </div>
-                        </div>
-                    </div>
-                    <h3>实验室</h3>
-                    <span class="h3BLine"></span>
-                    <div class="expPanel">
-                        <div class="expInbox" v-for="(item,index) in lab" :key="index">
-                            <img :src="item.img">
-                            <div class="expName">
-                                <span class="wto">{{item.title}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3>仪器设备</h3>
-                    <span class="h3BLine"></span>
-                    <div class="expPanel">
-                        <div class="expInbox" v-for="(item,index) in equipment" :key="index">
-                            <img :src="item.img">
-                            <div class="expName">
-                                <span class="wto">{{item.title}}</span>
-                            </div>
+                            <div class="date">{{item.date}}</div>
                         </div>
                     </div>
                 </div>
@@ -51,66 +41,54 @@
             return{
                 listData:[
                     {
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    }
-                ],
-                lab:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
-                    }
-                ],
-                equipment:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
                     },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
-                    }
+                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
+                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
+                        date:'2020年6月15日'
+                    },
                 ]
                 
             }
@@ -172,16 +150,18 @@
        justify-content: space-between;
    }
    .expItem{
-       width:502px;
-       margin-bottom:20px;
+       width:500px;
+       padding:15px 0;
        display: flex;
        flex-wrap: nowrap;
        justify-content: space-between;
+       border-top:1px solid #d0d0d0;
    }
-   .expItem img{
+   .expItem .date{
        width:100px;
-       height: 100px;
-       object-fit: cover;
+       color:#152b59;
+       text-align: right;
+       line-height: 70px;
    }
    .expInfo{
        width:382px;
@@ -191,7 +171,7 @@
        color:#333;
        font-weight: bold;
        padding:0;
-       line-height: 32px;
+       line-height: 30px;
        overflow: hidden ;
         display: -webkit-box ;
         -webkit-line-clamp: 1 ;
@@ -216,44 +196,61 @@
        color:#999;
        font-size:12px;
    }
-   .expPanel{
-       margin:20px 0;
-       display:flex;
-       flex-wrap:nowrap;
+
+   .viewShow{
+       margin-top:15px;
+       display: flex;
+       flex-wrap: nowrap;
        justify-content: space-between;
    }
-   .expInbox{
-       width:213px;
-       height:213px;
-       position: relative;
-   }
-   .expInbox img{
-       width:213px;
-       height:213px;
+   .viewShow img{
+       width:200px;
+       height: 150px;
        object-fit: cover;
    }
-   .expName{
-       position:absolute;
-       bottom:0;
-       left:0;
-       width:213px;
-       height:36px;
-       line-height: 36px;
-       background-color:rgba(21,43,89,.75);
-       color:#fff;
-       text-align-last: center;
-       font-size:14px;
+   .ctNinfo{
+       width: 690px;
+       height: 150px;
+       padding:0 20px;
+   }
+   .ctNinfo h4{
+       font-size:16px;
+       color:#333;
        font-weight: bold;
+       margin-bottom:10px;
    }
-   .expName span{
-       display:block;
-       padding:0 15px;
+   .ctNinfo p{
+       line-height: 20px;
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 3 ;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
    }
-   .expInbox:hover{
-       cursor:pointer;
+   .ctNinfo span{
+       margin-top:10px;
+       color:#999;
+       font-size:12px;
+       display: block;
    }
-   .expInbox:hover img{
-           opacity: .8;
-       }
+   .ctNSign{
+       width:100px;
+       display: flex;
+       flex-wrap: nowrap;
+       justify-content: flex-end;
+   }
+   .toTop{
+       width:84px;
+       height: 40px;
+       line-height:40px;
+       color:#fff;
+       text-align: center;
+       border-radius: 30px;
+       background-color:#c3c3c3;
+       display: block;
+       font-size:15px;
+       font-weight: bold;
+       margin-top:30px;
+   }
 
 </style>

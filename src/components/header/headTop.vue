@@ -18,16 +18,28 @@
                     <span :class="webActive=='home'?'active':''">
                         <router-link to="/home">首页</router-link>
                     </span>
-                    <span :class="webActive=='centerIntro'?'active':''">
-                        <router-link to="/centerIntro/index">中心介绍</router-link>
+                    <span :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
+                        <router-link to="/centerIntro/index">中心介绍<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
+                        <div class="childItem">
+                            <ul>
+                                <li>
+                                    <router-link to="/centerIntro/index">中心概况</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/research/index">研究方向</router-link>
+                                </li>
+                            </ul>
+                        </div>
                     </span>
                     <span :class="webActive=='news'?'active newsBtn':'newsBtn'">
-                        <router-link to="/news/index">新闻动态</router-link>
-                        <img class="menuArrow" src="../../images/menuArrow.png">
+                        <router-link to="/news/index">新闻动态<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
+                        
                         <div class="childItem">
                             <ul>
                                 <li>科研动态</li>
-                                <li>学术交流</li>
+                                <li>
+                                    <router-link to="/sciExchange/index">学术交流</router-link>
+                                </li>
                                 <li>
                                     <router-link to="/centerNews/index">中心动态</router-link>
                                 </li>
@@ -173,20 +185,14 @@
 .newsBtn{
     position: relative;
 }
-.newsBtn:hover{
-    .childItem,.menuArrow{
-        display: block;
-    }
-}
-
 .childItem{
     display: none;
     position:absolute;
-    bottom:-174px;
+    top:102px;
     right:-35px;
     background-color: #f2eeee;
     width:140px;
-    height:174px;
+    height:auto;
 }
 .childItem li{
     height:58px;
@@ -198,16 +204,28 @@
 }
 .childItem li:hover{
     cursor:pointer;
-    color:#152b59;
+    color:#fff;
+    background-color: rgb(176,0,125);
+}
+.childItem li:hover a{
+    color:#fff;
 }
 .menuArrow{
-    display: none;
-    width:29px;
-    height:29px;
+    width:20px;
+    height:20px;
+    transform:rotate(270deg);
     position: absolute;
-    bottom:0px;
-    right:16px;
-    z-index:100;
+    right:-25px;
+    top:40px;
+}
+.newsBtn:hover{
+    .childItem{
+        display:block;
+    }
+    .menuArrow{
+        transform:rotate(90deg);
+    }
+
 }
 
 
