@@ -26,20 +26,14 @@
         },
         props: ['menuActive'],
         computed: {
-            ...mapState([
-                'userInfo','login'
-            ]),
 
         },
         mounted(){
             //获取用户信息
-            this.getUserInfo();
+           
 
         },
         methods: {
-            ...mapActions([
-                'getUserInfo'
-            ]),
             async initData(){
                 var url=encodeURIComponent(location.href.split('#')[0]);
                 var data = await wxjssdk(url);

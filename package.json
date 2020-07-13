@@ -1,5 +1,5 @@
 {
-  "name": "sixmol",
+  "name": "web",
   "version": "1.0.0",
   "description": "A Vue.js project",
   "author": "Luk",
@@ -44,7 +44,7 @@
     "babel-preset-env": "^1.3.2",
     "babel-preset-stage-2": "^6.22.0",
     "babel-register": "^6.22.0",
-    "chromedriver": "^2.27.2",
+    "chromedriver": "^2.46.0",
     "copy-webpack-plugin": "^4.0.1",
     "cross-spawn": "^5.0.1",
     "css-loader": "^0.28.11",

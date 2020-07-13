@@ -10,6 +10,7 @@ const centerIntro = r => require.ensure([], () => r(require('../page/centerIntro
 const research = r => require.ensure([], () => r(require('../page/research/index')), 'research');
 const sciExchange = r => require.ensure([], () => r(require('../page/sciExchange/index')), 'sciExchange');
 
+
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
 const mTeam = r => require.ensure([], () => r(require('../mpage/team/index')), 'mTeam');

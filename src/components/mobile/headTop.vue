@@ -105,17 +105,10 @@
             
         },
         computed: {
-            ...mapState([
-                'userInfo','cartList','login'
-            ])
+           
         },
         methods:{
-            ...mapMutations([
-                'OUT_LOGIN'
-            ]),
-            ...mapActions([
-                'getUserInfo','initCart'
-            ])
+            
             
         }
 

@@ -96,8 +96,7 @@
     .footItem h3{
         font-size:13px;
         font-weight: bold;
-        margin:0 0 15px 0;
-        color:#fff;
+        margin:0 0 25px 0;
     }
     .footItem a{
         font-size: 12px;

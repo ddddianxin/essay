@@ -10,13 +10,11 @@
             </div>
             <div class="nav">
                 <div class="logo">
-                    <router-link to="/home">
-                        <img src="../../images/logo.png">
-                    </router-link>
+                    <img src="../../images/logo.png">
                 </div>
                 <div class="menu">
                     <span :class="webActive=='home'?'active':''">
-                        <router-link to="/home">首页</router-link>
+                        <router-link to="">首页</router-link>
                     </span>
                     <span :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
                         <router-link to="/centerIntro/index">中心介绍<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
@@ -47,13 +45,13 @@
                         </div>
                     </span>
                     <span :class="webActive=='team'?'active':''">
-                        <router-link to="/team/index">科研队伍</router-link>
+                        <router-link to="">科研队伍</router-link>
                     </span>
                     <span :class="webActive=='achievement'?'active':''">
                         <router-link to="">科研成果</router-link>
                     </span>
                     <span :class="webActive=='experiment'?'active':''">
-                        <router-link to="/experiment/index">实验平台</router-link>
+                        <router-link to="">实验平台</router-link>
                     </span>
                     <span :class="webActive=='recruit'?'active':''">
                         <router-link to="">人才招聘</router-link>
@@ -90,17 +88,10 @@
             
         },
         computed: {
-            ...mapState([
-                'userInfo','cartList','login'
-            ])
+           
         },
         methods:{
-            ...mapMutations([
-                'OUT_LOGIN'
-            ]),
-            ...mapActions([
-                'getUserInfo','initCart'
-            ])
+           
             
         }
 
@@ -182,8 +173,24 @@
 .menu span.active{
     color:#213662;
 }
-.newsBtn{
-    position: relative;
+
+/* 手机端头部 */
+#mHead{
+    width:100%;
+    height: px2rem(180);
+    position: fixed;
+    top:0;
+    left:0;
+    background-color:#fff;
+    border-bottom:1px solid #eee;
+    z-index: 1000;
+}
+.wapTop{
+    width:px2rem(750);
+    height: px2rem(90);
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
 }
 .childItem{
     display: none;
@@ -200,7 +207,10 @@
     text-align: center;
     font-size: 17px;
     color:#555;
-    font-weight: bold;
+    font-weight:bold;
+    line-height: px2rem(90);
+    padding-left:px2rem(14);
+    float:left;
 }
 .childItem li:hover{
     cursor:pointer;

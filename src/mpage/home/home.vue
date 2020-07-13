@@ -27,7 +27,7 @@
                             </div>
                         </div>
                         <div class="sciRg">
-                            <h3>学术交流</h3>
+                            <h3>科研成果</h3>
                             <span class="h3BLine"></span>
                             <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
                                 <h4>{{item.title}}</h4>
@@ -37,7 +37,28 @@
                     </div>
                 </div>
             </div>
-            <div class="centerBg">
+            <div class="hM-lf">
+                <h3>学术交流</h3>
+                <span class="h3BLine"></span>
+                <div class="hmLf_box">
+                    <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index">
+                        <h4>{{item.title}}</h4>
+                        <p>{{item.date}}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="hM-rg">
+                <h3>人才招聘</h3>
+                <span class="h3BLine"></span>
+                <div class="hmRg_box">
+                    <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
+                        <h4>{{item.title}}</h4>
+                        <span>岗位介绍：</span>
+                        <p>{{item.des}}</p>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="centerBg">
                 <div class="container centerIntro">
                     <img src="../../images/centerIntro.jpg">
                     <div class="ctIntro">
@@ -51,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="teamBg">
                 <div class="container">
                     <div class="teamTit">
@@ -78,7 +99,7 @@
                     </div>
                 </div>
             </div>
-            <div class="recruitBg">
+            <!-- <div class="recruitBg">
                 <div class="container">
                     <div class="recruitTit">
                         <h3>人才招聘</h3>
@@ -97,7 +118,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -105,7 +126,6 @@
 <script>
     import headTop from '../../components/mobile/headTop';
     import Swiper from 'swiper';
-    import {mapActions} from 'vuex'
 
     export default {
         name: 'home',
@@ -272,9 +292,6 @@
         computed:{
         },
         methods:{
-            ...mapActions([
-                'initCart'
-            ]),
             async initData(){
                 
             }
@@ -376,7 +393,7 @@
         height:px2rem(840);
         margin:0 px2rem(40);
         padding:px2rem(20) px2rem(40);
-       background-image: linear-gradient( #162a59, #530760);
+       background-image: linear-gradient( #a5177f, #e02d81);
    }
    .sciRg h3{
        padding:0;
@@ -403,8 +420,8 @@
         line-height: 22px;
    }
    .sciRgItem p{
-       color:#b4b2c7;
-       border-bottom:1px solid #5d5281;
+       color:#de97c5;
+       border-bottom:1px solid #c34696;
        font-size:px2rem(24);
         padding:px2rem(4) 0 px2rem(4);
         margin-bottom:px2rem(8);
@@ -662,4 +679,91 @@
        height: px2rem(28);
        
     }
+    .hM-lf{
+       width:auto;
+       height: auto;
+        margin:0 px2rem(40);
+        padding:px2rem(20) px2rem(40);
+       background-image: linear-gradient( #152c5a, #2d559d);
+       color:#fff;
+       overflow: hidden;
+   }
+   .hM-lf h3{
+       color:#fff;
+       padding:0;
+        margin:0;
+   }
+   .hM-lf .h3BLine{
+       background-color: #fff;
+       margin:0;
+   }
+   .hmLf_item{
+       border-bottom:1px solid #4f699b;
+       font-size:px2rem(24);
+        margin-top:px2rem(0);
+   }
+   .hmLf_item h4{
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        font-weight: bold;
+       line-height: px2rem(40);
+        font-weight: normal;
+        line-height: 22px;
+   }
+   .hmLf_item p{
+       color:#96a3bb;
+       font-size:px2rem(24);
+        padding:px2rem(4) 0 px2rem(4);
+        margin-bottom:px2rem(8);
+   }
+   .hM-rg{
+       width:auto;
+       height: auto;
+       margin:0 px2rem(40);
+        padding:px2rem(20) px2rem(40);
+       background-image: linear-gradient( #152c5a, #2d559d);
+       background-image: linear-gradient( #152c5a, #2d559d);
+       color:#fff;
+       overflow: hidden;
+       margin-top:px2rem(30);
+   }
+   .hM-rg h3{
+      padding:0;
+        margin:0;
+       color:#fff;
+   }
+   .hM-rg .h3BLine{
+       background-color: #fff;
+       margin:0;
+   }
+   .hmRg_item{
+       border-bottom:1px solid #4f699b;
+       font-size:px2rem(24);
+        margin-top:px2rem(0);
+   }
+   .hmRg_item h4{
+       font-size:px2rem(36);
+       font-weight: bold;
+       text-align: center;
+       margin-top:px2rem(30);
+   }
+   .hmRg_item span{
+       font-size:px2rem(14);
+   }
+   .hmRg_item p{
+       color:#fff;
+       line-height: px2rem(40);
+        font-weight: normal;
+        line-height: 22px;
+        padding:px2rem(4) 0 px2rem(4);
+        margin-bottom:px2rem(8);
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+   }
 </style>

@@ -34,7 +34,7 @@
                             </div>
                         </div>
                         <div class="sciRg">
-                            <h3>学术交流</h3>
+                            <h3>科研成果</h3>
                             <span class="h3BLine"></span>
                             <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
                                 <h4>{{item.title}}</h4>
@@ -44,7 +44,30 @@
                     </div>
                 </div>
             </div>
-            <div class="centerBg">
+            <div class="homeMid">
+                <div class="hM-lf">
+                    <h3>学术交流</h3>
+                    <span class="h3BLine"></span>
+                    <div class="hmLf_box">
+                        <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index">
+                            <h4>{{item.title}}</h4>
+                            <p>{{item.date}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="hM-rg">
+                    <h3>人才招聘</h3>
+                    <span class="h3BLine"></span>
+                    <div class="hmRg_box">
+                        <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
+                            <h4>{{item.title}}</h4>
+                            <span>岗位介绍：</span>
+                            <p>{{item.des}}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="centerBg">
                 <div class="container centerIntro">
                     <img src="../../images/centerIntro.jpg">
                     <div class="ctIntro">
@@ -58,7 +81,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="teamBg">
                 <div class="container">
                     <div class="teamTit">
@@ -85,7 +108,7 @@
                     </div>
                 </div>
             </div>
-            <div class="recruitBg">
+            <!-- <div class="recruitBg">
                 <div class="container">
                     <div class="recruitTit">
                         <h3>人才招聘</h3>
@@ -104,7 +127,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -112,7 +135,6 @@
 <script>
     import headTop from '../../components/header/headTop';
     import Swiper from 'swiper';
-    import {mapActions} from 'vuex'
 
     export default {
         name: 'home',
@@ -172,30 +194,23 @@
                 ],
                 sciCommunit:[
                     {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
+                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
                         date:'2020年6月15日，星期一',
                         url:''
                     },
                     {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
+                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
+                        date:'2020年6月15日，星期一',
+                        url:''
+                    },{
+                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
+                        date:'2020年6月15日，星期一',
+                        url:''
+                    },{
+                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
                         date:'2020年6月15日，星期一',
                         url:''
                     },
-                    {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    },
-                    {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    },
-                    {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    }
                 ],
                 teamData:[
                     {
@@ -280,9 +295,6 @@
         computed:{
         },
         methods:{
-            ...mapActions([
-                'initCart'
-            ]),
             async initData(){
                 
             }
@@ -379,7 +391,7 @@
        width:200px;
        height: 590px;
        padding:20px;
-       background-image: linear-gradient( #162a59, #530760);
+       background-image: linear-gradient( #a5177f, #e02d81);
    }
    .sciRg h3{
        margin-top:15px;
@@ -404,9 +416,9 @@
         line-height: 22px;
    }
    .sciRgItem p{
-       color:#b4b2c7;
+       color:#de97c5;
        font-size:12px;
-       border-bottom:1px solid #5d5281;
+       border-bottom:1px solid #c34696;
        padding:5px 0 13px;
        margin-bottom:13px;
    }
@@ -635,7 +647,6 @@
         word-break: break-all ;
         color:#333;
         margin-bottom:10px;
-        height:auto;
         height:115px;
         line-height: 23px;
     }
@@ -651,6 +662,86 @@
        width:20px;
        height: 20px;
        padding-top:6px;  
+   }
+   .homeMid{
+       width:1024px;
+       margin:0 auto;
+       display:flex;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+   }
+   .hM-lf{
+       width:460px;
+       height: 480px;
+       padding:10px 20px;
+       background-image: linear-gradient( #152c5a, #2d559d);
+       color:#fff;
+       overflow: hidden;
+   }
+   .hM-lf h3{
+       margin-top:15px;
+       color:#fff;
+   }
+   .hM-lf .h3BLine{
+       background-color: #fff;
+   }
+   .hmLf_item{
+       border-bottom:1px solid #4f699b;
+       padding:10px 0;
+   }
+   .hmLf_item h4{
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        font-weight: bold;
+        height: 48px;
+   }
+   .hmLf_item p{
+       color:#96a3bb;
+       font-size:12px;
+       margin-top:5px;
+   }
+
+
+   .hM-rg{
+       width:460px;
+       height: 480px;
+       padding:10px 20px;
+       background-image: linear-gradient( #152c5a, #2d559d);
+       color:#fff;
+       overflow: hidden;
+   }
+   .hM-rg h3{
+       margin-top:15px;
+       color:#fff;
+   }
+   .hM-rg .h3BLine{
+       background-color: #fff;
+   }
+   .hmRg_item{
+       border-bottom:1px solid #4f699b;
+       padding:10px 0;
+   }
+   .hmRg_item h4{
+       font-size:18px;
+       font-weight: bold;
+       text-align: center;
+   }
+   .hmRg_item span{
+       font-size:14px;
+
+   }
+   .hmRg_item p{
+       color:#fff;
+       font-size:12px;
+       margin-top:5px;
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 5;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
    }
 
 </style>

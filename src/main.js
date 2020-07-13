@@ -12,17 +12,12 @@ import store from './store'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 Vue.use(VueAwesomeSwiper);
 Vue.use(ElementUI);
-import { routerMode } from './config/env'
+import {routerMode} from './config/env'
 import '../config/rem.js'
 import 'babel-polyfill'
 import axios from 'axios'
-import { getStore } from './config/mUtils'
+import {getStore} from './config/mUtils'
 import WXConfig from 'weixin-js-sdk'
-
-import VideoPlayer from 'vue-video-player'
-require('video.js/dist/video-js.css')
-require('vue-video-player/src/custom-theme.css')
-Vue.use(VideoPlayer)
 
 Vue.prototype.WXConfig = WXConfig;
 Vue.config.productionTip = false;
@@ -45,26 +40,26 @@ axios.interceptors.request.use(
         //const token = localStorage.getItem('cc_token');
         var token = getStore('token') || '';
         // 设置参数格式
-        if (!config.headers['Content-Type']) {
+        if(!config.headers['Content-Type']){
             // config.headers = {
             //   'Content-Type':'application/json',
             // };
         }
         // 添加token到headers
-        if (token) {
+        if(token){
             config.headers.token = token
         }
         // 鉴权参数设置
-        if (config.method === 'get') {
+        if(config.method === 'get'){
             //get请求下 参数在params中，其他请求在data中
             config.headers = {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                token: token
+              'Content-Type':'application/x-www-form-urlencoded',
+                token:token
             };
             config.params = config.params || {};
             let json = JSON.parse(JSON.stringify(config.params));
             //一些参数处理
-        } else {
+        }else{
             config.data = config.data || {};
             //一些参数处理
         }
@@ -79,14 +74,14 @@ axios.interceptors.request.use(
 axios.interceptors.response.use(
     response => {
         //一些统一code的返回处理
-        if (response.data.code === 501) {
+        if(response.data.code === 501){
             // 登录验证
             //做了个示例跳转项目中登录，并记录下相对路径
             router.push({
-                name: 'login', //从哪个页面跳转
-                query: {
-                    retUrl: window.location.href.split('#')[1] || '',
-                    is_new_user_url: 1
+                name:'login',//从哪个页面跳转
+                query:{
+                    retUrl:window.location.href.split('#')[1] || '',
+                    is_new_user_url:1
                 }
             })
         }
