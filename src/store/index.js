@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { setStore, getStore } from '../config/mUtils'
-import { getUser, address, signout, cartList } from '../service/api'
 
 Vue.use(Vuex)
 
@@ -282,7 +281,7 @@ const store = new Vuex.Store({
             commit,
             state
         }) {
-            //let res = await getUser();
+
             commit(GET_USERINFO, res);
         },
         async saveAddress({
@@ -290,14 +289,14 @@ const store = new Vuex.Store({
             state
         }) {
             if (state.removeAddress.length > 0) return;
-            //let address = await address(state.userInfo.user_id);
+
             commit(SAVE_ADDRESS, address);
         },
         async initCart({
             commit,
             state
         }) {
-            //let res = await cartList();
+
             commit(INIT_BUYCART, res.cartInfo || '');
         }
     }

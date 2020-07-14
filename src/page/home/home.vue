@@ -135,6 +135,7 @@
 <script>
     import headTop from '../../components/header/headTop';
     import Swiper from 'swiper';
+    import {indexContent} from '../../service/api'
 
     export default {
         name: 'home',

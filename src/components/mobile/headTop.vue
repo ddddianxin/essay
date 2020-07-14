@@ -15,12 +15,12 @@
                 </div>
             </div>
             <div class="mLogo">
-                <img src="../../images/mlogo.png">
+                <img src="../../images/logo.png">
             </div>
         </div>
         <div class="sideMenu" v-show="menuShow">
             <div class="sideMenuIcon" @click="menuShow=!menuShow">
-                <img src="../../images/menu.png">
+                <img src="../../images/menuWhite.png">
             </div>
             <div class="sideMList">
                 <div class="sideItem" @click="menuShow=!menuShow">
@@ -35,7 +35,7 @@
                     </div>
                     <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
                         <router-link to="/centerIntro/index">中心概况</router-link>
-                        <router-link to="">研究方向</router-link>
+                        <router-link to="/research/index">研究方向</router-link>
                     </div>
                 </div>
                 <div class="sideItem">
@@ -56,7 +56,7 @@
                 </div>
                 <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
-                        <router-link to="/home">科研成果</router-link>
+                        <router-link to="">科研成果</router-link>
                     </div>
                 </div>
                 <div class="sideItem" @click="menuShow=!menuShow">
@@ -66,12 +66,12 @@
                 </div>
                 <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
-                        <router-link to="/home">人才招聘</router-link>
+                        <router-link to="">人才招聘</router-link>
                     </div>
                 </div>
                 <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
-                        <router-link to="/home">联系我们</router-link>
+                        <router-link to="">联系我们</router-link>
                     </div>
                 </div>
             </div>
@@ -133,7 +133,7 @@
     height:px2rem(90);
     padding-left:px2rem(40);
     display:block;
-    background-color:rgba(21,43,89,.75);
+    background-color:rgba(21,43,89,.85);
 }
 .sideMenuIcon img{
     width:px2rem(40);
@@ -142,7 +142,7 @@
     float:left;
 }
 .sideMList{
-    background-color:rgba(21,43,89,.75);
+    background-color:rgba(21,43,89,.85);
     height:100%;
 }
 .sideItem{

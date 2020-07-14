@@ -322,7 +322,7 @@
    .coverBg{
        background-color:rgba(21,43,89,.75);
        position: absolute;
-       top:px2rem(384);
+       bottom:0;
         left:0;
         width:100%;
         height:26px;
@@ -331,8 +331,8 @@
    }
    .bannerText{
        color:#fff;
-       width:360px;
-       float: right;
+       width:pxrem(720);
+       padding-left:px2rem(40);
    }
    .bannerText h2{
        margin:0;
@@ -390,7 +390,7 @@
    }
    .sciRg{
        width:100%;
-        height:px2rem(840);
+        height:auto;
         margin:0 px2rem(40);
         padding:px2rem(20) px2rem(40);
        background-image: linear-gradient( #a5177f, #e02d81);
@@ -533,7 +533,7 @@
     }
     .teamItem{
        width:px2rem(247);
-        height:px2rem(310);
+        height:px2rem(320);
        background-color: #fff;
    }
    .teamItem img{
@@ -581,6 +581,7 @@
         height: px2rem(320);
         position:relative;
         overflow: hidden;
+        margin:0 0 px2rem(30) 0;
     }
     .swiper-container{
         overflow: visible;

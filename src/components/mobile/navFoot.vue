@@ -15,7 +15,6 @@
 
 <script>
     import {mapState, mapMutations, mapActions} from 'vuex'
-    import {wxjssdk} from '../../service/api';
     import wxapi from '../../service/wxapi.js';
     export default {
         name: 'navFoot',
@@ -68,19 +67,19 @@
     @import '../../style/mixin';
     #foot{
         width:100%;
-        height: px2rem(220);
+        height: auto;
         background-color:#152b59;
         z-index: 1000;
         display:flex;
         flex-wrap: nowrap;
         justify-content: space-between;
         color:#fff;
+
     }
     .lfText{
         font-size:px2rem(24);
         width:px2rem(480);
         margin:px2rem(30) px2rem(40);
-
     }
     .contact{
         width:px2rem(120);

@@ -1,20 +1,25 @@
 <template>
     <header id='head_top'>
         <div class="container webTop">
-            <div class="search">
-                <span class="searchTit">English</span>
-                <div class="searchBox">
-                    <input value="" placeholder="">
-                    <button>搜索</button>
+            <div class="navTop">
+                <div class="logo">
+                    <router-link to="/home">
+                        <img src="../../images/logo.png">
+                    </router-link>
+                </div>
+                <div class="search">
+                    <span class="searchTit">English</span>
+                    <div class="searchBox">
+                        <input value="" placeholder="">
+                        <button>搜索</button>
+                    </div>
                 </div>
             </div>
             <div class="nav">
-                <div class="logo">
-                    <img src="../../images/logo.png">
-                </div>
+                
                 <div class="menu">
                     <span :class="webActive=='home'?'active':''">
-                        <router-link to="">首页</router-link>
+                        <router-link to="/home">首页</router-link>
                     </span>
                     <span :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
                         <router-link to="/centerIntro/index">中心介绍<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
@@ -34,7 +39,9 @@
                         
                         <div class="childItem">
                             <ul>
-                                <li>科研动态</li>
+                                <li>
+                                    <router-link to="/sciNews/index">科研动态</router-link>
+                                </li>
                                 <li>
                                     <router-link to="/sciExchange/index">学术交流</router-link>
                                 </li>
@@ -45,13 +52,13 @@
                         </div>
                     </span>
                     <span :class="webActive=='team'?'active':''">
-                        <router-link to="">科研队伍</router-link>
+                        <router-link to="/team/index">科研队伍</router-link>
                     </span>
                     <span :class="webActive=='achievement'?'active':''">
-                        <router-link to="">科研成果</router-link>
+                        <router-link to="/research/index">科研成果</router-link>
                     </span>
                     <span :class="webActive=='experiment'?'active':''">
-                        <router-link to="">实验平台</router-link>
+                        <router-link to="/experiment/index">实验平台</router-link>
                     </span>
                     <span :class="webActive=='recruit'?'active':''">
                         <router-link to="">人才招聘</router-link>
@@ -106,6 +113,12 @@
     text-align: center;
     background-color: #fff;
 }
+.navTop{
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+    padding:20px 0 10px 0;
+}
 
 /* 搜索 */
 .search{
@@ -144,23 +157,23 @@
 
 /* nav */
 .logo{
-    width:126px;
-    height: 102px;
+    width:533px;
+    height: 90px;
 }
 .logo img{
-    width:126px;
-    height: 102px;
+    width:533px;
+    height: 90px;
 }
 .nav{
     display:flex;
     flex-wrap: nowrap;
     justify-content: space-between;
-    height: 102px;
+    height: 50px;
 }
 .menu{
-    width:814px;
-    height: 102px;
-    line-height: 102px;
+    width:1024px;
+    height: 50px;
+    line-height: 50px;
     display: flex;
     flex-wrap: nowrap;
     justify-content: space-between;
@@ -173,18 +186,6 @@
 .menu span.active{
     color:#213662;
 }
-
-/* 手机端头部 */
-#mHead{
-    width:100%;
-    height: px2rem(180);
-    position: fixed;
-    top:0;
-    left:0;
-    background-color:#fff;
-    border-bottom:1px solid #eee;
-    z-index: 1000;
-}
 .wapTop{
     width:px2rem(750);
     height: px2rem(90);
@@ -195,22 +196,25 @@
 .childItem{
     display: none;
     position:absolute;
-    top:102px;
-    right:-35px;
+    top:50px;
+    right:-45px;
     background-color: #f2eeee;
     width:140px;
     height:auto;
 }
 .childItem li{
+    width:140px;
     height:58px;
     line-height: 58px;
     text-align: center;
     font-size: 17px;
     color:#555;
     font-weight:bold;
-    line-height: px2rem(90);
-    padding-left:px2rem(14);
-    float:left;
+}
+.childItem li a{
+    display: block;
+    height:58px;
+    line-height: 58px;
 }
 .childItem li:hover{
     cursor:pointer;
@@ -226,11 +230,15 @@
     transform:rotate(270deg);
     position: absolute;
     right:-25px;
-    top:40px;
+    top:18px;
+}
+.newsBtn{
+    position: relative;
 }
 .newsBtn:hover{
     .childItem{
         display:block;
+        z-index: 1000;
     }
     .menuArrow{
         transform:rotate(90deg);

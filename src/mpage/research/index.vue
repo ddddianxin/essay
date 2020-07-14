@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="centerIntro"></head-top>
+        <head-top webActive="experiment" title="研究方向"></head-top>
         <div class="resBg">
             <h3>研究方向</h3>
             <img src="../../images/whiteLine.png">
@@ -28,19 +28,19 @@
         
         <div class="ctBg">
             <div class="container">
-                <img class="mt30" src="../../images/resPic.png">
+                <img src="../../images/resPic.png">
             </div>
         </div>
     </div>
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
+    import headTop from '../../components/mobile/headTop';
     export default {
         name: 'news',
         data(){
             return{
-               
+                
                 
             }
         },
@@ -74,42 +74,41 @@
 <style lang="scss">
     @import '../../style/mixin';
     .resBg{
-        height:525px;
+        height:px2rem(400);
+        margin-top:px2rem(180);
         background: url('../../images/sciBg.png') no-repeat;
         background-size:100% 100%;
         text-align: center;
     }
     .resBg h3{
         text-align: center;
-        font-size:30px;
+        font-size:16px;
         font-weight: bold;
         color:#fff;
-        padding:80px 0 15px 0;
+        padding:px2rem(20) 0 0 0;
     }
     .resBg img{
-        margin:10px auto;
+        margin:0px auto;
+        width:80%;
     }
     .resTopItem{
-        font-size:24px;
+        font-size:12px;
         color:#fff;
-        padding:10px 0;
-        line-height: 38px;
+        padding:0;
+        line-height: px2rem(48);
         display: flex;
         justify-content: center;
     }
     .resTopItem img{
         margin:0;
+        width:px2rem(20);
+        object-fit: contain;
         padding-right:10px;
     }
-   
     .ctBg{
-        padding-bottom:35px;
+        padding:15px px2rem(20) 35px px2rem(20);
     }
-    .bgTop{
-        height:528px;
-        width: 100%;
-        object-fit: cover;
+    .ctBg img{
+        width:100%;
     }
-    
-
 </style>

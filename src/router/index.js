@@ -9,6 +9,7 @@ const centerNews = r => require.ensure([], () => r(require('../page/centerNews/i
 const centerIntro = r => require.ensure([], () => r(require('../page/centerIntro/index')), 'centerIntro');
 const research = r => require.ensure([], () => r(require('../page/research/index')), 'research');
 const sciExchange = r => require.ensure([], () => r(require('../page/sciExchange/index')), 'sciExchange');
+const sciNews = r => require.ensure([], () => r(require('../page/sciNews/index')), 'sciNews');
 
 
 //移动端
@@ -19,7 +20,7 @@ const mExperiment = r => require.ensure([], () => r(require('../mpage/experiment
 const mCenterNews = r => require.ensure([], () => r(require('../mpage/centerNews/index')), 'mEnterNews');
 const mCenterIntro = r => require.ensure([], () => r(require('../mpage/centerIntro/index')), 'mCenterIntro');
 const mSciExchange = r => require.ensure([], () => r(require('../mpage/sciExchange/index')), 'mSciExchange');
-
+const mResearch = r => require.ensure([], () => r(require('../mpage/research/index')), 'mResearch');
 
 var pc = [{
     path: '/',
@@ -70,6 +71,11 @@ var pc = [{
             path: '/sciExchange/index',
             name: 'sciExchange',
             component: sciExchange
+        },
+        {
+            path: '/sciNews/index',
+            name: 'sciNews',
+            component: sciNews
         }
     ]
 }];
@@ -118,6 +124,11 @@ var wap = [{
             path: '/sciExchange/index',
             name: 'mSciExchange',
             component: mSciExchange
+        },
+        {
+            path: '/research/index',
+            name: 'mResearch',
+            component: mResearch
         }
     ]
 }];

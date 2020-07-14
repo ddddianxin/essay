@@ -1,7 +1,7 @@
 <template>
     <div class="bg">
         <head-top webActive="experiment" title="中心概况"></head-top>
-        <img class="bgTop" src="../../images/ctIntro.png">
+        <img class="bgTop" src="../../images/mCtIntro.png">
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">
@@ -41,7 +41,7 @@
                     fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
                     sources: [{
                         type: "",//这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-                        src: "https://v.qq.com/x/page/f3112hlbbxl.html" //url地址
+                        src: "http://t.cn/A6yivmCw" //url地址
                     }],
                     poster: require('../../images/banner2.png'), //你的封面地址
                     // width: document.documentElement.clientWidth, //播放器宽度
@@ -78,7 +78,7 @@
         created(){
 
 
-        },
+        }, 
     }
 
 </script>
