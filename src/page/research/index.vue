@@ -36,11 +36,14 @@
 
 <script>
     import headTop from '../../components/header/headTop';
+    import {getStore} from '../../config/mUtils'
     export default {
         name: 'news',
         data(){
             return{
-               
+               cn:0,
+                id:'',
+                organizationId:'',
                 
             }
         },
@@ -48,6 +51,7 @@
             headTop
         },
         mounted(){
+            this.cn = getStore("inCN");
             // 获取首页产品
             this.initData();
             if(document.body.clientWidth<=1024){
@@ -59,7 +63,8 @@
         },
         methods:{
             async initData(){
-                
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
             }
 
         },

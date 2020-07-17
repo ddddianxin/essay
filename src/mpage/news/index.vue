@@ -39,7 +39,7 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
+    import headTop from '../../components/mobile/headTop';
     export default {
         name: 'news',
         data(){

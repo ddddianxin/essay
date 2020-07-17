@@ -8,7 +8,7 @@
                     </router-link>
                 </div>
                 <div class="search">
-                    <span class="searchTit">English</span>
+                    <span class="searchTit" @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                     <div class="searchBox">
                         <input value="" placeholder="">
                         <button>搜索</button>
@@ -16,9 +16,21 @@
                 </div>
             </div>
             <div class="nav">
-                
                 <div class="menu">
                     <span :class="webActive=='home'?'active':''">
+                        <router-link to="/home">首页</router-link>
+                    </span>
+                    <span v-for="(item,index) in menuData" :key="index" :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
+                        <div @click="toUrl(item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/lfArrow.png"></div>
+                        <div class="childItem" v-if="item.items" >
+                            <ul>
+                                <li v-for="(iitem,iindex) in item.items" :key="iindex">
+                                    <span @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </span>
+                    <!-- <span :class="webActive=='home'?'active':''">
                         <router-link to="/home">首页</router-link>
                     </span>
                     <span :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
@@ -65,7 +77,7 @@
                     </span>
                     <span :class="webActive=='contactUs'?'active':''">
                         <router-link to="">联系我们</router-link>
-                    </span>
+                    </span> -->
                 </div>
             </div>
         </div>
@@ -74,11 +86,15 @@
 
 <script>
     import {mapState, mapMutations, mapActions} from 'vuex'
+    import {setStore,getStore} from '../../config/mUtils'
+    import {menuList} from '../../service/api'
     export default {
         name: 'headTop',
         data(){
             return{
+                cn:0,
                 menu:['home','centerIntro','news','team','achievement','experiment','recruit','contactUs'],
+                menuData:''
             }
         },
         props: ['webActive'],
@@ -91,14 +107,35 @@
             //this.getUserInfo();
         },
         mounted(){
-            
-            
+            this.cn = getStore("inCN");
+            this.getMenu();
         },
         computed: {
-           
+           ...mapState([
+               'inCN'
+           ])
         },
         methods:{
-           
+           ...mapMutations([
+               'IN_CN','IN_EN'
+           ]),
+           changelanguage(){
+               if(this.cn==0){
+                   this.IN_EN();
+               }else{
+                   this.IN_CN();
+               }
+               this.$router.go(0);
+           },
+           async getMenu(){
+               var res = await menuList(this.cn,1);
+               this.menuData = res.data;
+           },
+           toUrl(url,id,organizationId){
+               if(url!='/'){
+                   this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
+               }
+           }
             
         }
 
@@ -133,6 +170,9 @@
     font-weight: bold;
     font-size: 16px;
     padding-right: 20px;
+}
+.searchTit:hover{
+    cursor:pointer;
 }
 .searchBox{
     width:280px;
@@ -211,7 +251,7 @@
     color:#555;
     font-weight:bold;
 }
-.childItem li a{
+.childItem li span{
     display: block;
     height:58px;
     line-height: 58px;
@@ -221,7 +261,7 @@
     color:#fff;
     background-color: rgb(176,0,125);
 }
-.childItem li:hover a{
+.childItem li:hover span{
     color:#fff;
 }
 .menuArrow{

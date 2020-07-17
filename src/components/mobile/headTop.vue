@@ -11,7 +11,7 @@
                         <i class="el-icon-search"></i>
                         <input type="text" value="搜索" placeholder="搜索">
                     </div>
-                    <span>English</span>
+                    <span @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                 </div>
             </div>
             <div class="mLogo">
@@ -23,7 +23,18 @@
                 <img src="../../images/menuWhite.png">
             </div>
             <div class="sideMList">
-                <div class="sideItem" @click="menuShow=!menuShow">
+                <div class="sideItem" v-for="(item,index) in menuData" :key="index">
+                    <div class="sideBtn" @click="toUrl(item.menuUrl,item.id)">
+                        <span>{{item.menuName}}</span>
+                        <img v-if="item.items" src="../../images/lfArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
+                    </div>
+                    <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
+                        <p v-for="(iitem,iindex) in item.items" :key="iindex">
+                            <router-link :to="iitem.menuUrl">{{iitem.menuName}}</router-link>
+                        </p>
+                    </div>
+                </div>
+                <!-- <div class="sideItem" @click="menuShow=!menuShow">
                     <div class="sideBtn">
                         <router-link to="/home">首页</router-link>
                     </div>
@@ -73,7 +84,7 @@
                     <div class="sideBtn">
                         <router-link to="">联系我们</router-link>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </header>
@@ -81,14 +92,18 @@
 
 <script>
     import {mapState, mapMutations, mapActions} from 'vuex'
+    import {setStore,getStore} from '../../config/mUtils'
+    import {menuList} from '../../service/api'
     export default {
         name: 'headTop',
         data(){
             return{
+                cn:0,
                 menuShow:false,
                 ctShow:true,
                 newsShow:true,
                 menu:['home','centerIntro','news','team','achievement','experiment','recruit','contactUs'],
+                menuData:''
             }
         },
         props: ['webActive','title'],
@@ -101,17 +116,39 @@
             //this.getUserInfo();
         },
         mounted(){
-            
-            
+            this.cn = getStore("inCN");
+            this.getMenu();
         },
         computed: {
-           
+           ...mapState([
+               'inCN'
+           ])
         },
         methods:{
-            
-            
+            ...mapMutations([
+               'IN_CN','IN_EN'
+           ]),
+           changelanguage(){
+               if(this.cn==0){
+                   this.IN_EN();
+               }else{
+                   this.IN_CN();
+               }
+               this.$router.go(0);
+           },
+           async getMenu(){
+               var res = await menuList(this.cn,1);
+               this.menuData = res.data;
+               console.log(res);
+           },
+           toUrl(url,id){
+               if(url!='/'){
+                   this.$router.push({path:url,query:{id:id}});
+               }else{
+                   this.ctShow = !this.ctShow
+               }
+           }
         }
-
     }
 
 </script>
@@ -147,11 +184,10 @@
 }
 .sideItem{
     padding:0 px2rem(30);
-    
 }
 .sideBtn{
     font-size:px2rem(32);
-    height:px2rem(110);
+    height:px2rem(100);
     line-height: px2rem(110);
     text-align: center;
     position: relative;

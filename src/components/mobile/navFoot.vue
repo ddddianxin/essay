@@ -15,7 +15,7 @@
 
 <script>
     import {mapState, mapMutations, mapActions} from 'vuex'
-    import wxapi from '../../service/wxapi.js';
+    // import wxapi from '../../service/wxapi.js';
     export default {
         name: 'navFoot',
     	data(){
@@ -35,14 +35,14 @@
         methods: {
             async initData(){
                 var url=encodeURIComponent(location.href.split('#')[0]);
-                var data = await wxjssdk(url);
+                // var data = await wxjssdk(url);
                 var option = {
                     title:window.location.title?window.location.title:'六摩尔直营商城 www.sixmol.com',
                     desc:'主营医药中间体、原料药、化妆品高端原料、日化清洗行业原材料，包括进出口国际贸易业务。',
                     link:window.location.href,
                     imgUrl:'http://www.huaxuejia.cn/Public/home/images/logo.jpg'
                 }
-                wxapi.wxRegister(data,option);
+                // wxapi.wxRegister(data,option);
 
             },
             toMessage(){

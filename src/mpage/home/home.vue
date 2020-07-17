@@ -7,10 +7,10 @@
                     <el-carousel-item v-for="(item,index) in bannerInfo" :key="index" >
                         <div class="coverBg">
                             <div class="bannerText">
-                                <h2 class="wto">{{item.title}}</h2>
+                                <h2 class="wto">{{item.contentTitle}}</h2>
                             </div>
                         </div>
-                        <img :src="item.img">
+                        <img :src="host+item.imgUrl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -126,11 +126,16 @@
 <script>
     import headTop from '../../components/mobile/headTop';
     import Swiper from 'swiper';
+    import {indexContent,banner} from '../../service/api'
+    import {mapState} from 'vuex'
+    import {getStore} from '../../config/mUtils'
 
     export default {
         name: 'home',
         data(){
             return{
+                cn:0,
+                isPc:1,
                 newsShowNum:6,
                 bannerHeight:'613px',
                 carouselArr:[
@@ -267,6 +272,8 @@
             headTop
         },
         mounted(){
+            this.cn = getStore("inCN");
+            this.isPc = getStore("isPc");
             // 获取首页产品
             this.initData();
             if(document.body.clientWidth<=1024){
@@ -289,11 +296,16 @@
                 }
             })
         },
-        computed:{
+        computed: {
+           ...mapState([
+               'host','inCN'
+           ])
         },
         methods:{
             async initData(){
-                
+                //this.bannerInfo = await banner(1,0,1);
+                var res = await indexContent(this.cn,1,this.isPc);
+                this.bannerInfo = res.data[0].list;
             }
 
         },

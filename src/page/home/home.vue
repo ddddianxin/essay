@@ -7,12 +7,12 @@
                     <el-carousel-item v-for="(item,index) in bannerInfo" :key="index" >
                         <div class="coverBg">
                             <div class="bannerText">
-                                <h2 class="wto">{{item.title}}</h2>
-                                <p>{{item.description}}</p>
-                                <router-link :to="item.url">查看更多</router-link>
+                                <h2 class="wto">{{item.contentTitle}}</h2>
+                                <p>{{item.content}}</p>
+                                <!-- <router-link :to="item.url">查看更多</router-link> -->
                             </div>
                         </div>
-                        <img :src="item.img">
+                        <img :src="item.imgUrl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -135,12 +135,16 @@
 <script>
     import headTop from '../../components/header/headTop';
     import Swiper from 'swiper';
-    import {indexContent} from '../../service/api'
+    import {indexContent,banner} from '../../service/api'
+    import {mapState} from 'vuex'
+    import {getStore} from '../../config/mUtils'
 
     export default {
         name: 'home',
         data(){
             return{
+                cn:0,
+                isPc:1,
                 newsShowNum:6,
                 bannerHeight:'613px',
                 carouselArr:[
@@ -270,6 +274,8 @@
             headTop
         },
         mounted(){
+            this.cn = getStore("inCN");
+            this.isPc = getStore("isPc");
             // 获取首页产品
             this.initData();
             if(document.body.clientWidth<=1024){
@@ -294,11 +300,18 @@
             })
         },
         computed:{
+            ...mapState([
+               'host','inCN'
+           ])
         },
         methods:{
             async initData(){
-                
-            }
+                var res = await banner('',this.cn,this.isPc);
+                this.bannerInfo = res.data;
+                var res2 = await indexContent(this.cn,1,this.isPc);
+                console.log(res2);
+
+            },
 
         },
         created(){
@@ -350,6 +363,7 @@
         -webkit-line-clamp: 7 ;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
+        font-size:13px;
    }
    .bannerText a{
        border:2px solid #fff;
@@ -360,6 +374,22 @@
        display: block;
        margin-top:20px;
    }
+   .el-carousel__indicators.el-carousel__indicators--horizontal{
+        left:40%;
+        bottom:30px;
+        
+    }
+    .el-carousel__indicators--horizontal li{
+        float:right;
+    }
+    .el-carousel__indicator--horizontal{
+        padding:0 6px 8px 0;
+    }
+    .el-carousel__button{
+        width:10px;
+        height: 10px;
+        border-radius: 30px;
+    }
 
    /* 科研动态 */
    .sciBg{

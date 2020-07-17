@@ -16,7 +16,7 @@ import { routerMode } from './config/env'
 import '../config/rem.js'
 import 'babel-polyfill'
 import axios from 'axios'
-import { getStore } from './config/mUtils'
+import { getStore, setStore } from './config/mUtils'
 import WXConfig from 'weixin-js-sdk'
 
 import VideoPlayer from 'vue-video-player'
@@ -27,6 +27,11 @@ Vue.use(VideoPlayer)
 Vue.prototype.WXConfig = WXConfig;
 Vue.config.productionTip = false;
 Vue.prototype.$ajax = axios;
+
+
+if (!getStore("inCN")) {
+    setStore('inCN', 0);
+}
 
 // axios.defaults.withCredentials = true;
 // 默认超时设置

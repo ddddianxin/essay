@@ -1,5 +1,6 @@
 import App from '../App' //PC端
 import mApp from '../mApp' //移动端
+import { setStore, getStore } from '../config/mUtils'
 //PC端
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home');
 const team = r => require.ensure([], () => r(require('../page/team/index')), 'team');
@@ -21,6 +22,7 @@ const mCenterNews = r => require.ensure([], () => r(require('../mpage/centerNews
 const mCenterIntro = r => require.ensure([], () => r(require('../mpage/centerIntro/index')), 'mCenterIntro');
 const mSciExchange = r => require.ensure([], () => r(require('../mpage/sciExchange/index')), 'mSciExchange');
 const mResearch = r => require.ensure([], () => r(require('../mpage/research/index')), 'mResearch');
+const mSciNews = r => require.ensure([], () => r(require('../mpage/sciNews/index')), 'mSciNews');
 
 var pc = [{
     path: '/',
@@ -129,6 +131,11 @@ var wap = [{
             path: '/research/index',
             name: 'mResearch',
             component: mResearch
+        },
+        {
+            path: '/sciNews/index',
+            name: 'mSciNews',
+            component: mSciNews
         }
     ]
 }];
@@ -148,8 +155,10 @@ function IsPC() {
 var use;
 if (IsPC()) {
     use = pc;
+    setStore('isPc', 1);
 } else {
     use = wap;
+    setStore('isPc', 0);
 }
 
 export default use;

@@ -3,8 +3,8 @@
         <head-top webActive="news" title="学术交流"></head-top>
         <div class="newsBg">
             <div class="container">
-                <div class="teamMenu">
-                    <div class="teamMList">
+                <div class="sciEMenu">
+                    <div class="sciEMList">
                         <span class="active">分类一</span>
                         <span>分类二</span>
                         <span>分类三</span>
@@ -148,23 +148,23 @@
         flex-wrap: nowrap;
         justify-content: space-between;
     }
-    .teamMenu{
+    .sciEMenu{
         background-color:rgb(180,0,125);
         height:px2rem(60);
         line-height:px2rem(60);
     }
-    .teamMList{
+    .sciEMList{
         margin:0 px2rem(40);
         display:flex;
         flex-wrap: nowrap;
         
     }
-    .teamMList span{
+    .sciEMList span{
         width:px2rem(110);
         text-align: center;
         color:#fff;
     }
-    .teamMList span.active{
+    .sciEMList span.active{
         background-color:#fff;
         color:#152b59;
         height:px2rem(60);
