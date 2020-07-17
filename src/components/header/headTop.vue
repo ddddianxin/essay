@@ -18,7 +18,7 @@
             <div class="nav">
                 <div class="menu">
                     <span :class="webActive=='home'?'active':''">
-                        <router-link to="/home">首页</router-link>
+                        <router-link to="/home">{{cn==0?'首页':'Index'}}</router-link>
                     </span>
                     <span v-for="(item,index) in menuData" :key="index" :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
                         <div @click="toUrl(item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/lfArrow.png"></div>
@@ -30,54 +30,6 @@
                             </ul>
                         </div>
                     </span>
-                    <!-- <span :class="webActive=='home'?'active':''">
-                        <router-link to="/home">首页</router-link>
-                    </span>
-                    <span :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
-                        <router-link to="/centerIntro/index">中心介绍<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
-                        <div class="childItem">
-                            <ul>
-                                <li>
-                                    <router-link to="/centerIntro/index">中心概况</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/research/index">研究方向</router-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span :class="webActive=='news'?'active newsBtn':'newsBtn'">
-                        <router-link to="/news/index">新闻动态<img class="menuArrow" src="../../images/lfArrow.png"></router-link>
-                        
-                        <div class="childItem">
-                            <ul>
-                                <li>
-                                    <router-link to="/sciNews/index">科研动态</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/sciExchange/index">学术交流</router-link>
-                                </li>
-                                <li>
-                                    <router-link to="/centerNews/index">中心动态</router-link>
-                                </li>
-                            </ul>
-                        </div>
-                    </span>
-                    <span :class="webActive=='team'?'active':''">
-                        <router-link to="/team/index">科研队伍</router-link>
-                    </span>
-                    <span :class="webActive=='achievement'?'active':''">
-                        <router-link to="/research/index">科研成果</router-link>
-                    </span>
-                    <span :class="webActive=='experiment'?'active':''">
-                        <router-link to="/experiment/index">实验平台</router-link>
-                    </span>
-                    <span :class="webActive=='recruit'?'active':''">
-                        <router-link to="">人才招聘</router-link>
-                    </span>
-                    <span :class="webActive=='contactUs'?'active':''">
-                        <router-link to="">联系我们</router-link>
-                    </span> -->
                 </div>
             </div>
         </div>
@@ -276,6 +228,8 @@
     position: relative;
 }
 .newsBtn:hover{
+    cursor:pointer;
+    color:#152b59;
     .childItem{
         display:block;
         z-index: 1000;

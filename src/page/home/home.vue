@@ -20,12 +20,13 @@
                 <div class="sciNews">
                     <h3>科研动态</h3>
                     <span class="h3BLine"></span>
-                    <div class="sciBox">
+                    <div class="sciBox" >
                         <div class="sciLf">
-                            <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index">
-                                <img :src="item.img">
-                                <h4>{{item.title}}</h4>
-                                <p>{{item.date}}</p>
+                            <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
+                                <img :src="host+item.mainImage">
+                                <h4>{{item.contentTitle}}</h4>
+                                <p class="plain">{{item.plainText}}</p>
+                                <p class="date">{{item.createTime}}</p>
                                 <div class="tc">
                                     <span class="arrow">
                                         <img src="../../images/arrow.png">
@@ -37,8 +38,8 @@
                             <h3>科研成果</h3>
                             <span class="h3BLine"></span>
                             <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
-                                <h4>{{item.title}}</h4>
-                                <p>{{item.date}}</p>
+                                <h4>{{item.contentTitle}}</h4>
+                                <p>{{item.createTime}}</p>
                             </div>
                         </div>
                     </div>
@@ -49,9 +50,10 @@
                     <h3>学术交流</h3>
                     <span class="h3BLine"></span>
                     <div class="hmLf_box">
-                        <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index">
-                            <h4>{{item.title}}</h4>
-                            <p>{{item.date}}</p>
+                        <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
+                            <h4>{{item.contentTitle}}</h4>
+                            <p class="plain">{{item.plainText}}</p>
+                            <p class="date">{{item.createTime}}</p>
                         </div>
                     </div>
                 </div>
@@ -60,9 +62,9 @@
                     <span class="h3BLine"></span>
                     <div class="hmRg_box">
                         <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
-                            <h4>{{item.title}}</h4>
+                            <h4>{{item.contentTitle}}</h4>
                             <span>岗位介绍：</span>
-                            <p>{{item.des}}</p>
+                            <p>{{item.plainText}}</p>
                         </div>
                     </div>
                 </div>
@@ -92,9 +94,9 @@
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index">    
-                                    <img :src="item.img">              
-                                    <h4 class="wto">{{item.name}}</h4>
-                                    <p>{{item.description}}</p>
+                                    <img :src="host+item.mainImage">              
+                                    <h4 class="wto">{{item.contentTitle}}</h4>
+                                    <p>{{item.plainText}}</p>
                                     <div class="tc">
                                         <span class="arrow">
                                             <img src="../../images/arrow.png">
@@ -108,26 +110,6 @@
                     </div>
                 </div>
             </div>
-            <!-- <div class="recruitBg">
-                <div class="container">
-                    <div class="recruitTit">
-                        <h3>人才招聘</h3>
-                        <span class="h3BLine"></span>
-                    </div>
-                    <div class="recruitBox">
-                        <div class="recItem" v-for="(item,index) in recruitData" :key="index">
-                            <h4>{{item.title}}</h4>
-                            <h5>岗位简介</h5>
-                            <p>{{item.des}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
         </div>
     </div>
 </template>
@@ -147,10 +129,6 @@
                 isPc:1,
                 newsShowNum:6,
                 bannerHeight:'613px',
-                carouselArr:[
-                    require('../../images/banner2.png'),
-                    require('../../images/banner3.png')
-                ],
                 bannerInfo:[
                     {
                         img:require('../../images/banner2.png'),
@@ -167,105 +145,33 @@
                 ],
                 sciNewsData:[
                     {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020年6月1日'
+                        mainImage:require('../../images/banner2.png'),
+                        contentTitle:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        createTime:'2020年6月1日'
                     }
                 ],
                 sciCommunit:[
                     {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
+                        contentTitle:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
+                        createTime:'2020年6月15日，星期一',
                         url:''
-                    },
-                    {
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    },{
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    },{
-                        title:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        date:'2020年6月15日，星期一',
-                        url:''
-                    },
+                    }
                 ],
                 teamData:[
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        mainImage:require('../../images/banner2.png'),
+                        contentTitle:'某某姓名',
+                        plainText:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
                         url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
+                    }
                     
                 ],
                 recruitData:[
                     {
-                        title:'访问学者',
-                        des:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
+                        contentTitle:'访问学者',
+                        plainText:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
                         url:''
-                    },
-                    {
-                        title:'访问学者',
-                        des:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
-                        url:''
-                    },
-                    {
-                        title:'访问学者',
-                        des:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
-                        url:''
-                    },
+                    }
                 ]
                 
             }
@@ -306,12 +212,33 @@
         },
         methods:{
             async initData(){
-                var res = await banner('',this.cn,this.isPc);
+                var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                console.log(res2);
+                for(var i in res2.data){
+                    if(res2.data[i].menuId == 13){
+                        //科研动态
+                        this.sciNewsData = res2.data[i].list;
+                    }
+                    if(res2.data[i].menuId == 14){
+                        //学术交流
+                        this.sciCommunit = res2.data[i].list;
+                    }
+                    if(res2.data[i].menuId == 11){
+                        //人才招聘
+                        this.recruitData = res2.data[i].list;
+                    }
+                    if(res2.data[i].menuId == 8){
+                        //科研队伍
+                        this.teamData = res2.data[i].list;
+                    }
+                    console.log(res2.data[i]);
+                }
 
             },
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
+            }
 
         },
         created(){
@@ -443,8 +370,12 @@
         -webkit-box-orient: vertical ;
         word-break: break-all ;
         font-weight: bold;
-        font-size: 12px;
+        font-size: 13px;
         line-height: 22px;
+   }
+   .sciRgItem h4:hover{
+       cursor:pointer;
+       text-decoration: underline;
    }
    .sciRgItem p{
        color:#de97c5;
@@ -466,6 +397,10 @@
        height: 306px;
        background-color: #fff;
    }
+   .sciLfItem:hover{
+       box-shadow:0 0 3px 3px #eee;
+       cursor:pointer;
+   }
    .sciLfItem img{
        width:240px;
        height: 140px;
@@ -475,20 +410,29 @@
        font-size: 13px;
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
         font-weight: bold;
         color:#333;
         padding:0 20px;
-        margin:5px 0;
-        height:88px;
-        /* font-family: 'PingFang SC'; */
+        margin:5px 0 0 0;
+        height:44px;
         line-height: 22px;
-
    }
-   .sciLfItem p{
+   .sciLfItem .plain{
        color:#666;
+       font-size: 10px;
+       padding:0 20px;
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        height:48px;
+   }
+   .sciLfItem .date{
+       color:#999;
        font-size: 10px;
        padding:0 20px 5px 20px;
 
@@ -558,6 +502,10 @@
        width:240px;
        height: 306px;
        background-color: #fff;
+   }
+   .teamItem:hover{
+       box-shadow:0 0 3px 3px #eee;
+       cursor:pointer;
    }
    .teamItem img{
        width:240px;
@@ -721,15 +669,30 @@
        padding:10px 0;
    }
    .hmLf_item h4{
+       font-size:13px;
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        font-weight: bold;
+        height: 24px;
+   }
+   .hmLf_item h4:hover{
+       cursor:pointer;
+       text-decoration: underline;
+   }
+   .hmLf_item .plain{
+       color:#96a3bb;
+       font-size:12px;
+       margin-top:5px;
        overflow: hidden ;
         display: -webkit-box ;
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        font-weight: bold;
-        height: 48px;
    }
-   .hmLf_item p{
+   .hmLf_item .date{
        color:#96a3bb;
        font-size:12px;
        margin-top:5px;
@@ -759,6 +722,10 @@
        font-size:18px;
        font-weight: bold;
        text-align: center;
+   }
+   .hmRg_item h4:hover{
+       cursor:pointer;
+       text-decoration: underline;
    }
    .hmRg_item span{
        font-size:14px;

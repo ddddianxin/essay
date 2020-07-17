@@ -23,68 +23,22 @@
                 <img src="../../images/menuWhite.png">
             </div>
             <div class="sideMList">
+                <div class="sideItem">
+                    <div class="sideBtn">
+                        <router-link to="/home">{{cn==0?'首页':'Index'}}</router-link>
+                    </div>
+                </div>
                 <div class="sideItem" v-for="(item,index) in menuData" :key="index">
-                    <div class="sideBtn" @click="toUrl(item.menuUrl,item.id)">
+                    <div class="sideBtn" @click="toUrl(item.menuUrl,item.id,item.organizationId)">
                         <span>{{item.menuName}}</span>
                         <img v-if="item.items" src="../../images/lfArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
                     </div>
                     <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
                         <p v-for="(iitem,iindex) in item.items" :key="iindex">
-                            <router-link :to="iitem.menuUrl">{{iitem.menuName}}</router-link>
+                            <span @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
                         </p>
                     </div>
                 </div>
-                <!-- <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="/home">首页</router-link>
-                    </div>
-                </div>
-                <div class="sideItem">
-                    <div class="sideBtn" @click="ctShow = !ctShow">
-                        <span>中心介绍</span>
-                        <img src="../../images/lfArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
-                    </div>
-                    <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
-                        <router-link to="/centerIntro/index">中心概况</router-link>
-                        <router-link to="/research/index">研究方向</router-link>
-                    </div>
-                </div>
-                <div class="sideItem">
-                    <div class="sideBtn" @click="newsShow = !newsShow">
-                        <span>新闻动态</span>
-                        <img src="../../images/lfArrow.png" :style="newsShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
-                    </div>
-                    <div class="sidechild" v-show="newsShow" @click="menuShow=!menuShow">
-                        <router-link to="/news/index">科研动态</router-link>
-                        <router-link to="/sciExchange/index">学术交流</router-link>
-                        <router-link to="/centerNews/index">中心活动</router-link>
-                    </div>
-                </div>
-                <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="/team/index">科研队伍</router-link>
-                    </div>
-                </div>
-                <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="">科研成果</router-link>
-                    </div>
-                </div>
-                <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="/experiment/index">实验平台</router-link>
-                    </div>
-                </div>
-                <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="">人才招聘</router-link>
-                    </div>
-                </div>
-                <div class="sideItem" @click="menuShow=!menuShow">
-                    <div class="sideBtn">
-                        <router-link to="">联系我们</router-link>
-                    </div>
-                </div> -->
             </div>
         </div>
     </header>
@@ -139,11 +93,10 @@
            async getMenu(){
                var res = await menuList(this.cn,1);
                this.menuData = res.data;
-               console.log(res);
            },
-           toUrl(url,id){
+           toUrl(url,id,organizationId){
                if(url!='/'){
-                   this.$router.push({path:url,query:{id:id}});
+                   this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
                }else{
                    this.ctShow = !this.ctShow
                }
@@ -203,7 +156,7 @@
 .sidechild{
     padding:px2rem(20) 0 0 0;
 }
-.sidechild a{
+.sidechild span{
     height:px2rem(60);
     line-height: px2rem(60);
     display:block;

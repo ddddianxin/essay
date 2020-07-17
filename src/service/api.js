@@ -53,12 +53,12 @@ export const detailContent = (id, organizationId, chineseOrEnglish) => post(base
 
 
 // 首页请求主体部分内容
-export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(baseUrl + '/cms/content/queryIndexContent', {
-    chineseOrEnglish,
-    organizationId,
-    isPc
-});
-
+// export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(baseUrl + '/cms/content/queryIndexContent', {
+//     chineseOrEnglish,
+//     organizationId,
+//     isPc
+// });
+export const indexContent = () => fetch('../static/index.json');
 
 // 退出登录
 //export const signout = () => fetch(baseUrl + '/outLogin');
