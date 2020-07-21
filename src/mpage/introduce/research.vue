@@ -2,27 +2,11 @@
     <div class="bg">
         <head-top webActive="experiment" title="研究方向"></head-top>
         <div class="resBg">
-            <h3>研究方向</h3>
+            <h3>{{list[0]}}</h3>
             <img src="../../images/whiteLine.png">
-            <div class="resTopItem">
+            <div class="resTopItem" v-for="(item,index) in list.slice(1)" :key="index">
                 <img src="../../images/star.png">
-                <span>仿生触觉与柔性传感</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
+                <span>{{item}}</span>
             </div>
         </div>
         
@@ -36,11 +20,16 @@
 
 <script>
     import headTop from '../../components/mobile/headTop';
+    import {getStore} from '../../config/mUtils'
+    import {content} from '../../service/api'
     export default {
         name: 'news',
         data(){
             return{
-                
+                cn:0,
+                id:'',
+                organizationId:'',
+                list:''
                 
             }
         },
@@ -59,7 +48,10 @@
         },
         methods:{
             async initData(){
-                
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                var res = await content(this.cn,this.id,this.organizationId);
+                this.list = res.data.list[0].plainText.split("###");
             }
 
         },
@@ -79,6 +71,7 @@
         background: url('../../images/sciBg.png') no-repeat;
         background-size:100% 100%;
         text-align: center;
+        padding-bottom:px2rem(40);
     }
     .resBg h3{
         text-align: center;

@@ -2,27 +2,11 @@
     <div class="bg">
         <head-top webActive="centerIntro"></head-top>
         <div class="resBg">
-            <h3>研究方向</h3>
+            <h3>{{list[0]}}</h3>
             <img src="../../images/whiteLine.png">
-            <div class="resTopItem">
+            <div class="resTopItem" v-for="(item,index) in list.slice(1)" :key="index">
                 <img src="../../images/star.png">
-                <span>仿生触觉与柔性传感</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
-            </div>
-            <div class="resTopItem">
-                <img src="../../images/star.png">
-                <span>微流控与体外诊断</span>
+                <span>{{item}}</span>
             </div>
         </div>
         
@@ -37,6 +21,7 @@
 <script>
     import headTop from '../../components/header/headTop';
     import {getStore} from '../../config/mUtils'
+    import {content} from '../../service/api'
     export default {
         name: 'news',
         data(){
@@ -44,7 +29,7 @@
                cn:0,
                 id:'',
                 organizationId:'',
-                
+                list:''
             }
         },
         components:{
@@ -65,6 +50,9 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
+                var res = await content(this.cn,this.id,this.organizationId);
+                this.list = res.data.list[0].plainText.split("###");
+                console.log(this.list);
             }
 
         },
@@ -79,17 +67,18 @@
 <style lang="scss">
     @import '../../style/mixin';
     .resBg{
-        height:525px;
+        min-height:325px;//525px
         background: url('../../images/sciBg.png') no-repeat;
         background-size:100% 100%;
         text-align: center;
+        padding-bottom:40px;
     }
     .resBg h3{
         text-align: center;
         font-size:30px;
         font-weight: bold;
         color:#fff;
-        padding:80px 0 15px 0;
+        padding:40px 0 15px 0;
     }
     .resBg img{
         margin:10px auto;

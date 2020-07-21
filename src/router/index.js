@@ -24,6 +24,9 @@ const lab = r => require.ensure([], () => r(require('../page/platform/lab')), 'l
 const equipment = r => require.ensure([], () => r(require('../page/platform/equipment')), 'equipment');
 const recruit = r => require.ensure([], () => r(require('../page/recruit/index')), 'recruit');
 const contactus = r => require.ensure([], () => r(require('../page/contactus/index')), 'contactus');
+const teamDetail = r => require.ensure([], () => r(require('../page/team/detail')), 'teamDetail');
+const newsDetail = r => require.ensure([], () => r(require('../page/news/detail')), 'newsDetail');
+const sciDetail = r => require.ensure([], () => r(require('../page/science/detail')), 'sciDetail');
 
 
 //移动端
@@ -49,6 +52,9 @@ const mLab = r => require.ensure([], () => r(require('../mpage/platform/lab')), 
 const mEquipment = r => require.ensure([], () => r(require('../mpage/platform/equipment')), 'mEquipment');
 const mRecruit = r => require.ensure([], () => r(require('../mpage/recruit/index')), 'mRecruit');
 const mContactus = r => require.ensure([], () => r(require('../mpage/contactus/index')), 'mContactus');
+const mTeamDetail = r => require.ensure([], () => r(require('../mpage/team/detail')), 'mTeamDetail');
+const mNewsDetail = r => require.ensure([], () => r(require('../mpage/news/detail')), 'mNewsDetail');
+const mSciDetail = r => require.ensure([], () => r(require('../mpage/science/detail')), 'mSciDetail');
 
 var pc = [{
     path: '/',
@@ -169,6 +175,21 @@ var pc = [{
             path: '/contactus/index',
             name: 'contactus',
             component: contactus
+        },
+        {
+            path: '/team/detail',
+            name: 'teamDetail',
+            component: teamDetail
+        },
+        {
+            path: '/news/detail',
+            name: 'newsDetail',
+            component: newsDetail
+        },
+        {
+            path: '/science/detail',
+            name: 'sciDetail',
+            component: sciDetail
         },
     ]
 }];
@@ -292,6 +313,21 @@ var wap = [{
             path: '/contactus/index',
             name: 'mContactus',
             component: mContactus
+        },
+        {
+            path: '/team/detail',
+            name: 'mTeamDetail',
+            component: mTeamDetail
+        },
+        {
+            path: '/news/detail',
+            name: 'mNewsDetail',
+            component: mNewsDetail
+        },
+        {
+            path: '/science/detail',
+            name: 'mSciDetail',
+            component: mSciDetail
         },
     ]
 }];

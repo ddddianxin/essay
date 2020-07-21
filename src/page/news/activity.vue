@@ -5,27 +5,13 @@
         <div class="teamBg">
             <div class="container">
                 <div class="lsideBox">
-                    <div class="lsideMenu">
-                        <h3>新闻动态</h3>
-                        <span class="h3BLine"></span>
-                        <ul>
-                            <li class="lsideMItem">
-                                <span>科研动态</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>学术交流</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>业内动态</span>
-                            </li>
-                            <li class="lsideMItem active">
-                                <span>中心活动</span>
-                            </li>
-                        </ul>
+                    <side-menu webTitle="新闻动态" webActive="中心动态"></side-menu>
+                    <div class="sciNList" v-if="listData.length ==0">
+                        <h2 class="f16">暂无数据</h2>
                     </div>
-                    <div class="sciNList">
+                    <div class="sciNList" v-else>
                         <div>
-                            <div class="topPanel">
+                            <div class="topPanel" @click="toNewsDetail(listData[0].id)">
                                 <div class="tPimg">
                                     <img :src="listData[0].mainPic">
                                 </div>
@@ -38,21 +24,22 @@
                                     <span>置顶</span>
                                 </div>
                             </div>
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index">    
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
                                 </div>         
                                 <div class="sciNdate">{{item.publishTime}}</div>
                                 <div class="sciNimg">
-                                    <img :src="host+item.mainImage">
+                                    <img :src="item.mainPic">
                                 </div>
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
                             <el-pagination
                                 layout="prev, pager, next"
-                                :total="50">
+                                :page-count="totalPage"
+                                @current-change="handleCurrentChange">
                             </el-pagination>
                         </div>
                     </div>
@@ -88,9 +75,10 @@
 
 <script>
     import headTop from '../../components/header/headTop';
+    import sideMenu from '../../components/common/sideMenu'
     import {getStore} from '../../config/mUtils'
-     import {mapState} from 'vuex'
-    import {content} from '../../service/api'
+    import {mapState} from 'vuex'
+    import {contentPage} from '../../service/api'
     export default {
         name: 'news',
         data(){
@@ -98,30 +86,16 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                listData:[
-                    {
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日'
-                    },{
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日'
-                    },{
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日'
-                    },{
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日'
-                    }
-                ]
+                rows:9,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                listData:[]
                 
             }
         },
         components:{
-            headTop
+            headTop,sideMenu
         },
         mounted(){
             this.cn = getStore("inCN");
@@ -141,9 +115,28 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                var res = await content(this.cn,this.id,this.organizationId);
-                this.listData = res.data;
-                console.log(res);
+                this.page = 1;
+                this.getData();
+            },
+            toNewsDetail(id){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
+                 console.log(res);
             }
 
         },
@@ -161,6 +154,7 @@
         height:205px;
         width: 100%;
         object-fit: cover;
+        display:block;
     }
     .teamBg{
         background-color: #f7f7f7;

@@ -90,7 +90,7 @@
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
                 var res = await content(this.cn,this.id,this.organizationId);
-                this.list = res.data;
+                this.list = res.data.list;
             }
 
         },

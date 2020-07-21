@@ -21,7 +21,7 @@
                         <router-link to="/home">{{cn==0?'首页':'Index'}}</router-link>
                     </span>
                     <span v-for="(item,index) in menuData" :key="index" :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
-                        <div @click="toUrl(item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/lfArrow.png"></div>
+                        <div @click="toUrl(item.items?'/':item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/lfArrow.png"></div>
                         <div class="childItem" v-if="item.items" >
                             <ul>
                                 <li v-for="(iitem,iindex) in item.items" :key="iindex">

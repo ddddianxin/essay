@@ -25,20 +25,20 @@
 
 <script>
     import headTop from '../../components/mobile/headTop';
-    import {content,detailContent} from '../../service/api'
+    import {contentPage} from '../../service/api'
+    import {getStore} from '../../config/mUtils'
     export default {
         name: 'news',
         data(){
             return{
-                listData:[
-                    {
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    }
-
-                ]
+                cn:0,
+                id:'',
+                rows:9,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                organizationId:'',
+                listData:[]
                 
             }
         },
@@ -47,11 +47,8 @@
         },
         mounted(){
             // 获取首页产品
-            this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
+            this.cn = getStore("inCN");
+            this.initData();   
         },
         computed:{
         },
@@ -59,9 +56,27 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                var res = await content(this.cn,this.id,this.organizationId);
-                this.listData = res.data;
-                console.log(res.data);
+                this.page = 1;
+                this.getData();
+            },
+            toNewsDetail(id){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
             }
 
         },

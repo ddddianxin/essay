@@ -4,34 +4,34 @@
         <div class="teamBg">
             <div class="container">
                 <div class="lsideBox">
-                    <div class="lsideMenu">
-                        <h3>科研队伍</h3>
-                        <span class="h3BLine"></span>
-                        <ul>
-                            <li class="lsideMItem">
-                                <span>全部</span>
-                            </li>
-                            <li class="lsideMItem active">
-                                <span>初级职称</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>中级职称</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>高级职称</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="teamList">
-                        <div class="teamItem" v-for="(item,index) in teamData" :key="index">    
-                            <img :src="item.img">              
-                            <h4 class="wto">{{item.name}}</h4>
-                            <p>{{item.description}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
+                    <side-menu webTitle="科研成果" webActive="技术转移转化"></side-menu>
+                    <div class="sciList">
+                        <div>
+                            <div class="newsSort">
+                                <span class="active">分类一</span>
+                                <span>分类二</span>
+                                <span>分类三</span>
+                                <span>分类四</span>
                             </div>
+                            <div class="tecPanel">
+                                <div class="tecItem" v-for="(item,index) in list" :key="index">
+                                    <img src="../../images/banner2.png">
+                                    <div class="tecInfo">
+                                        <h3 class="wto">的范德萨范德萨范德萨</h3>
+                                        <p class="plain">的范德萨范德萨发地方的范德萨范德萨发第三方第三方发的苟富贵</p>
+                                        <p class="date">2020年5月28日</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            
+                        </div>
+                        <div class="tc" style="margin:0 auto;">
+                            <el-pagination
+                                layout="prev, pager, next"
+                                :page-count="totalPage"
+                                @current-change="handleCurrentChange">
+                            </el-pagination>
                         </div>
                     </div>
                 </div>
@@ -42,6 +42,8 @@
 
 <script>
     import headTop from '../../components/header/headTop';
+    import sideMenu from '../../components/common/sideMenu'
+    import {contentPage} from '../../service/api'
     import {getStore} from '../../config/mUtils'
 
     export default {
@@ -51,67 +53,60 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                teamData:[
+                rows:9,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                list:[
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称断绝后路是克己复礼手机号',
+                        name:'张小婷',
+                        type:'某某类型',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称号',
+                        name:'张小婷',
+                        type:'某某类型',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称号和杜鹃花科时间',
+                        name:'张小婷',
+                        type:'某某类型豆腐块',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称断绝后路是克己复礼手机号',
+                        name:'张小婷',
+                        type:'某某类型',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称号',
+                        name:'张小婷',
+                        type:'某某类型',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目名称号和杜鹃花科时间',
+                        name:'张小婷',
+                        type:'某某类型豆腐块',
+                        apply:'2020年7月',
+                        get:'2020年7月',
                     }
+                    
                 ],
                 
             }
         },
         components:{
-            headTop
+            headTop,sideMenu
         },
         mounted(){
             this.cn = getStore("inCN");
@@ -145,54 +140,80 @@
         background-color: #f7f7f7;
         padding:36px 0;
     }
-    .teamList{
+    .sciList{
         width:780px;
+        padding-left:30px;
+        min-height: 850px;
         display: flex;
         flex-wrap: wrap;
-        align-content: flex-start;
+        align-content:space-between;
     }
-    .teamItem{
-       width:240px;
-       height: 306px;
-       background-color: #fff;
-       margin:0 0 20px 20px;
+
+    
+    .newsSort{
+       border-bottom:2px solid #ddd;
    }
-   .teamItem img{
-       width:240px;
-       height: 140px;
-       object-fit: cover;
+   .newsSort span{
+       font-size:16px;
+       color:#666;
+       line-height: 50px;
+       padding:0 20px;
+       text-align: center;
    }
-   .teamItem h4{
-       font-size: 15px;
+   .newsSort span:hover{
+       color:#152b59;
+   }
+   .newsSort span.active{
+       font-weight: bold;
+       color:#152b59;
+   }
+
+   .tecPanel{
+       display: flex;
+       flex-wrap: wrap;
+       justify-content: space-between;
+   }
+   .tecItem{
+       display: flex;
+       flex-wrap: nowrap;
+       justify-content: space-between;
+       width:350px;
+       margin-top:25px;
+   }
+   .tecItem img{
+       width:100px;
+       height:100px;
+       object-fit:cover;
+   }
+   .tecInfo{
+       width:230px;
+   }
+   .tecInfo h3{
+       font-size:16px;
        font-weight: bold;
        color:#333;
-       padding:5px 20px 0 20px;
+      padding:5px 0;
    }
-    .teamItem p{
-        font-size: 12px;
-        overflow: hidden ;
+    .tecInfo h3:hover{
+        color:#152b59;
+        font-weight: bold;
+        cursor:pointer;
+        text-decoration: underline;
+    }
+   .tecInfo .plain{
+       overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        color:#333;
-        padding:0 20px;
-        margin-bottom:10px;
-        height:88px;
-        line-height: 22px;
-    }
-    .teamItem .arrow{
-       width:30px;
-       height: 32px;
-       background-color: #152b59;
-       border-radius: 30px 30px 0 0;
-       display: inline-block;
-       text-align: center;
-    }
-    .teamItem .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;
-    }
+        font-size:14px;
+        line-height: 20px;
+        color:#666;
+   }
+   .tecInfo .date{
+       font-size:14px;
+        color:#999;
+   }
+    
 
 </style>

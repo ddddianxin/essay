@@ -10,7 +10,7 @@
                                 <h2 class="wto">{{item.contentTitle}}</h2>
                             </div>
                         </div>
-                        <img :src="host+item.imgUrl">
+                        <img :src="item.imgUrl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -20,10 +20,11 @@
                     <span class="h3BLine"></span>
                     <div class="sciBox">
                         <div class="sciLf">
-                            <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index">
-                                <img :src="host+item.mainImage">
+                            <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
+                                <img :src="item.mainPic">
                                 <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.createTime.slice(0,10)}}</p>
+                                <p class="plain">{{item.plainText}}</p>
+                                <p>{{item.publishTime}}</p>
                             </div>
                         </div>
                         <div class="sciRg">
@@ -31,7 +32,7 @@
                             <span class="h3BLine"></span>
                             <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
                                 <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.createTime}}</p>
+                                <p>{{item.publishTime}}</p>
                             </div>
                         </div>
                     </div>
@@ -41,9 +42,9 @@
                 <h3>学术交流</h3>
                 <span class="h3BLine"></span>
                 <div class="hmLf_box">
-                    <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index">
+                    <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                         <h4>{{item.contentTitle}}</h4>
-                        <p>{{item.createTime}}</p>
+                        <p>{{item.publishTime}}</p>
                     </div>
                 </div>
             </div>
@@ -68,7 +69,7 @@
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index">    
-                                    <img :src="host+item.mainImage">              
+                                    <img :src="item.mainPic">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p>{{item.plainText}}</p>
                                     <div class="tc">
@@ -103,50 +104,11 @@
                 isPc:1,
                 newsShowNum:6,
                 bannerHeight:'613px',
-                bannerInfo:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'一个研究相关标题',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner3.png'),
-                        title:'一个研究相关标题',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    }
-                ],
-                sciNewsData:[
-                    {
-                        mainImage:require('../../images/banner2.png'),
-                        contentTitle:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        createTime:'2020年6月1日'
-                    }
-                ],
-                sciCommunit:[
-                    {
-                        contentTitle:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        createTime:'2020年6月15日，星期一',
-                        url:''
-                    }
-                ],
-                teamData:[
-                    {
-                        mainImage:require('../../images/banner2.png'),
-                        contentTitle:'某某姓名',
-                        plainText:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    }
-                    
-                ],
-                recruitData:[
-                    {
-                        contentTitle:'访问学者',
-                        plainText:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
-                        url:''
-                    }
-                ]
+                bannerInfo:[],
+                sciNewsData:[],
+                sciCommunit:[],
+                teamData:[],
+                recruitData:[]
                 
             }
         },
@@ -187,27 +149,16 @@
             async initData(){
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
-                console.log(res.data);
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                for(var i in res2.data){
-                    if(res2.data[i].menuId == 13){
-                        //科研动态
-                        this.sciNewsData = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 14){
-                        //学术交流
-                        this.sciCommunit = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 11){
-                        //人才招聘
-                        this.recruitData = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 8){
-                        //科研队伍
-                        this.teamData = res2.data[i].list;
-                    }
-                    
-                }
+                console.log(res2);
+                this.sciNewsData = res2.data.science;
+                this.sciCommunit = res2.data.learning;
+                this.recruitData = res2.data.recruit;
+                this.teamData = res2.data.higher;
+                this.achieve = res2.data.achievement;
+            },
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             }
 
         },
@@ -365,7 +316,7 @@
       font-size: px2rem(26);
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
         font-weight: normal;
@@ -373,7 +324,17 @@
         padding:0 px2rem(12);
         line-height: px2rem(38);
         color:#333;
-        height:px2rem(190);
+        height:px2rem(76);
+   }
+   .sciLfItem .plain{
+       overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        font-weight: normal;
+        line-height: px2rem(36);
+        height:px2rem(110);
    }
    .sciLfItem p{
        color:#666;

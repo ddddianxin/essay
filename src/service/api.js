@@ -21,6 +21,7 @@ export const menuList = (chineseOrEnglish, organizationId) => post(baseUrl + '/c
     organizationId
 });
 
+
 //banner
 export const banner = (organizationId, chineseOrEnglish, isPc) => post(baseUrl + '/cms/banner/queryBannerList', {
     organizationId,
@@ -44,6 +45,7 @@ export const contentPage = (chineseOrEnglish, pageNumber, pageSize, organization
     menuId
 });
 
+
 //根据id查看内容详情
 export const detailContent = (id, organizationId, chineseOrEnglish) => post(baseUrl + '/cms/content/queryDetailContent', {
     id,
@@ -53,12 +55,12 @@ export const detailContent = (id, organizationId, chineseOrEnglish) => post(base
 
 
 // 首页请求主体部分内容
-// export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(baseUrl + '/cms/content/queryIndexContent', {
-//     chineseOrEnglish,
-//     organizationId,
-//     isPc
-// });
-export const indexContent = () => fetch('../static/index.json');
+export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(baseUrl + '/cms/content/querySensingIndex', {
+    chineseOrEnglish,
+    organizationId,
+    isPc
+});
+//export const indexContent = () => fetch('../static/index.json');
 
 // 退出登录
 //export const signout = () => fetch(baseUrl + '/outLogin');

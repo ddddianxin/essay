@@ -5,10 +5,11 @@
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">
-                    <h3>仿生触觉与智能传感研究中心</h3>
-                    <h4>中心概况</h4>
-                    <div class="ctText">
-                        代课老师复健科多杜鹃花科拉多加湖可怜的就是看了好久疯狂的解放军队上看见好看的就是看少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了
+                    <div v-for="(item,index) in list" :key="index">
+                        <h3>{{item.contentTitle}}</h3>
+                        <div class="tc pl15 pr15"><img class="w" src="../../images/ctTitLine.png"></div>
+                        <div class="ctText" v-html="item.contentHtml">
+                        </div>
                     </div>
                     <div class="ctVideo">
                         <video-player  class="video-player vjs-custom-skin"
@@ -26,10 +27,14 @@
 <script>
     import headTop from '../../components/mobile/headTop';
     import { videoPlayer } from 'vue-video-player'
+    import {content} from '../../service/api'
     export default {
         name: 'news',
         data(){
             return{
+                cn:0,
+                id:'',
+                organizationId:'',
                 playerOptions : {
                     playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
                     autoplay: false, //如果true,浏览器准备好时开始回放。
@@ -52,7 +57,8 @@
                         remainingTimeDisplay: false,
                         fullscreenToggle: true  //全屏按钮
                     }
-                }
+                },
+                list:''
                 
             }
         },
@@ -71,7 +77,10 @@
         },
         methods:{
             async initData(){
-                
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                var res = await content(this.cn,this.id,this.organizationId);
+                this.list = res.data.list;
             }
 
         },

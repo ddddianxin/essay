@@ -5,24 +5,7 @@
         <div class="teamBg">
             <div class="container">
                 <div class="lsideBox">
-                    <div class="lsideMenu">
-                        <h3>新闻动态</h3>
-                        <span class="h3BLine"></span>
-                        <ul>
-                            <li class="lsideMItem">
-                                <span>科研动态</span>
-                            </li>
-                            <li class="lsideMItem active">
-                                <span>学术交流</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>业内动态</span>
-                            </li>
-                            <li class="lsideMItem">
-                                <span>中心活动</span>
-                            </li>
-                        </ul>
-                    </div>
+                    <side-menu webTitle="新闻动态" webActive="学术交流"></side-menu>
                     <div class="sciNList">
                         <div>
                             <div class="newsSort">
@@ -31,21 +14,22 @@
                                 <span>分类三</span>
                                 <span>分类四</span>
                             </div>
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index">    
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">    
                                 <div class="sciNInfo">
-                                    <h4 class="wto">功夫格斗个的风格</h4>
-                                    <p class="wto">这里是简介辽阔的房间里上飞机的开始放假考虑到司法局看来都是放家里的收缴罚款禄鼎记时空裂缝健康了司法局考虑到收缴罚款</p>    
+                                    <h4 class="wto">{{item.contentTitle}}</h4>
+                                    <p class="wto">{{item.plainText}}</p>    
                                 </div>         
-                                <div class="sciNdate">2020-06-01</div>
+                                <div class="sciNdate">{{item.publishTime}}</div>
                                 <div class="sciNimg">
-                                    <img src="../../images/banner2.png">
+                                    <img :src="item.mainPic">
                                 </div>
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
                             <el-pagination
                                 layout="prev, pager, next"
-                                :total="50">
+                                :page-count="totalPage"
+                                @current-change="handleCurrentChange">
                             </el-pagination>
                         </div>
                     </div>
@@ -66,6 +50,8 @@
 
 <script>
     import headTop from '../../components/header/headTop';
+    import sideMenu from '../../components/common/sideMenu'
+    import {contentPage} from '../../service/api'
     import {getStore} from '../../config/mUtils'
 
     export default {
@@ -75,6 +61,10 @@
                 cn:0,
                 id:'',
                 organizationId:'',
+                rows:9,
+                page:1,
+                totalPage:1,
+                totalRow:1,
                 listData:[
                     {
                         title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
@@ -130,7 +120,7 @@
             }
         },
         components:{
-            headTop
+            headTop,sideMenu
         },
         mounted(){
             this.cn = getStore("inCN");
@@ -147,6 +137,28 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
+                this.page = 1;
+                this.getData();
+            },
+            toNewsDetail(id){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
             }
 
         },

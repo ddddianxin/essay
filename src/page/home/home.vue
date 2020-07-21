@@ -23,10 +23,10 @@
                     <div class="sciBox" >
                         <div class="sciLf">
                             <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
-                                <img :src="host+item.mainImage">
+                                <img :src="item.mainPic">
                                 <h4>{{item.contentTitle}}</h4>
                                 <p class="plain">{{item.plainText}}</p>
-                                <p class="date">{{item.createTime}}</p>
+                                <p class="date">{{item.publishTime}}</p>
                                 <div class="tc">
                                     <span class="arrow">
                                         <img src="../../images/arrow.png">
@@ -37,9 +37,9 @@
                         <div class="sciRg">
                             <h3>科研成果</h3>
                             <span class="h3BLine"></span>
-                            <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
+                            <div class="sciRgItem" v-for="(item,index) in achieve" :key="index">
                                 <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.createTime}}</p>
+                                <p>{{item.publishTime}}</p>
                             </div>
                         </div>
                     </div>
@@ -53,7 +53,7 @@
                         <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                             <h4>{{item.contentTitle}}</h4>
                             <p class="plain">{{item.plainText}}</p>
-                            <p class="date">{{item.createTime}}</p>
+                            <p class="date">{{item.publishTime}}</p>
                         </div>
                     </div>
                 </div>
@@ -94,7 +94,7 @@
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index">    
-                                    <img :src="host+item.mainImage">              
+                                    <img :src="item.mainPic">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p>{{item.plainText}}</p>
                                     <div class="tc">
@@ -150,6 +150,7 @@
                         createTime:'2020年6月1日'
                     }
                 ],
+                achieve:[],
                 sciCommunit:[
                     {
                         contentTitle:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
@@ -215,25 +216,31 @@
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                for(var i in res2.data){
-                    if(res2.data[i].menuId == 13){
-                        //科研动态
-                        this.sciNewsData = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 14){
-                        //学术交流
-                        this.sciCommunit = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 11){
-                        //人才招聘
-                        this.recruitData = res2.data[i].list;
-                    }
-                    if(res2.data[i].menuId == 8){
-                        //科研队伍
-                        this.teamData = res2.data[i].list;
-                    }
-                    console.log(res2.data[i]);
-                }
+                console.log(res2.data);
+                this.sciNewsData = res2.data.science;
+                this.sciCommunit = res2.data.learning;
+                this.recruitData = res2.data.recruit;
+                this.teamData = res2.data.higher;
+                this.achieve = res2.data.achievement;
+                // for(var i in res2.data){
+                //     if(res2.data[i].menuId == 13){
+                //         //科研动态
+                //         this.sciNewsData = res2.data[i].list;
+                //     }
+                //     if(res2.data[i].menuId == 14){
+                //         //学术交流
+                //         this.sciCommunit = res2.data[i].list;
+                //     }
+                //     if(res2.data[i].menuId == 11){
+                //         //人才招聘
+                //         this.recruitData = res2.data[i].list;
+                //     }
+                //     if(res2.data[i].menuId == 8){
+                //         //科研队伍
+                //         this.teamData = res2.data[i].list;
+                //     }
+                //     console.log(res2.data[i]);
+                // }
 
             },
             toNewsDetail(id,organizationId){
