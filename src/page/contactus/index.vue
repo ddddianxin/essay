@@ -8,9 +8,7 @@
                     <div v-for="(item,index) in list" :key="index">
                         <h3>{{item.contentTitle}}</h3>
                         <div class="tc"><img src="../../images/ctTitLine.png"></div>
-                        <div class="ctText" v-html="item.contentHtml">
-                            
-                        </div>
+                        <div class="ctText" v-html="item.contentHtml"></div>
                    </div>
                     <div class="ctVideo">
                         <video-player  class="video-player vjs-custom-skin"
