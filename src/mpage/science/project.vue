@@ -1,39 +1,35 @@
 <template>
     <div class="bg">
-        <head-top webActive="team"></head-top>
-        <div class="teamBg">
-            <div class="container">
+        <head-top webActive="news" title="科研成果" ref="headNav"></head-top>
+        <div class="newsBg">
+            <div class="container pr">
+                <div class="sciEMenu">
+                    <div class="sciEMList">
+                        <span v-for="(item,index) in sciMenu" :key="index" :class="item.title=='科研项目'?'active':''" @click="toUrl(item.url)">{{item.title}}</span>
+                    </div>
+                </div>
                 <div class="teamBox">
-                    <div class="teamMenu">
-                        <h3>科研队伍</h3>
-                        <span class="h3BLine"></span>
-                        <ul>
-                            <li class="teamMItem">
-                                <span>全部</span>
-                            </li>
-                            <li class="teamMItem active">
-                                <span>初级职称</span>
-                            </li>
-                            <li class="teamMItem">
-                                <span>中级职称</span>
-                            </li>
-                            <li class="teamMItem">
-                                <span>高级职称</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="teamList">
-                        <div class="teamItem" v-for="(item,index) in teamData" :key="index">    
-                            <img :src="item.img">              
-                            <h4 class="wto">{{item.name}}</h4>
-                            <p>{{item.description}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
+                    <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
+                        :data="newsData"
+                        :listenScroll="true"
+                        :pulldown="true"
+                        @pulldown="getData"
+                        @scrollToEnd="getmoredata"
+                        :pullup="true">
+                        <div class="sciList">
+                            <div class="sciItem" v-for="(item,index) in newsData" :key="index">               
+                                <div class="sciInfo">
+                                    <h2>{{index}}.{{item.ename}}</h2>
+                                    <div class="proTail">
+                                        <div class="proTlf ">项目负责人：付款经典款复健科时代峰峻临时冻结</div>
+                                        <div class="proTrg ">项目分类：付款经典款复健科时代峰峻临时冻结</div>
+                                    </div>
+                                </div>
                             </div>
+                            <view class="loading">{{loadingText}}</view>
                         </div>
-                    </div>
+                        <div class="loading-wrapper"></div>
+                    </scroll>
                 </div>
             </div>
         </div>
@@ -41,198 +37,297 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
-   
-
+    import headTop from '../../components/mobile/headTop';
+    import {contentPage,test} from '../../service/api'
+    import {getStore} from '../../config/mUtils'
+    import Scroll from '../../components/common/scroll'
+    
+    var page=1
     export default {
-        name: 'team',
+        name: 'news',
         data(){
             return{
-                teamData:[
+                sciMenu:[
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'科研项目',
+                        url:'/science/project'
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'期刊论文',
+                        url:'/science/paper'
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'专利/专著',
+                        url:'/science/patent'
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'技术转移转化',
+                        url:'/science/technology'
                     },
                     {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
+                        title:'成果奖励',
+                        url:'/science/award'
                     }
                 ],
-                
+                newsData:[
+                    {
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    },{
+                        title:'一个研究相关标题',
+                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
+                        date:'2020/02/05',
+                        url:''
+                    }
+
+                ],
+                cn:0,
+                id:'',
+                totalPage:1,
+                totalRow:1,
+                organizationId:'',
+                listData:[],
+                scrollY: 0,
+                rows:10,
+                noData: false,//false为无数据，true为有数据
+                loadingText:'加载中...',
+                scrollH:300
             }
         },
         components:{
-            headTop
+            headTop,Scroll
+        },
+        created(){
+            this.getData();
+        },
+        beforeMount(height) {
+            var h = document.documentElement.clientHeight || document.body.clientHeight;
+            this.scrollH = h-90-30-102;//头部、菜单栏、尾部
         },
         mounted(){
-            // 获取首页产品
-            this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
+            this.cn = getStore("inCN");
             
         },
         computed:{
         },
         methods:{
             async initData(){
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                this.page = 1;
+                this.getData();
+            },
+            toUrl(url){
+                this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
+            },
+            toSciDetail(id){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            async getData(){
+                // var res = await contentPage(
+                //     this.cn,
+                //     this.page,
+                //     this.rows,
+                //     this.organizationId,
+                //     this.id
+                // );
+                // this.listData = res.data.list;
+                // this.totalPage = res.data.totalPage;
+                // console.log(res);
+                var res = await test('',1,this.rows);
+                if (res.length != 0 && res.length == this.rows) {
+					this.noData = false;
+					page++;
+					this.newsData = res;
+					this.loadingText = '上拉加载更多';
+				} else {
+					this.newsData = res;
+					this.noData = true;
+					this.loadingText = '';
+                }
+                console.log(this.newsData);
                 
-            }
+            },
+            async getmoredata(){
+                console.log("getting more data");
+				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
+				    return false;
+				}
+				this.loadingText = '加载中...';
+				var res = await test('',page,this.rows);
+				this.loadingText = '';
+				if(res.length == 0){
+				  this.loadingText = '已加载全部';
+				  return false;
+				}
+				page++;
+				this.newsData  = this.newsData.concat(res);
+				this.loadingText = '上拉加载更多';
+			}
+
 
         },
-        created(){
-
-
+        watch: {
+           
         },
+        
     }
 
 </script>
 
 <style lang="scss">
     @import '../../style/mixin';
-    .teamBg{
-        background-color: #f7f7f7;
-        padding:36px 0;
+    .newsBg{
+        margin-top:px2rem(180);
+        background-color:#fff;
+    }
+    .bgTop{
+        height:205px;
+        width: 100%;
+        object-fit: cover;
     }
     .teamBox{
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
-    .teamMenu{
-        width:240px;
-        height:850px;
-        background-image: linear-gradient( #162a59, #530760);
+    .sciEMenu{
+        background-color:#152b59;
+        height:px2rem(60);
+        line-height:px2rem(60);
+        position:fixed;
+        top:px2rem(180);
+        left:0
     }
-   .teamMenu h3{
-       margin:30px 0 0 20px;
-       color:#fff;
-       font-weight: bold;
-       font-size: 25px;
-
-   }
-   .teamMenu .h3BLine{
-       width:70px;
-       height: 3px;
-       display: inline-block;
-       background-color: #fff;
-       margin-left: 20px;
-   }
-   .teamMItem{
-       height: 84px;
-       line-height: 84px;
-   }
-   .teamMItem.active{
-       background-color:#fff;
-   }
-    .teamMItem.active span{
-        color:#152b59;
+    .sciEMList{
+        margin:0 px2rem(40);
+        display:flex;
+        flex-wrap: nowrap; 
     }
-    .teamMItem span{
-        display: block;
+    .sciEMList span{
+        width:px2rem(140);
+        text-align: center;
         color:#fff;
-        font-size:16px;
-        font-weight: bold;
-        margin:0 20px;
-        border-bottom:2px solid #5b4b7e;
     }
-    .teamMItem span:hover{
-        cursor:pointer;
+    .sciEMList span.active{
+        background-color:#fff;
+        color:#152b59;
+        height:px2rem(60);
+        line-height:px2rem(60);
     }
-    .teamList{
-        width:780px;
+    
+    .sciList{
+        padding:0 px2rem(40);
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
     }
-    .teamItem{
-       width:240px;
-       height: 306px;
-       background-color: #fff;
-       margin:0 0 20px 20px;
-   }
-   .teamItem img{
-       width:240px;
-       height: 140px;
-       object-fit: cover;
-   }
-   .teamItem h4{
-       font-size: 15px;
-       font-weight: bold;
-       color:#333;
-       padding:5px 20px 0 20px;
-   }
-    .teamItem p{
-        font-size: 12px;
+    .sciItem{
+        border-bottom:1px dashed #ddd;
+        padding:15px 0;
+        width:100%;
+    }
+    .sciInfo{
+    }
+    .sciInfo h2{
+        font-size:16px;
+        font-weight: bold;
+        color:#333;
+        margin-bottom:5px;
+        line-height: 20px;;
+    }
+    .sciInfo h2:hover{
+        cursor:pointer;
+        color:#152b59;
+    }
+    .proTail{
+        font-size:12px;
+        color:#666;
+        display: flex;
+        flex-wrap: nowrap;
+        justify-content: space-between;
+    }
+    .proTlf{
+        width:50%;
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 4;
+        -webkit-line-clamp: 1;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        color:#333;
-        padding:0 20px;
-        margin-bottom:10px;
-        height:88px;
-        line-height: 22px;
+        height: px2rem(48);
     }
-    .teamItem .arrow{
-       width:30px;
-       height: 32px;
-       background-color: #152b59;
-       border-radius: 30px 30px 0 0;
-       display: inline-block;
-       text-align: center;
+    .proTrg{
+        width:50%;
+        overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        height: px2rem(48);
     }
-    .teamItem .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;
+    .wrapper{
+        
+        margin-top:px2rem(60);
+        overflow: hidden;
     }
-
+    .sciList{
+       
+    }
 </style>

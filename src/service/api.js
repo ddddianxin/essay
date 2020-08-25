@@ -15,6 +15,9 @@ Vue.prototype.$del = del;
 //const baseUrl = 'http://www.sixmol.com/api/v1';
 const baseUrl = 'http://juice666.gz2vip.idcfengye.com';
 
+//测试翻页接口
+export const test = (name, page, rows) => fetch('https://api.huaxuejia.cn/api/v1/enterpriseList?name=' + name + '&isCheck=1&page=' + page + '&rows=' + rows);
+
 //首页菜单
 export const menuList = (chineseOrEnglish, organizationId) => post(baseUrl + '/cms/menu/queryMenuList', {
     chineseOrEnglish,

@@ -23,6 +23,7 @@
     </div>
 </template>
 
+
 <script>
     import headTop from '../../components/header/headTop';
     import { videoPlayer } from 'vue-video-player';

@@ -356,7 +356,7 @@
        width:200px;
        height: 590px;
        padding:20px;
-       background-image: linear-gradient( #a5177f, #e02d81);
+       background-image: linear-gradient(to bottom right, #b12b6e, #77164d);
    }
    .sciRg h3{
        margin-top:15px;
@@ -660,7 +660,7 @@
        width:460px;
        height: 480px;
        padding:10px 20px;
-       background-image: linear-gradient( #152c5a, #2d559d);
+       background-image: linear-gradient(to bottom right, #1f768a, #0e5363);
        color:#fff;
        overflow: hidden;
    }
@@ -710,7 +710,7 @@
        width:460px;
        height: 480px;
        padding:10px 20px;
-       background-image: linear-gradient( #152c5a, #2d559d);
+       background-image: linear-gradient(to bottom right, #1f768a, #0e5363);
        color:#fff;
        overflow: hidden;
    }
