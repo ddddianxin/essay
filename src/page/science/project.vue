@@ -1,21 +1,17 @@
 <template>
     <div class="bg">
-        <head-top webActive="team"></head-top>
+        <head-top webActive="科研成果" webChildActive="科研项目"></head-top>
         <div class="teamBg">
             <div class="container">
                 <div class="lsideBox">
                     <side-menu webTitle="科研成果" webActive="科研项目"></side-menu>
                     <div class="sciList">
                         <div>
-                            <div class="sciItem sciNav">
-                                <div class="sciName">科研项目名称</div>
-                                <div class="sciRep">项目负责人</div>
-                                <div class="sciSort">项目分类</div>
+                            <div class="sciTit">
+                                2020年新增项目
                             </div>
                             <div class="sciItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">
-                                <div class="sciName">{{item.contentTitle}}</div>
-                                <div class="sciRep">{{item.author}}</div>
-                                <div class="sciSort">{{item.typeName}}</div>
+                               
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
@@ -49,7 +45,14 @@
                 page:1,
                 totalPage:1,
                 totalRow:1,
-                listData:[],
+                listData:[
+                    {
+                        title:'2020年新增项目',
+                        data:[
+                            
+                        ]
+                    }
+                ],
                 
             }
         },
@@ -85,14 +88,14 @@
             async getData(){
                 var res = await contentPage(
                     this.cn,
-                    this.page,
                     this.rows,
+                    this.page,
                     this.organizationId,
                     this.id
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
-                 console.log(res);
+                console.log(res);
             }
 
         },
@@ -124,26 +127,7 @@
         justify-content: space-between;
         margin-bottom:30px;
     }
-    .sciNav .sciName,.sciNav .sciRep,.sciNav .sciSort{
-        font-size:18px;
-        text-align:center;
-        color:#152b59;
-    }
-    .sciName{
-        width:410px;
-        font-size:15px;
-        padding:0 20px;
-    }
-    .sciRep{
-        width:170px;
-        font-size:15px;
-        text-align: center;
-    }
-    .sciSort{
-        width:200px;
-        font-size:15px;
-        text-align: center;
-    }
+    
     
 
 </style>

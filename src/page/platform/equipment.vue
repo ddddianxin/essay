@@ -1,43 +1,24 @@
 <template>
     <div class="bg">
-        <head-top webActive="experiment"></head-top>
+        <head-top webActive="实验平台" webChildActive="仪器设备"></head-top>
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="expBg">
             <div class="container">
-                <div class="expBox">
-                    <h3>支撑载体</h3>
-                    <span class="h3BLine"></span>
-                    <div class="expList">
-                        <div class="expItem" v-for="(item,index) in listData.slice(0,6)" :key="index">
-                            <img :src="item.img">
-                            <div class="expInfo">
-                                <h4>{{item.title}}</h4>
-                                <p>{{item.des}}</p>
-                                <span>{{item.date}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3>实验室</h3>
-                    <span class="h3BLine"></span>
-                    <div class="expPanel">
-                        <div class="expInbox" v-for="(item,index) in lab" :key="index">
-                            <img :src="item.img">
-                            <div class="expName">
-                                <span class="wto">{{item.title}}</span>
-                            </div>
-                        </div>
-                    </div>
-                    <h3>仪器设备</h3>
-                    <span class="h3BLine"></span>
-                    <div class="expPanel">
-                        <div class="expInbox" v-for="(item,index) in equipment" :key="index">
-                            <img :src="item.img">
-                            <div class="expName">
-                                <span class="wto">{{item.title}}</span>
+                <div class="lsideBox">
+                    <side-menu webTitle="实验平台" webActive="仪器设备"></side-menu>
+                    <div class="expBox">
+                        <div class="expPanel">
+                            <div class="expInbox" v-for="(item,index) in lab" :key="index">
+                                <img :src="item.img">
+                                <div class="expName">
+                                    <span class="wto">{{item.title}}</span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                
             </div>
         </div>
     </div>
@@ -45,6 +26,7 @@
 
 <script>
     import headTop from '../../components/header/headTop';
+    import sideMenu from '../../components/common/sideMenu'
     import {getStore} from '../../config/mUtils'
     import {detailContent} from '../../service/api'
     export default {
@@ -54,39 +36,6 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                listData:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'这里是标题东方季道螺蛳粉几点开始房间里的哭声',
-                        des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
-                        date:'2020年6月15日，星期一'
-                    }
-                ],
                 lab:[
                     {
                         img:require('../../images/banner2.png'),
@@ -101,27 +50,11 @@
                         img:require('../../images/banner2.png'),
                         title:'实验室名称',
                     }
-                ],
-                equipment:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'仪器设备名称',
-                    }
                 ]
-                
             }
         },
         components:{
-            headTop
+            headTop,sideMenu
         },
         mounted(){
             this.cn = getStore("inCN");
@@ -153,13 +86,23 @@
 
 <style lang="scss">
     @import '../../style/mixin';
+    .expBg{
+        background-color: #f7f7f7;
+        padding:36px 0;
+    }
     .bgTop{
         height:205px;
         width: 100%;
         object-fit: cover;
+        display: block;
     }
     .expBox{
-        width:1024px;
+        width:780px;
+        padding-left:30px;
+        min-height: 850px;
+        display: flex;
+        flex-wrap: wrap;
+        align-content:space-between;
     }
     .expBox h3{
        margin:30px 0 0 0;
@@ -226,29 +169,29 @@
        font-size:12px;
    }
    .expPanel{
-       margin:20px 0;
        display:flex;
-       flex-wrap:nowrap;
+       flex-wrap:wrap;
        justify-content: space-between;
    }
    .expInbox{
-       width:213px;
-       height:213px;
+       width:368px;
+       height:270px;
        position: relative;
+       margin-bottom:20px;
    }
    .expInbox img{
-       width:213px;
-       height:213px;
+       width:368px;
+       height:270px;
        object-fit: cover;
    }
    .expName{
        position:absolute;
        bottom:0;
        left:0;
-       width:213px;
-       height:36px;
-       line-height: 36px;
-       background-color:rgba(21,43,89,.75);
+       width:368px;
+       height:42px;
+       line-height: 42px;
+       background-color:rgba(21,43,89,.9);
        color:#fff;
        text-align-last: center;
        font-size:14px;

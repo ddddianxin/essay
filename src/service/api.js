@@ -12,8 +12,8 @@ Vue.prototype.$del = del;
 
 
 //const _baseUrl=process.env.API_URL;//这里我在项目配置文件里面设置了相对路径
-//const baseUrl = 'http://www.sixmol.com/api/v1';
-const baseUrl = 'http://juice666.gz2vip.idcfengye.com';
+//const baseUrl = 'http://juice666.gz2vip.idcfengye.com';
+const baseUrl = 'http://sensing.zwin.work';
 
 //测试翻页接口
 export const test = (name, page, rows) => fetch('https://api.huaxuejia.cn/api/v1/enterpriseList?name=' + name + '&isCheck=1&page=' + page + '&rows=' + rows);

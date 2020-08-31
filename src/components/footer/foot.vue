@@ -2,45 +2,47 @@
     <div id='webfoot'>
         <div class="container foot">
             <div class="footItem">
-                <h3>首页</h3>
-                <router-link to="">支撑载体</router-link>
-                <router-link to="">中心简介</router-link>
-                <router-link to="">科研队伍</router-link>
-                <router-link to="">人才招聘</router-link>
-                <router-link to="">联系我们</router-link>
+                <h3 @click="jumpTo('/home')">首页</h3>
+                <router-link to="/news/scinews?id=13&organizationId=1">科研动态</router-link>
+                <router-link to="/science/project?id=25&organizationId=1">科研成果</router-link>
+                <router-link to="/news/exchange?id=14&organizationId=1">学术交流</router-link>
+                <router-link to="/team/higher?id=20&organizationId=1">科研队伍</router-link>
+                <router-link to="/recruit/index?id=11&organizationId=1">人才招聘</router-link>
+                <router-link to="/contactus/index?id=12&organizationId=1">联系我们</router-link>
             </div>
             <div class="footItem">
                 <h3>中心简介</h3>
-                <router-link to="">中心概况</router-link>
-                <router-link to="">研究方向</router-link>
-                <router-link to="">介绍视频</router-link>
+                <router-link to="/introduce/aboutus?id=3&organizationId=1">中心概况</router-link>
+                <router-link to="/introduce/research?id=5&organizationId=1">研究方向</router-link>
             </div>
             <div class="footItem">
                 <h3>新闻动态</h3>
-                <router-link to="">科研动态</router-link>
-                <router-link to="">学术交流</router-link>
-                <router-link to="">中心活动</router-link>
+                <router-link to="/news/scinews?id=13&organizationId=1">科研动态</router-link>
+                <router-link to="/news/exchange?id=14&organizationId=1">学术交流</router-link>
+                <router-link to="/news/industry?id=18&organizationId=1">业内活动</router-link>
+                <router-link to="/news/activity?id=19&organizationId=1">中心活动</router-link>
             </div>
             <div class="footItem">
                 <h3>科研队伍</h3>
-                <router-link to="">高级职称</router-link>
-                <router-link to="">中级职称</router-link>
-                <router-link to="">初级职称</router-link>
-                <router-link to="">支撑管理</router-link>
-                <router-link to="">学生</router-link>
+                <router-link to="/team/higher?id=20&organizationId=1">高级职称</router-link>
+                <router-link to="/team/medium?id=21&organizationId=1">中级职称</router-link>
+                <router-link to="/team/primary?id=22&organizationId=1">初级职称</router-link>
+                <router-link to="/team/manage?id=23&organizationId=1">支撑管理</router-link>
+                <router-link to="/team/student?id=24&organizationId=1">学生</router-link>
             </div>
             <div class="footItem">
                 <h3>科研成果</h3>
-                <router-link to="">科研项目</router-link>
-                <router-link to="">期刊论文</router-link>
-                <router-link to="">专利专著</router-link>
-                <router-link to="">成果奖励</router-link>
+                <router-link to="/science/project?id=25&organizationId=1">科研项目</router-link>
+                <router-link to="/science/paper?id=26&organizationId=1">期刊论文</router-link>
+                <router-link to="/science/patent?id=27&organizationId=1">专利专著</router-link>
+                <router-link to="/science/technology?id=28&organizationId=1">成果转移转化</router-link>
+                <router-link to="/science/award?id=29&organizationId=1">成果奖励</router-link>
             </div>
             <div class="footItem">
                 <h3>实验平台</h3>
-                <router-link to="">支撑载体</router-link>
-                <router-link to="">实验室</router-link>
-                <router-link to="">仪器设备</router-link>
+                <router-link to="/platform/supporter?id=30&organizationId=1">支撑载体</router-link>
+                <router-link to="/platform/lab?id=31&organizationId=1">实验室</router-link>
+                <router-link to="/platform/equipment?id=32&organizationId=1">仪器设备</router-link>
             </div>
             <div class="contact">
                 <div class="erCode"><img></div>
@@ -68,7 +70,11 @@
         methods:{
             async initData(){
                 
-            }
+            },
+            jumpTo(url){
+                // this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
+                this.$router.push({path:url});
+            },
         },
         created(){
             this.initData();

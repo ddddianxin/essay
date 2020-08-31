@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="centerIntro"></head-top>
+        <head-top webActive="中心介绍" webChildActive="研究方向"></head-top>
         <div class="resBg">
             <h3>{{list[0]}}</h3>
             <img src="../../images/whiteLine.png">

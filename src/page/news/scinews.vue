@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="news"></head-top>
+        <head-top webActive="新闻动态" webChildActive="科研动态"></head-top>
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="sciNBg">
             <div class="container">

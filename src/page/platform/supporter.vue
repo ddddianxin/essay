@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="experiment"></head-top>
+        <head-top webActive="实验平台" webChildActive="支撑载体"></head-top>
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="expBg">
             <div class="container">

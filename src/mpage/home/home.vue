@@ -5,12 +5,12 @@
             <div class="banner">
                  <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
                     <el-carousel-item v-for="(item,index) in bannerInfo" :key="index" >
-                        <div class="coverBg">
+                        <div class="coverBg" @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
                             <div class="bannerText">
-                                <h2 class="wto">{{item.contentTitle}}</h2>
+                                <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
                             </div>
                         </div>
-                        <img :src="item.imgUrl">
+                        <img :src="item.imgurl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -21,7 +21,7 @@
                     <div class="sciBox">
                         <div class="sciLf">
                             <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
-                                <img :src="item.mainPic">
+                                <img :src="'http://sensing.zwin.work/'+item.mainImage">
                                 <h4>{{item.contentTitle}}</h4>
                                 <p class="plain">{{item.plainText}}</p>
                                 <p>{{item.publishTime}}</p>
@@ -69,7 +69,7 @@
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index">    
-                                    <img :src="item.mainPic">              
+                                    <img :src="'http://sensing.zwin.work/'+item.mainImage">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p>{{item.plainText}}</p>
                                     <div class="tc">
@@ -159,6 +159,24 @@
             },
             toNewsDetail(id,organizationId){
                 this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
+            },
+            toBannerJump(isExternalLink,contentId,jumpLink){
+                // 当isExternalLink=0时，无需跳转任何页面
+                // 当isExternalLink=1时，跳转到详情页，查询/cms/content/queryDetailContent?id=contentId
+                // 当isExternalLink=2时，跳转到外部链接，即jumpLink指定的链接
+                if(isExternalLink==2){
+                    var arr = jumpLink.match(/http/g);
+                    if(!arr){
+                        jumpLink = 'http://'+jumpLink;
+                    }
+                    window.open(jumpLink,"_blank");
+
+                }else if(isExternalLink==1){
+                    //this.$router.push({path:'/team/detail',query:{id:id,organizationId:this.organizationId}});
+                }else{
+
+                }
+
             }
 
         },
@@ -258,7 +276,7 @@
         height:auto;
         margin:0 px2rem(40);
         padding:px2rem(20) px2rem(40);
-       background-image: linear-gradient( #a5177f, #e02d81);
+       background-image: linear-gradient(to bottom right, #b12b6e, #77164d);
    }
    .sciRg h3{
        padding:0;
@@ -323,7 +341,7 @@
         margin: 0;
         padding:0 px2rem(12);
         line-height: px2rem(38);
-        color:#333;
+        color:#152b59;
         height:px2rem(76);
    }
    .sciLfItem .plain{
@@ -337,7 +355,7 @@
         height:px2rem(110);
    }
    .sciLfItem p{
-       color:#666;
+       color:#152b59;
        font-size: px2rem(24);
         padding:px2rem(4) px2rem(12);
    }
@@ -562,7 +580,7 @@
        height: auto;
         margin:0 px2rem(40);
         padding:px2rem(20) px2rem(40);
-       background-image: linear-gradient( #152c5a, #2d559d);
+        background-image: linear-gradient(to bottom right, #1f768a, #0e5363);
        color:#fff;
        overflow: hidden;
    }
@@ -576,7 +594,7 @@
        margin:0;
    }
    .hmLf_item{
-       border-bottom:1px solid #4f699b;
+       border-bottom:1px solid #3c8191;
        font-size:px2rem(24);
     margin-top:px2rem(0);
    }
@@ -605,8 +623,7 @@
        height: auto;
        margin:0 px2rem(40);
         padding:px2rem(20) px2rem(40);
-       background-image: linear-gradient( #152c5a, #2d559d);
-       background-image: linear-gradient( #152c5a, #2d559d);
+       background-image: linear-gradient(to bottom right, #1f768a, #0e5363);
        color:#fff;
        overflow: hidden;
        margin-top:px2rem(30);
@@ -621,7 +638,7 @@
        margin:0;
    }
    .hmRg_item{
-       border-bottom:1px solid #4f699b;
+       border-bottom:1px solid #3c8191;
        font-size:px2rem(24);
         margin-top:px2rem(0);
    }

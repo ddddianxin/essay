@@ -37,8 +37,6 @@
                 id:'',
                 organizationId:'',
                 val:''
-                
-                
             }
         },
         components:{
@@ -60,7 +58,7 @@
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
                 var res = await detailContent(this.id,this.organizationId,this.cn);
-                this.val = res.data;
+                this.val = res.data.list[0];
                 console.log(res);
             }
 

@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="centerIntro"></head-top>
+        <head-top webActive="中心介绍" webChildActive="中心概论"></head-top>
         <img class="bgTop" src="../../images/ctIntro.png">
         <div class="ctBg">
             <div class="container">

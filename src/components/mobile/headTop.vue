@@ -22,7 +22,7 @@
             <div class="sideMenuIcon" @click="menuShow=!menuShow">
                 <img src="../../images/menuWhite.png">
             </div>
-            <div class="sideMList">
+            <div class="sideMList" :style="'height:'+menuHeight+'px;'">
                 <div class="sideItem">
                     <div class="sideBtn">
                         <router-link to="/home">{{cn==0?'首页':'Index'}}</router-link>
@@ -57,13 +57,15 @@
                 ctShow:true,
                 newsShow:true,
                 menu:['home','centerIntro','news','team','achievement','experiment','recruit','contactUs'],
-                menuData:''
+                menuData:'',
+                menuHeight:''
             }
         },
         props: ['webActive','title'],
         created(){
             //获取用户信息
             //this.getUserInfo();
+            
         },
         beforeMount(){
             //获取用户信息
@@ -72,6 +74,7 @@
         mounted(){
             this.cn = getStore("inCN");
             this.getMenu();
+            this.menuHeight = window.screen.height-45;
         },
         computed: {
            ...mapState([
@@ -134,6 +137,7 @@
 .sideMList{
     background-color:rgba(21,43,89,.85);
     height:100%;
+    overflow: auto;
 }
 .sideItem{
     padding:0 px2rem(30);

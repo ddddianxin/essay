@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="team"></head-top>
+        <head-top webActive="科研队伍" webChildActive="支撑管理"></head-top>
         <div class="teamBg">
             <div class="container">
                 <div class="lsideBox">

@@ -40,8 +40,7 @@
         },
         methods:{
            toUrl:function(url,id,organizationId){
-               console.log(url);
-               this.$router.push({path:url,query:{id:id,organizationId:this.organizationId}});
+               this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
            },
            async initData(){
                //获取菜单并整理

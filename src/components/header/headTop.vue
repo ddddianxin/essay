@@ -20,12 +20,12 @@
                     <span :class="webActive=='home'?'active':''">
                         <router-link to="/home">{{cn==0?'首页':'Index'}}</router-link>
                     </span>
-                    <span v-for="(item,index) in menuData" :key="index" :class="webActive=='centerIntro'?'active newsBtn':'newsBtn'">
-                        <div @click="toUrl(item.items?'/':item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/lfArrow.png"></div>
+                    <span v-for="(item,index) in menuData" :key="index" :class="webActive==item.menuName?'active newsBtn':'newsBtn'">
+                        <div @click="toUrl(item.items?'/':item.menuUrl,item.id,item.organizationId)">{{item.menuName}}<img v-if="item.items" class="menuArrow" src="../../images/blueArrow.png"></div>
                         <div class="childItem" v-if="item.items" >
                             <ul>
                                 <li v-for="(iitem,iindex) in item.items" :key="iindex">
-                                    <span @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
+                                    <span :class="webChildActive==iitem.menuName?'active':''" @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
                                 </li>
                             </ul>
                         </div>
@@ -49,7 +49,7 @@
                 menuData:''
             }
         },
-        props: ['webActive'],
+        props: ['webActive','webChildActive'],
         created(){
             //获取用户信息
             //this.getUserInfo();
@@ -172,11 +172,11 @@
 }
 .menu span{
     font-size: 17px;
-    color:#555;
+    color:#152b59;
     font-weight: bold;
 }
 .menu span.active{
-    color:#213662;
+    color:#b12b6e;
 }
 .wapTop{
     width:px2rem(750);
@@ -190,7 +190,7 @@
     position:absolute;
     top:50px;
     right:-45px;
-    background-color: #f2eeee;
+    background-color: #fff;
     width:140px;
     height:auto;
 }
@@ -210,11 +210,10 @@
 }
 .childItem li:hover{
     cursor:pointer;
-    color:#fff;
-    background-color: rgb(176,0,125);
+    color:#b12b6e;
 }
 .childItem li:hover span{
-    color:#fff;
+    color:#b12b6e;
 }
 .menuArrow{
     width:20px;
@@ -229,7 +228,7 @@
 }
 .newsBtn:hover{
     cursor:pointer;
-    color:#152b59;
+    color:#b12b6e;
     .childItem{
         display:block;
         z-index: 1000;

@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="科研成果" webChildActive=""></head-top>
+        <head-top webActive="实验平台" webChildActive=""></head-top>
         <div class="newsBg">
             <div class="container">
                 <h2 class="newsH2">新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题新闻标题</h2>
@@ -19,7 +19,7 @@
 <script>
     import headTop from '../../components/header/headTop';
     import {getStore} from '../../config/mUtils'
-    import {detailContent} from '../../service/api'
+
     export default {
         name: 'team',
         data(){
@@ -38,6 +38,10 @@
             this.cn = getStore("inCN");
             // 获取首页产品
             this.initData();
+            if(document.body.clientWidth<=1024){
+                
+            }
+            
         },
         computed:{
         },
@@ -45,9 +49,6 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                var res = await detailContent(this.id,this.organizationId,this.cn);
-                this.val = res.data.list[0];
-                console.log(res.data);
             }
 
         },
