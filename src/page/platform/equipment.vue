@@ -7,18 +7,25 @@
                 <div class="lsideBox">
                     <side-menu webTitle="实验平台" webActive="仪器设备"></side-menu>
                     <div class="expBox">
-                        <div class="expPanel">
-                            <div class="expInbox" v-for="(item,index) in lab" :key="index">
-                                <img :src="item.img">
-                                <div class="expName">
-                                    <span class="wto">{{item.title}}</span>
+                        <div class="expB">
+                            <div class="expPanel">
+                                <div class="expInbox" v-for="(item,index) in listData" :key="index"  @click="toDetail(item.id)">
+                                    <img :src="item.mainPic">
+                                    <div class="expName">
+                                        <span class="wto">{{item.contentTitle}}</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <div class="tc" style="margin:0 auto;">
+                            <el-pagination
+                                layout="prev, pager, next"
+                                :page-count="totalPage"
+                                @current-change="handleCurrentChange">
+                            </el-pagination>
+                        </div>
                     </div>
                 </div>
-
-                
             </div>
         </div>
     </div>
@@ -28,7 +35,7 @@
     import headTop from '../../components/header/headTop';
     import sideMenu from '../../components/common/sideMenu'
     import {getStore} from '../../config/mUtils'
-    import {detailContent} from '../../service/api'
+    import {contentPage} from '../../service/api'
     export default {
         name: 'news',
         data(){
@@ -36,21 +43,11 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                lab:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
-                    },{
-                        img:require('../../images/banner2.png'),
-                        title:'实验室名称',
-                    }
-                ]
+                rows:8,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                listData:[]
             }
         },
         components:{
@@ -58,12 +55,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -71,9 +63,31 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                var res = await detailContent(this.id, this.organizationId, this.cn);
+                this.page = 1;
+                this.getData();
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
                 console.log(res);
+            },
+            toDetail(id){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
             }
+            
 
         },
         created(){
@@ -102,7 +116,12 @@
         min-height: 850px;
         display: flex;
         flex-wrap: wrap;
-        align-content:space-between;
+    }
+    .expB{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        width:100%;
     }
     .expBox h3{
        margin:30px 0 0 0;
@@ -118,6 +137,7 @@
        
    }
    .expList{
+       width:100%;
        margin-top:15px;
        display: flex;
        flex-wrap: wrap;
@@ -169,6 +189,7 @@
        font-size:12px;
    }
    .expPanel{
+       width:100%;
        display:flex;
        flex-wrap:wrap;
        justify-content: space-between;

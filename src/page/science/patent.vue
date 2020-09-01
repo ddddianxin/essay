@@ -6,20 +6,23 @@
                 <div class="lsideBox">
                     <side-menu webTitle="科研成果" webActive="专利/专著"></side-menu>
                     <div class="sciList">
-                        <div>
-                            <div class="sciItem sciNav">
-                                <div class="ptName">专利/专著名称</div>
-                                <div class="ptAuthor">负责人</div>
-                                <div class="ptType">专利/专著类型</div>
-                                <div class="ptApply">申请时间</div>
-                                <div class="ptGet">授权时间</div>
+                        <div class="sciPanel" v-for="(item,index) in sortTit" :key="index">
+                            <div class="tit">{{item}}</div>
+                            <div class="sciIt sciNav">
+                                <div class="ptIndex">序号</div>
+                                <div class="ptNumber">授权号</div>
+                                <div class="ptName">专利名称</div>
+                                <div class="ptAuthor">发明人</div>
+                                <div class="ptType">专利类型</div>
+                                <div class="ptDate">授权日期</div>
                             </div>
-                            <div class="sciItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">
-                                <div class="ptName">{{item.contentTitle}}</div>
-                                <div class="ptAuthor">{{item.author}}</div>
-                                <div class="ptType">{{item.contentSubtitle}}</div>
-                                <div class="ptApply">{{item.publishTime}}</div>
-                                <div class="ptGet">--年--月--日</div>
+                            <div class="sciIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                                <div class="ptIndex">{{iindex+1}}</div>
+                                <div class="ptNumber">{{iitem.remark}}</div>
+                                <div class="ptName" @click="toSciDetail(iitem.id)">{{iitem.contentTitle}}</div>
+                                <div class="ptAuthor">{{iitem.author}}</div>
+                                <div class="ptType">{{iitem.typeName}}</div>
+                                <div class="ptDate">{{iitem.publishTime}}</div>
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
@@ -49,12 +52,13 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                rows:9,
+                rows:10,
                 page:1,
                 totalPage:1,
                 totalRow:1,
-                listData:[]
-                
+                listData:[],
+                sortTit:[],
+                sortList:[]
             }
         },
         components:{
@@ -96,8 +100,39 @@
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
-                 console.log(res);
-            }
+                this.totalRow = res.data.totalRow;
+                console.log(res);
+
+                var sortArr=[];
+                for(var i =0 ; i < this.listData.length ; i++){
+                    sortArr[i]=this.listData[i].typeName;
+                }
+
+                //去除数组相同值
+                let hash=[];
+                for (let i = 0; i < sortArr.length; i++) {
+                    if(hash.indexOf(sortArr[i]) === -1){
+                        hash.push(sortArr[i]);
+                    }
+                }
+                console.log(hash);
+                this.sortTit = hash;
+                var newList=[];
+                for(var i = 0 ; i < hash.length ;i++){
+                    var valList=[];
+                    for(var j = 0 ; j< this.listData.length ; j++){
+                        if(hash[i]==this.listData[j].typeName){
+                            valList.push(this.listData[j]);
+                        }
+                    }
+                    newList.push(valList);
+                }
+                console.log(newList);
+                this.sortList = newList;
+            },
+            toSciDetail(id){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            },
 
         },
         created(){
@@ -118,47 +153,71 @@
         width:780px;
         padding-left:20px;
         min-height: 850px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content:space-between;
     }
-    .sciItem{
+    .sciList .tit{
+        color:#152b59;
+        font-weight: bold;
+        font-size:16px;
+        margin-bottom:20px;
+    }
+    .sciPanel{
+        height:auto;
+        display: block;
+        margin-bottom:30px;
+    }
+    .sciIt{
         display:flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-        margin-bottom:30px;
-    }
-    .sciNav .ptName,.sciNav .ptAuthor,.sciNav .ptType,.sciNav .ptApply,.sciNav .ptGet{
-        font-size:18px;
-        text-align:center;
         color:#152b59;
+        font-size:14px;
+        text-align: center;
+        min-height: 36px;
+        line-height: 36px;
+        border-bottom:2px solid #999;
+        border-left:2px solid #999;
+        align-content: center;
+    }
+    .sciIt:nth-child(odd){
+        background-color: #e0e6f2;
+    }
+    .sciNav{
+        background-color:#152b59 !important;
+        color:#fff;
+        font-size:16px;
+        height: 44px;
+        line-height: 44px;
+        border-top:2px solid #999;
+    }
+    .ptIndex{
+        width:68px;
+        border-right:2px solid #999;
+    }
+    .ptNumber{
+        width:170px;
+        border-right:2px solid #999;
     }
     .ptName{
-        width:260px;
-        font-size:15px;
-        padding:0 20px;
+        width:240px;
+        border-right:2px solid #999;
+    }
+    .ptName:hover{
+        text-decoration: underline;
+        cursor:pointer;
     }
     .ptAuthor{
-        width:100px;
-        font-size:15px;
-        text-align: center;
+        width:86px;
+        border-right:2px solid #999;
     }
     .ptType{
-        width:180px;
-        font-size:15px;
-        text-align: center;
-        padding:0 20px;
+        width:86px;
+        border-right:2px solid #999;
     }
-    .ptApply{
-        width:120px;
-        font-size:15px;
-        text-align: center;
+    .ptDate{
+        width:100px;
+        border-right:2px solid #999;
     }
-    .ptGet{
-        width:120px;
-        font-size:15px;
-        text-align: center;
-    }
+    
     
 
 </style>

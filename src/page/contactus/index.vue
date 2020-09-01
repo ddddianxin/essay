@@ -6,15 +6,9 @@
             <div class="container">
                 <h3>联系我们</h3>
                 <span class="h3BLine"></span>
-                <div class="contactText">
-                    <p>地址：深圳市带饭了极度空灵上飞机带了三块</p>
-                    <p>邮政编码：</p>
-                    <p>联系人：</p>
-                    <p>电话：</p>
-                    <p>邮箱：</p>
-                </div>
-                <a href="../../images/address.png" target="_blank">
-                    <img class="contactImg" src="../../images/address.png">
+                <div class="contactText" v-html="listData.contentHtml"></div>
+                <a :href="listData.mainPic" target="_blank">
+                    <img class="contactImg" :src="listData.mainPic">
                 </a>
             </div>
         </div>
@@ -31,8 +25,12 @@
             return{
                 cn:0,
                 id:'',
+                rows:4,
+                page:1,
+                totalPage:1,
+                totalRow:1,
                 organizationId:'',
-                
+                listData:[]
             }
         },
         components:{
@@ -40,7 +38,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            //this.initData();
+            this.initData();
         },
         computed:{
         },
@@ -48,8 +46,22 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                
+                this.page = 1;
+                this.getData();
             },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list[0];
+                this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+                console.log(res);
+            }
             
 
 

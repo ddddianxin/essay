@@ -4,19 +4,19 @@
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="recBg">
             <div class="container">
-                <div class="recList" v-for="(item,index) in listData" :key="index">
+                <div class="recList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">
                     <div class="recImg">
                         <img :src="item.mainPic">
                     </div>
                     <div class="recInfo">
                         <div class="recName">{{item.contentTitle}}</div>
                         <div>
-                            <span class="recSalary">{{item.salary}}</span>
-                            <span class="recExp">{{item.experience}}</span>
-                            <span class="recEdu">{{item.edu}}</span>
+                            <span class="recSalary">{{item.contentSubtitle}}</span>
+                            <span class="recExp">{{item.remark}}</span>
                         </div>
                         <p>岗位简介：</p>
-                        <div>{{item.text}}</div>
+                        <!-- <div class="recText" v-html="item.contentHtml"></div> -->
+                        <div class="recText">{{item.plainText}}</div>
                     </div>
                     
                 </div>
@@ -42,37 +42,12 @@
             return{
                 cn:0,
                 id:'',
-                rows:9,
+                rows:4,
                 page:1,
                 totalPage:1,
                 totalRow:1,
                 organizationId:'',
-                listData:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'访问学者',
-                        salary:"5K-10K",
-                        experience:'1-3年',
-                        edu:"本科",
-                        text:"哒哒哒哒哒哒多多多多多多多多多多多方式范德萨范德萨"
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'访问学者',
-                        salary:"5K-10K",
-                        experience:'1-3年',
-                        edu:"本科",
-                        text:"哒哒哒哒哒哒多多多多多多多多多多多方式范德萨范德萨"
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'访问学者',
-                        salary:"5K-10K",
-                        experience:'1-3年',
-                        edu:"本科",
-                        text:"哒哒哒哒哒哒多多多多多多多多多多多方式范德萨范德萨"
-                    }
-                ]
+                listData:[]
             }
         },
         components:{
@@ -96,6 +71,9 @@
                 this.getData();
                 //console.log(`当前页: ${val}`);
             },
+            toDetail(id){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:this.organizationId}});
+            },
             async getData(){
                 var res = await contentPage(
                     this.cn,
@@ -104,8 +82,9 @@
                     this.organizationId,
                     this.id
                 );
-                //this.listData = res.data.list;
+                this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
                 console.log(res);
             }
 
@@ -154,10 +133,22 @@
         font-weight: bold;
         margin:10px 0 15px 0;
     }
+    .recName:hover{
+        cursor:pointer;
+        text-decoration: underline;
+    }
     .recSalary{
         color:#b12b6e;
         font-size:16px;
         margin-right:15px;
+    }
+    .recText{
+        overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 4 ;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        max-height: 125px;
     }
     
 </style>

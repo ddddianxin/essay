@@ -1,16 +1,20 @@
 <template>
     <div class="bg">
-        <head-top webActive="科研成果" webChildActive=""></head-top>
+        <head-top webActive="人才招聘" webChildActive=""></head-top>
         <div class="newsBg">
             <div class="container">
                 <h2 class="newsH2">{{val.contentTitle}}</h2>
-                <div class="newsSource">
-                    <span>{{val.createTime}}</span>
+                <div class="newsSource"> 
+                    <div>
+                        <span class="recSalary">{{val.contentSubtitle}}</span>
+                        <span class="recExp">{{val.remark}}</span> 
+                    </div>
+                    <span>{{val.publishTime}}</span>
                 </div>
-                <div class="newsText">
-                    <img class="textImg" :src="val.mainPic">
-                    <div v-html="val.contentHtml"></div>
+                <div>
+                    
                 </div>
+                <div class="newsText" v-html="val.contentHtml"></div>
             </div>
         </div>
     </div>
@@ -20,6 +24,7 @@
     import headTop from '../../components/header/headTop';
     import {getStore} from '../../config/mUtils'
     import {detailContent} from '../../service/api'
+
     export default {
         name: 'team',
         data(){
@@ -28,7 +33,6 @@
                 id:'',
                 organizationId:'',
                 val:''
-                
             }
         },
         components:{
@@ -38,6 +42,10 @@
             this.cn = getStore("inCN");
             // 获取首页产品
             this.initData();
+            if(document.body.clientWidth<=1024){
+                
+            }
+            
         },
         computed:{
         },
@@ -47,7 +55,7 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await detailContent(this.id,this.organizationId,this.cn);
                 this.val = res.data.list[0];
-                console.log(res.data);
+                console.log(res);
             }
 
         },
@@ -75,7 +83,7 @@
     .newsSource{
         display: flex;
         flex-wrap: nowrap;
-        justify-content: flex-end;
+        justify-content: space-between;
         font-size:16px;
         border-bottom:2px solid #a9a9a9;
         color:#152b59;
@@ -86,12 +94,10 @@
         color:#152b59;
         line-height: 36px;
     }
-    .textImg{
-        width:340px;
-        height:260px;
-        object-fit: cover;
-        float:left;
-        margin:0 20px 15px 0;
+    .recSalary{
+        color:#b12b6e;
+        font-size:16px;
+        margin-right:15px;
     }
 
 </style>

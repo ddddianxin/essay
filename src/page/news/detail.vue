@@ -86,6 +86,7 @@
         font-size:16px;
         padding:35px 80px;
         color:#152b59;
+        line-height: 36px;
     }
 
 </style>

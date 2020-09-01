@@ -4,8 +4,8 @@
         <div id="home">
             <div class="banner">
                  <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
-                    <el-carousel-item v-for="(item,index) in bannerInfo" :key="index">
-                        <div class="coverBg" @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
+                    <el-carousel-item v-for="(item,index) in bannerInfo" :key="index"  @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
+                        <div class="coverBg">
                             <div class="bannerText">
                                 <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
                                 <!-- <p>{{item.jumpLink}}</p> -->
@@ -23,7 +23,7 @@
                     <span class="h3BLine"></span>
                     <div class="sciBox" >
                         <div class="sciLf">
-                            <div class="sciLfItem" v-for="(item,index) in sciNewsData.slice(0,newsShowNum)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
+                            <div class="sciLfItem" v-for="(item,index) in sciNewsData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                                 <img :src="'http://sensing.zwin.work/'+item.mainImage">
                                 <h4>{{item.contentTitle}}</h4>
                                 <p class="plain">{{item.plainText}}</p>
@@ -143,52 +143,12 @@
                 isPc:1,
                 newsShowNum:6,
                 bannerHeight:'613px',
-                bannerInfo:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        title:'一个研究相关标题',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner3.png'),
-                        title:'一个研究相关标题',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    }
-                ],
-                sciNewsData:[
-                    {
-                        mainImage:require('../../images/banner2.png'),
-                        contentTitle:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        createTime:'2020年6月1日'
-                    }
-                ],
+                bannerInfo:[],
+                sciNewsData:[],
                 achieve:[],
-                sciCommunit:[
-                    {
-                        contentTitle:'COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望,COVID-19大流行及以后的工厂解决方案：历史回顾和未来展望',
-                        createTime:'2020年6月15日，星期一',
-                        url:''
-                    }
-                ],
-                teamData:[
-                    {
-                        mainImage:require('../../images/banner2.png'),
-                        contentTitle:'某某姓名',
-                        plainText:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    }
-                    
-                ],
-                recruitData:[
-                    {
-                        contentTitle:'访问学者',
-                        plainText:'能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文,能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文，能流畅的阅读和书写英文',
-                        url:''
-                    }
-                ]
-                
+                sciCommunit:[],
+                teamData:[],
+                recruitData:[]
             }
         },
         components:{
@@ -215,9 +175,10 @@
             async initData(){
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
+                console.log(this.bannerInfo);
                 var res2 = await indexContent(this.cn,1,this.isPc);
                 console.log(res2.data);
-                this.sciNewsData = res2.data.science;
+                this.sciNewsData = res2.data.science.slice(0,this.newsShowNum);
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
                 this.teamData = res2.data.higher.concat(res2.data.medium).concat(res2.data.primary);

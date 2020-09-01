@@ -12,7 +12,7 @@
         
         <div class="ctBg">
             <div class="container">
-                <img class="mt30" src="../../images/resPic.png">
+                <img class="mt30" :src="pic">
             </div>
         </div>
     </div>
@@ -29,7 +29,8 @@
                cn:0,
                 id:'',
                 organizationId:'',
-                list:''
+                list:'',
+                pic:''
             }
         },
         components:{
@@ -52,7 +53,8 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await content(this.cn,this.id,this.organizationId);
                 this.list = res.data.list[0].plainText.split("###");
-                console.log(this.list);
+                this.pic = res.data.list[0].mainPic;
+                console.log(res);
             }
 
         },

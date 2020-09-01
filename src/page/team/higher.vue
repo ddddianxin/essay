@@ -5,15 +5,17 @@
             <div class="container">
                 <div class="lsideBox">
                     <side-menu webTitle="科研队伍" webActive="高级职称"></side-menu>
-                    <div class="teamList">
-                        <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id)">    
-                            <img :src="item.mainPic">              
-                            <h4 class="wto">{{item.contentTitle}}</h4>
-                            <p>{{item.plainText}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
+                    <div>
+                        <div  class="teamList">
+                            <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id)">    
+                                <img :src="item.mainPic">              
+                                <h4 class="wto">{{item.contentTitle}}</h4>
+                                <p>{{item.plainText}}</p>
+                                <div class="tc">
+                                    <span class="arrow">
+                                        <img src="../../images/arrow.png">
+                                    </span>
+                                </div>
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
@@ -43,7 +45,7 @@
                 cn:0,
                 id:'',
                 organizationId:'',
-                rows:9,
+                rows:12,
                 page:1,
                 totalPage:1,
                 totalRow:1,
@@ -56,12 +58,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -90,7 +87,8 @@
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
-                 console.log(res);
+                this.totalRow = res.data.totalRow;
+                console.log(res);
             }
 
         },
@@ -176,7 +174,7 @@
    .teamItem h4{
        font-size: 15px;
        font-weight: bold;
-       color:#333;
+       color:#152b59;
        padding:5px 20px 0 20px;
    }
     .teamItem p{
@@ -186,7 +184,7 @@
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        color:#333;
+        color:#152b59;
         padding:0 20px;
         margin-bottom:10px;
         height:88px;
@@ -205,5 +203,6 @@
        height: 20px;
        padding-top:6px;
     }
+    
 
 </style>

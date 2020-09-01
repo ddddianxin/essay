@@ -8,7 +8,7 @@
                     <side-menu webTitle="新闻动态" webActive="业内动态"></side-menu>
                     <div class="sciNList">
                         <div>
-                            <div class="topPanel"  @click="toNewsDetail(listData[0].id)">
+                            <!-- <div class="topPanel"  @click="toNewsDetail(listData[0].id)">
                                 <div class="tPimg">
                                     <img :src="listData[0].mainPic">
                                 </div>
@@ -20,8 +20,8 @@
                                 <div class="tPsign">
                                     <span>置顶</span>
                                 </div>
-                            </div>
-                            <div class="sciNItem" v-for="(item,index) in listData.slice(1)" :key="index"  @click="toNewsDetail(item.id)">    
+                            </div> -->
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index"  @click="toNewsDetail(item.id)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
@@ -112,6 +112,8 @@
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+                console.log(res);
                
             }
 
@@ -158,7 +160,7 @@
    .sciNInfo h4{
        font-size:16px;
        font-weight: bold;
-       color:#333;
+       color:#152259;
        line-height: 40px;
    }
    .sciNInfo h4:hover{
@@ -168,12 +170,13 @@
    }
    .sciNInfo p{
        font-size:15px;
-       color:#999;
+       color:#152b59;
    }
    .sciNdate{
        width:110px;
        line-height: 70px;
        text-align: center;
+       color:#152b59;
    }
    .sciNimg{
        width:105px;
@@ -184,70 +187,68 @@
        object-fit: cover;
    }
 
-   .topPanel{
-       display: flex;
-       flex-wrap: nowrap;
-       justify-content: space-between;
-       border-bottom:1px solid #ddd;
-       padding-bottom:20px;
-   }
-   .tPimg{
-       width:200px;
-       height:140px;
-   }
-   .tPimg img{
-       width:200px;
-       height:140px;
-       object-fit: cover;
-   }
-   .tPinfo{
-       width:420px;
-       padding-left:20px;
-   }
-   .tPinfo h4{
-       font-size:16px;
-       color:#333;
-       font-weight: bold;
-   }
-   .tPinfo h4:hover{
-       cursor:pointer;
-       color: #152b59;
-       text-decoration: underline;
-   }
-   .tPinfo .plain{
-       font-size:14px;
-       color:#666;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 3 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        height: 72px;
-   }
-   .tPinfo .date{
-       font-size:13px;
-       color:#999;
-       margin-top:15px;
-   }
-   .tPsign{
-       width:160px;
-   }
-   .tPsign span{
-       width:80px;
-       height:40px;
-       line-height: 40px;
-       border-radius: 30px;
-        background-color:#c3c3c3;
-        color:#fff;
-        text-align: center;
-        display: block;
-        font-size:16px;
-        font-weight: bold;
-        float:right;
-        margin-top:20px;
-
-
-   }
+//    .topPanel{
+//        display: flex;
+//        flex-wrap: nowrap;
+//        justify-content: space-between;
+//        border-bottom:1px solid #ddd;
+//        padding-bottom:20px;
+//    }
+//    .tPimg{
+//        width:200px;
+//        height:140px;
+//    }
+//    .tPimg img{
+//        width:200px;
+//        height:140px;
+//        object-fit: cover;
+//    }
+//    .tPinfo{
+//        width:420px;
+//        padding-left:20px;
+//    }
+//    .tPinfo h4{
+//        font-size:16px;
+//        color:#333;
+//        font-weight: bold;
+//    }
+//    .tPinfo h4:hover{
+//        cursor:pointer;
+//        color: #152b59;
+//        text-decoration: underline;
+//    }
+//    .tPinfo .plain{
+//        font-size:14px;
+//        color:#666;
+//        overflow: hidden ;
+//         display: -webkit-box ;
+//         -webkit-line-clamp: 3 ;
+//         -webkit-box-orient: vertical ;
+//         word-break: break-all ;
+//         height: 72px;
+//    }
+//    .tPinfo .date{
+//        font-size:13px;
+//        color:#999;
+//        margin-top:15px;
+//    }
+//    .tPsign{
+//        width:160px;
+//    }
+//    .tPsign span{
+//        width:80px;
+//        height:40px;
+//        line-height: 40px;
+//        border-radius: 30px;
+//         background-color:#c3c3c3;
+//         color:#fff;
+//         text-align: center;
+//         display: block;
+//         font-size:16px;
+//         font-weight: bold;
+//         float:right;
+//         margin-top:20px;
+//    }
     
 
 </style>

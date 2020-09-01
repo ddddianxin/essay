@@ -9,16 +9,35 @@
                     </div>
                     <div class="desInfo">
                         <h3>{{val.contentTitle}}</h3>
-                        <p>{{val.plainText}}</p>
+                        <div class="info" v-html="this.valArr[0]"></div>
                     </div>
                 </div>
                 <div class="desNav">
-                    <span class="active">个人简介</span>
-                    <span>代表性项目</span>
-                    <span>代表性成果</span>
-                    <span>团队成员</span>
+                    <span :class="tab==1?'active':''" @click="clickTab(1)">个人简介</span>
+                    <span :class="tab==2?'active':''" @click="clickTab(2)">代表性项目</span>
+                    <span :class="tab==3?'active':''" @click="clickTab(3)">代表性成果</span>
+                    <span :class="tab==4?'active':''" @click="clickTab(4)">团队成员</span>
                 </div>
-                <div class="desPanel" v-html="val.contentHtml"></div>
+                <div class="desPanel">
+                    <div v-if="tab==1">
+                        <div v-html="this.valArr[1]"></div>
+                        <div v-html="this.valArr[2]"></div>
+                    </div>
+                    <div v-if="tab==2">
+                        <div v-html="this.valArr[3]"></div>
+                        <div v-html="this.valArr[4]"></div>
+                    </div>
+                    <div v-if="tab==3">
+                        <div v-html="this.valArr[5]"></div>
+                        <div v-html="this.valArr[6]"></div>
+                    </div>
+                    <div v-if="tab==4">
+                        <div v-html="this.valArr[7]"></div>
+                        <div v-html="this.valArr[8]"></div>
+                    </div>
+                    <!-- <div v-for="(item,index) in this.valArr" :key="index" v-html="item"></div> -->
+                </div>
+                
             </div>
         </div>
     </div>
@@ -35,8 +54,13 @@
             return{
                 cn:0,
                 id:'',
+                tab:1,
                 organizationId:'',
-                val:''
+                val:'',
+                valArr:'',
+                plainArr:'',
+                
+
             }
         },
         components:{
@@ -46,10 +70,6 @@
             this.cn = getStore("inCN");
             // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -59,9 +79,14 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await detailContent(this.id,this.organizationId,this.cn);
                 this.val = res.data.list[0];
+                this.valArr = this.val.contentHtml.split("###");
+                this.plainArr = this.val.plainText.split("###");
                 console.log(res);
+                console.log(this.valArr);
+            },
+            clickTab(tabNum){
+                this.tab = tabNum;
             }
-
         },
         created(){
 
@@ -94,18 +119,19 @@
     .desInfo{
         width:824px;
         padding-left:30px;
-        color:#666;
+        color:#152b59;
     }
     .desInfo h3{
-        font-size:30px;
+        font-size:28px;
         margin:30px 0 20px 0;
     }
-    .desInfo p{
+    .desInfo .info{
         font-size:18px;
         margin-bottom:10px;
+        line-height: 36px;;
         overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 7 ;
+        -webkit-line-clamp: 3 ;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
     }
@@ -116,26 +142,27 @@
     }
     .desNav span{
         font-size:18px;
-        color:#666;
+        color:#fff;
         padding:0 40px;
         display: inline-block;
-        background-color: #c3c3c3;
+        background-color: #152b59;
         height: 50px;
         line-height: 50px;
         margin-right:25px;
     }
     .desNav span.active{
         background-color: #fff;
+        color:#152b59;
     }
     .desNav span:hover{
         cursor: pointer;
-        color:#152b59;
     }
     .desPanel{
         font-size:16px;
-        color:#666;
         background-color: #fff;
         padding:30px 80px;
+        color:#152b59;
+        line-height: 36px;
     }
     
 

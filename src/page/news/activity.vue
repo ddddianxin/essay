@@ -136,7 +136,8 @@
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
-                 console.log(res);
+                this.totalRow = res.data.totalRow;
+                console.log(res);
             }
 
         },
@@ -309,7 +310,7 @@
    .sciNInfo h4{
        font-size:16px;
        font-weight: bold;
-       color:#333;
+       color:#152b59;
        line-height: 40px;
    }
    .sciNInfo h4:hover{
@@ -319,12 +320,13 @@
    }
    .sciNInfo p{
        font-size:15px;
-       color:#999;
+       color:#152b59;
    }
    .sciNdate{
        width:110px;
        line-height: 70px;
        text-align: center;
+       color:#152b59;
    }
    .sciNimg{
        width:105px;
@@ -357,7 +359,7 @@
    }
    .tPinfo h4{
        font-size:16px;
-       color:#333;
+       color:#152b59;
        font-weight: bold;
    }
    .tPinfo h4:hover{
@@ -367,7 +369,7 @@
    }
    .tPinfo .plain{
        font-size:14px;
-       color:#666;
+       color:#152b59;
        overflow: hidden ;
         display: -webkit-box ;
         -webkit-line-clamp: 3 ;
@@ -377,7 +379,7 @@
    }
    .tPinfo .date{
        font-size:13px;
-       color:#999;
+       color:#152b59;
        margin-top:15px;
    }
    .tPsign{
@@ -388,7 +390,7 @@
        height:40px;
        line-height: 40px;
        border-radius: 30px;
-        background-color:#c3c3c3;
+        background-color:#152b59;
         color:#fff;
         text-align: center;
         display: block;

@@ -87,6 +87,7 @@
                 );
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
             }
 
         },
@@ -132,7 +133,7 @@
    .sciNInfo h4{
        font-size:16px;
        font-weight: bold;
-       color:#333;
+       color:#152b59;
        line-height: 40px;
    }
    .sciNInfo h4:hover{
@@ -142,12 +143,13 @@
    }
    .sciNInfo p{
        font-size:15px;
-       color:#666;
+       color:#152b59;
    }
    .sciNdate{
        width:110px;
        line-height: 70px;
        text-align: center;
+       color:#152b59;
    }
    .sciNimg{
        width:105px;

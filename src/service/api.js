@@ -40,12 +40,13 @@ export const content = (chineseOrEnglish, menuId, organizationId) => post(baseUr
 });
 
 //查询某菜单下的所有内容（分页）/关键词搜索（分页）
-export const contentPage = (chineseOrEnglish, pageNumber, pageSize, organizationId, menuId) => post(baseUrl + '/cms/content/queryContentPageApi', {
+export const contentPage = (chineseOrEnglish, pageNumber, pageSize, organizationId, menuId, contentType) => post(baseUrl + '/cms/content/queryContentPageApi', {
     chineseOrEnglish,
     pageNumber,
     pageSize,
     organizationId,
-    menuId
+    menuId,
+    contentType
 });
 
 
@@ -67,3 +68,9 @@ export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(bas
 
 // 退出登录
 //export const signout = () => fetch(baseUrl + '/outLogin');
+
+//字典常数
+export const dictionary = (type_key, psn) => post(baseUrl + '/api/common/getDictionaryByPkey', {
+    type_key,
+    psn
+});

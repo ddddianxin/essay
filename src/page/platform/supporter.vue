@@ -7,7 +7,20 @@
                 <div class="lsideBox">
                     <side-menu webTitle="实验平台" webActive="支撑载体"></side-menu>
                     <div class="expList">
-                        <div class="supTit">
+                        <div v-for="(item,index) in sortTit" :key="index">
+                            <div class="supTit">
+                                <span>{{item}}</span>
+                            </div>
+                            <div class="supInfo" v-for="(iitem,iindex) in listData" :key="iindex" v-if="iitem.typeName==item" @click="toDetail(iitem.id)">
+                                <div class="supText">
+                                    <p class="fb tit">{{iitem.contentTitle}}</p>
+                                    <p>{{iitem.plainText}}</p>
+                                </div>
+                                <img :src="iitem.mainPic">
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="supTit">
                             <span>创新团队</span>
                         </div>
                         <div class="supInfo">
@@ -35,7 +48,7 @@
                         <div class="supInfo">
                             <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
                             <img src="../../images/labAward.jpg">
-                        </div>
+                        </div> -->
                     </div>
                 </div>
                 
@@ -48,7 +61,7 @@
     import headTop from '../../components/header/headTop';
     import sideMenu from '../../components/common/sideMenu'
     import {getStore} from '../../config/mUtils'
-    import {detailContent} from '../../service/api'
+    import {contentPage} from '../../service/api'
     export default {
         name: 'supporter',
         data(){
@@ -56,6 +69,13 @@
                 cn:0,
                 id:'',
                 organizationId:'',
+                rows:8,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                listData:[],
+                sortList:[],
+                sortTit:[]
                 
             }
         },
@@ -64,12 +84,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
-            this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
+            this.initData(); 
         },
         computed:{
         },
@@ -77,9 +92,43 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                
-            }
+                this.page = 1;
+                this.getData();
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+                console.log(res);
 
+                var sortArr = [];
+                for(var i=0;i<this.listData.length;i++){
+                    sortArr[i]=this.listData[i].typeName;
+                }
+                //去除数组相同值
+                let hash=[];
+                for (let i = 0; i < sortArr.length; i++) {
+                    if(hash.indexOf(sortArr[i]) === -1){
+                        hash.push(sortArr[i]);
+                    }
+                }
+                this.sortTit = hash;
+            },
+            toDetail(id){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
+            }
         },
         created(){
 
@@ -105,9 +154,6 @@
         width:780px;
         padding-left:30px;
         min-height: 850px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content:space-between;
     }
     .supTit{
         width:100%;
@@ -137,8 +183,14 @@
         width:440px;
         font-size:18px;
         color:#152b59;
-        line-height: 30px;
+        line-height: 28px;
         text-indent: 40px;
+        height: 200px;
+        overflow: hidden;
+    }
+    .supText .tit:hover{
+        cursor:pointer;
+        text-decoration: underline;
     }
     
 </style>

@@ -9,10 +9,7 @@
                     <div class="sciNList">
                         <div>
                             <div class="newsSort">
-                                <span class="active">分类一</span>
-                                <span>分类二</span>
-                                <span>分类三</span>
-                                <span>分类四</span>
+                                <span v-for="(item,index) in sortList" :key="index" :class="sortNum==index?'active':''" @click="tabChange(index)">{{item.name}}</span>
                             </div>
                             <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">    
                                 <div class="sciNInfo">
@@ -33,15 +30,6 @@
                             </el-pagination>
                         </div>
                     </div>
-                    <!-- <div class="sciList">
-                        <div class="sciItem" v-for="(item,index) in listData" :key="index">
-                            <div class="sciInfo">
-                                <h4>{{item.title}}</h4>
-                                <p>{{item.des}}</p>
-                            </div>
-                            <div class="date">{{item.date}}</div>
-                        </div>
-                    </div> -->
                 </div>
             </div>
         </div>
@@ -51,7 +39,7 @@
 <script>
     import headTop from '../../components/header/headTop';
     import sideMenu from '../../components/common/sideMenu'
-    import {contentPage} from '../../service/api'
+    import {contentPage,dictionary} from '../../service/api'
     import {getStore} from '../../config/mUtils'
 
     export default {
@@ -60,6 +48,7 @@
             return{
                 cn:0,
                 id:'',
+                sortNum:0,
                 organizationId:'',
                 rows:9,
                 page:1,
@@ -115,8 +104,8 @@
                         des:'简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介简介',
                         date:'2020年6月15日'
                     },
-                ]
-                
+                ],
+                sortList:[]
             }
         },
         components:{
@@ -124,11 +113,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
             
         },
         computed:{
@@ -149,16 +134,30 @@
                 //console.log(`当前页: ${val}`);
             },
             async getData(){
+                var dicRes = await dictionary(
+                    'contentType',
+                    'academic_exchange'
+                )
+                console.log(dicRes);
+                this.sortList = dicRes.data;
                 var res = await contentPage(
                     this.cn,
                     this.page,
                     this.rows,
                     this.organizationId,
-                    this.id
+                    this.id,
+                    dicRes.data[this.sortNum].id
                 );
+                console.log(res);
                 
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+            },
+            tabChange(tabNum){
+                this.sortNum = tabNum;
+                this.page = 1;
+                this.getData();
             }
 
         },
@@ -258,7 +257,7 @@
    .sciNInfo h4{
        font-size:16px;
        font-weight: bold;
-       color:#333;
+       color:#152b59;
        line-height: 40px;
    }
    .sciNInfo h4:hover{
@@ -268,12 +267,13 @@
    }
    .sciNInfo p{
        font-size:15px;
-       color:#999;
+       color:#152b59;
    }
    .sciNdate{
        width:110px;
        line-height: 70px;
        text-align: center;
+       color:#152b59;
    }
    .sciNimg{
        width:105px;
@@ -295,6 +295,7 @@
    }
    .newsSort span:hover{
        color:#152b59;
+       cursor:pointer;
    }
    .newsSort span.active{
        font-weight: bold;

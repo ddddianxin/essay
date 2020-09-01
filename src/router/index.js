@@ -27,7 +27,8 @@ const contactus = r => require.ensure([], () => r(require('../page/contactus/ind
 const teamDetail = r => require.ensure([], () => r(require('../page/team/detail')), 'teamDetail');
 const newsDetail = r => require.ensure([], () => r(require('../page/news/detail')), 'newsDetail');
 const sciDetail = r => require.ensure([], () => r(require('../page/science/detail')), 'sciDetail');
-
+const platformDetail = r => require.ensure([], () => r(require('../page/platform/detail')), 'platformDetail');
+const recruitDetail = r => require.ensure([], () => r(require('../page/recruit/detail')), 'recruitDetail');
 
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
@@ -172,6 +173,11 @@ var pc = [{
             component: recruit
         },
         {
+            path: '/recruit/detail',
+            name: 'recruitDetail',
+            component: recruitDetail
+        },
+        {
             path: '/contactus/index',
             name: 'contactus',
             component: contactus
@@ -190,6 +196,11 @@ var pc = [{
             path: '/science/detail',
             name: 'sciDetail',
             component: sciDetail
+        },
+        {
+            path: '/platform/detail',
+            name: 'platformDetail',
+            component: platformDetail
         },
     ]
 }];
