@@ -1,35 +1,28 @@
 <template>
     <div class="bg">
-        <head-top webActive="news" title="科研成果" ref="headNav"></head-top>
-        <div class="newsBg">
-            <div class="container pr">
-                <div class="sciEMenu">
-                    <div class="sciEMList">
-                        <span v-for="(item,index) in sciMenu" :key="index" :class="item.title=='科研项目'?'active':''" @click="toUrl(item.url)">{{item.title}}</span>
+        <head-top webActive="achievement" title="科研成果"></head-top>
+        <div class="webAchiBg">
+            <side-menu webTitle="科研成果" webActive="科研项目"></side-menu>
+            <div class="webAchiList">
+                <div class="mAchiList">
+                    <div class="mAchiPanel" v-for="(item,index) in sortTit" :key="index">
+                        <div class="tit">{{item}}</div>
+                        <div class="mAchiIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                            <div class="mPjIndex">{{iindex+1}}</div>
+                            <div class="mPjInfo">
+                                <p>项目名称：{{iitem.contentTitle}}</p>
+                                <p>项目类别：{{iitem.typeName}}</p>
+                                <p>项目负责人：{{iitem.author}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="teamBox">
-                    <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
-                        :data="newsData"
-                        :listenScroll="true"
-                        :pulldown="true"
-                        @pulldown="getData"
-                        @scrollToEnd="getmoredata"
-                        :pullup="true">
-                        <div class="sciList">
-                            <div class="sciItem" v-for="(item,index) in newsData" :key="index">               
-                                <div class="sciInfo">
-                                    <h2>{{index}}.{{item.ename}}</h2>
-                                    <div class="proTail">
-                                        <div class="proTlf ">项目负责人：付款经典款复健科时代峰峻临时冻结</div>
-                                        <div class="proTrg ">项目分类：付款经典款复健科时代峰峻临时冻结</div>
-                                    </div>
-                                </div>
-                            </div>
-                            <view class="loading">{{loadingText}}</view>
-                        </div>
-                        <div class="loading-wrapper"></div>
-                    </scroll>
+                <div class="tc" style="margin:0 auto;">
+                    <el-pagination
+                        layout="prev, pager, next"
+                        :page-count="totalPage"
+                        @current-change="handleCurrentChange">
+                    </el-pagination>
                 </div>
             </div>
         </div>
@@ -38,132 +31,34 @@
 
 <script>
     import headTop from '../../components/mobile/headTop';
-    import {contentPage,test} from '../../service/api'
+    import sideMenu from '../../components/mobile/sideMenu'
+    import {contentPage} from '../../service/api'
     import {getStore} from '../../config/mUtils'
-    import Scroll from '../../components/common/scroll'
-    
-    var page=1
     export default {
-        name: 'news',
+        name: 'achievement',
         data(){
             return{
-                sciMenu:[
-                    {
-                        title:'科研项目',
-                        url:'/science/project'
-                    },
-                    {
-                        title:'期刊论文',
-                        url:'/science/paper'
-                    },
-                    {
-                        title:'专利/专著',
-                        url:'/science/patent'
-                    },
-                    {
-                        title:'技术转移转化',
-                        url:'/science/technology'
-                    },
-                    {
-                        title:'成果奖励',
-                        url:'/science/award'
-                    }
-                ],
-                newsData:[
-                    {
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    }
-
-                ],
                 cn:0,
                 id:'',
+                organizationId:'',
+                rows:10,
+                page:1,
                 totalPage:1,
                 totalRow:1,
-                organizationId:'',
                 listData:[],
-                scrollY: 0,
-                rows:10,
-                noData: false,//false为无数据，true为有数据
-                loadingText:'加载中...',
-                scrollH:300
+                sortTit:[],
+                sortList:[]
             }
         },
         components:{
-            headTop,Scroll
+            headTop,sideMenu
         },
         created(){
-            this.getData();
-        },
-        beforeMount(height) {
-            var h = document.documentElement.clientHeight || document.body.clientHeight;
-            this.scrollH = h-90-30-102;//头部、菜单栏、尾部
+            
         },
         mounted(){
             this.cn = getStore("inCN");
-            
+            this.initData();
         },
         computed:{
         },
@@ -174,160 +69,119 @@
                 this.page = 1;
                 this.getData();
             },
-            toUrl(url){
-                this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
-            },
             toSciDetail(id){
                 this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
             },
-            async getData(){
-                // var res = await contentPage(
-                //     this.cn,
-                //     this.page,
-                //     this.rows,
-                //     this.organizationId,
-                //     this.id
-                // );
-                // this.listData = res.data.list;
-                // this.totalPage = res.data.totalPage;
-                // console.log(res);
-                var res = await test('',1,this.rows);
-                if (res.length != 0 && res.length == this.rows) {
-					this.noData = false;
-					page++;
-					this.newsData = res;
-					this.loadingText = '上拉加载更多';
-				} else {
-					this.newsData = res;
-					this.noData = true;
-					this.loadingText = '';
-                }
-                console.log(this.newsData);
-                
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
             },
-            async getmoredata(){
-                console.log("getting more data");
-				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
-				    return false;
-				}
-				this.loadingText = '加载中...';
-				var res = await test('',page,this.rows);
-				this.loadingText = '';
-				if(res.length == 0){
-				  this.loadingText = '已加载全部';
-				  return false;
-				}
-				page++;
-				this.newsData  = this.newsData.concat(res);
-				this.loadingText = '上拉加载更多';
-			}
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+                console.log(res);
+
+                var sortArr=[];
+                for(var i =0 ; i < this.listData.length ; i++){
+                    sortArr[i]=this.listData[i].typeName;
+                }
+
+                //去除数组相同值
+                let hash=[];
+                for (let i = 0; i < sortArr.length; i++) {
+                    if(hash.indexOf(sortArr[i]) === -1){
+                        hash.push(sortArr[i]);
+                    }
+                }
+                console.log(hash);
+                this.sortTit = hash;
+                var newList=[];
+                for(var i = 0 ; i < hash.length ;i++){
+                    var valList=[];
+                    for(var j = 0 ; j< this.listData.length ; j++){
+                        if(hash[i]==this.listData[j].typeName){
+                            valList.push(this.listData[j]);
+                        }
+                    }
+                    newList.push(valList);
+                }
+                console.log(newList);
+                this.sortList = newList;
+            }
+        },
+        created(){
 
 
         },
-        watch: {
-           
-        },
-        
     }
 
 </script>
 
 <style lang="scss">
     @import '../../style/mixin';
-    .newsBg{
+    .webAchiBg{
         margin-top:px2rem(180);
-        background-color:#fff;
     }
-    .bgTop{
-        height:205px;
-        width: 100%;
-        object-fit: cover;
+    .webAchiList{
+        display: block;
+        background-color: #f7f7f7;
+        overflow: hidden;
+        padding:px2rem(30) 0;
     }
-    .teamBox{
-        display: flex;
+    .mAchiList{
+        padding:px2rem(30);
+    }
+    .mAchiList .tit{
+        color:#152b59;
+        font-weight: bold;
+        font-size:px2rem(28);
+        margin-bottom:px2rem(10);
+    }
+    .mAchiPanel{
+        height:auto;
+        display: block;
+        margin-bottom:px2rem(40);
+        border-bottom:px2rem(4) solid #999;
+    }
+    .mAchiIt{
+        display:flex;
         flex-wrap: nowrap;
         justify-content: space-between;
-    }
-    .sciEMenu{
-        background-color:#152b59;
-        height:px2rem(60);
-        line-height:px2rem(60);
-        position:fixed;
-        top:px2rem(180);
-        left:0
-    }
-    .sciEMList{
-        margin:0 px2rem(40);
-        display:flex;
-        flex-wrap: nowrap; 
-    }
-    .sciEMList span{
-        width:px2rem(140);
-        text-align: center;
-        color:#fff;
-    }
-    .sciEMList span.active{
-        background-color:#fff;
         color:#152b59;
-        height:px2rem(60);
-        line-height:px2rem(60);
+        font-size:14px;
+        text-align: center;
+        min-height: 36px;
+        line-height: 36px;
+        border-top:2px solid #999;
+        border-left:2px solid #999;
+        align-content: center;
+    }
+    .mAchiIt:nth-child(even){
+        background-color: #e0e6f2;
+    }
+    .mPjIndex{
+        width:px2rem(60);
+        border-right:px2rem(4) solid #999;
+    }
+    .mPjInfo{
+        width:px2rem(600);
+        border-right:px2rem(4) solid #999;
+        text-align: left;
+    }
+    .mPjInfo p{
+        font-size:px2rem(24);
+        line-height: px2rem(48);
+
     }
     
-    .sciList{
-        padding:0 px2rem(40);
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-    .sciItem{
-        border-bottom:1px dashed #ddd;
-        padding:15px 0;
-        width:100%;
-    }
-    .sciInfo{
-    }
-    .sciInfo h2{
-        font-size:16px;
-        font-weight: bold;
-        color:#333;
-        margin-bottom:5px;
-        line-height: 20px;;
-    }
-    .sciInfo h2:hover{
-        cursor:pointer;
-        color:#152b59;
-    }
-    .proTail{
-        font-size:12px;
-        color:#666;
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-    }
-    .proTlf{
-        width:50%;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        height: px2rem(48);
-    }
-    .proTrg{
-        width:50%;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        height: px2rem(48);
-    }
-    .wrapper{
-        
-        margin-top:px2rem(60);
-        overflow: hidden;
-    }
-    .sciList{
-       
-    }
+
 </style>

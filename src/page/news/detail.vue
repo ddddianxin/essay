@@ -6,6 +6,7 @@
                 <h2 class="newsH2">{{val.contentTitle}}</h2>
                 <div class="newsSource">
                     <span>{{val.publishTime}}</span>
+                    <span class="ml10" v-if="val.author">作者：{{val.author}}</span>
                 </div>
                 <div class="newsText" v-html="val.contentHtml"></div>
             </div>

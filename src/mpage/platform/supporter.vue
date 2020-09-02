@@ -1,36 +1,18 @@
 <template>
     <div class="bg">
-        <head-top webActive="team"></head-top>
-        <div class="teamBg">
-            <div class="container">
-                <div class="teamBox">
-                    <div class="teamMenu">
-                        <h3>科研队伍</h3>
-                        <span class="h3BLine"></span>
-                        <ul>
-                            <li class="teamMItem">
-                                <span>全部</span>
-                            </li>
-                            <li class="teamMItem active">
-                                <span>初级职称</span>
-                            </li>
-                            <li class="teamMItem">
-                                <span>中级职称</span>
-                            </li>
-                            <li class="teamMItem">
-                                <span>高级职称</span>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="teamList">
-                        <div class="teamItem" v-for="(item,index) in teamData" :key="index">    
-                            <img :src="item.img">              
-                            <h4 class="wto">{{item.name}}</h4>
-                            <p>{{item.description}}</p>
-                            <div class="tc">
-                                <span class="arrow">
-                                    <img src="../../images/arrow.png">
-                                </span>
+        <head-top webActive="experiment" title="实验平台"></head-top>
+        <div class="webTeamBg">
+            <side-menu webTitle="实验平台" webActive="支撑载体"></side-menu>
+            <div class="webTeamList">
+                <div class="expList">
+                    <div v-for="(item,index) in sortTit" :key="index">
+                        <div class="supTit">
+                            <span>{{item}}</span>
+                        </div>
+                        <div class="supInfo" v-for="(iitem,iindex) in listData" :key="iindex" v-if="iitem.typeName==item" @click="toDetail(iitem.id)">
+                            <img :src="iitem.mainPic">
+                            <div class="supText">
+                                <p>{{iitem.plainText}}</p>
                             </div>
                         </div>
                     </div>
@@ -41,90 +23,80 @@
 </template>
 
 <script>
-    import headTop from '../../components/header/headTop';
-   
-
+    import headTop from '../../components/mobile/headTop';
+    import sideMenu from '../../components/mobile/sideMenu'
+    import {contentPage} from '../../service/api'
+    import {getStore} from '../../config/mUtils'
+    //var page=1
     export default {
-        name: 'team',
+        name: 'experiment',
         data(){
             return{
-                teamData:[
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    },
-                    {
-                        img:require('../../images/banner2.png'),
-                        name:'某某姓名',
-                        description:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        url:''
-                    }
-                ],
-                
+                cn:0,
+                id:'',
+                organizationId:'',
+                rows:8,
+                page:1,
+                totalPage:1,
+                totalRow:1,
+                listData:[],
+                sortList:[],
+                sortTit:[]
             }
         },
         components:{
-            headTop
+            headTop,sideMenu
+        },
+        created(){
+            
         },
         mounted(){
-            // 获取首页产品
+            this.cn = getStore("inCN");
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
         methods:{
             async initData(){
-                
-            }
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                this.page = 1;
+                this.getData();
+            },
+            handleCurrentChange(val) {
+                this.page = val;
+                this.getData();
+                //console.log(`当前页: ${val}`);
+            },
+            async getData(){
+                var res = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                this.listData = res.data.list;
+                this.totalPage = res.data.totalPage;
+                this.totalRow = res.data.totalRow;
+                console.log(res);
 
+                var sortArr = [];
+                for(var i=0;i<this.listData.length;i++){
+                    sortArr[i]=this.listData[i].typeName;
+                }
+                //去除数组相同值
+                let hash=[];
+                for (let i = 0; i < sortArr.length; i++) {
+                    if(hash.indexOf(sortArr[i]) === -1){
+                        hash.push(sortArr[i]);
+                    }
+                }
+                this.sortTit = hash;
+            },
+            toDetail(id){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
+            }
         },
         created(){
 
@@ -136,103 +108,52 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .teamBg{
-        background-color: #f7f7f7;
-        padding:36px 0;
+    .webTeamBg{
+        margin-top:px2rem(180);
     }
-    .teamBox{
-        display: flex;
+    .expList{
+        width:100%;
+    }
+    .supTit{
+        display:inline-block;
+        color:#152b59;
+        font-size:px2rem(28);
+        font-weight:bold;
+        border-bottom:px2rem(4) solid #152b59;
+        padding:0 0 px2rem(10) 0;
+        margin:px2rem(30) 0 0 px2rem(30);
+    }
+    .supInfo{
+        display:flex;
         flex-wrap: nowrap;
         justify-content: space-between;
+        margin:px2rem(30) px2rem(30) 0 px2rem(30);
+        padding-bottom:px2rem(30);
+        border-bottom:px2rem(4) dashed #ddd;
+        
     }
-    .teamMenu{
-        width:240px;
-        height:850px;
-        background-image: linear-gradient( #162a59, #530760);
+    .supInfo img{
+        width:px2rem(240);
+        height:px2rem(160);
+        object-fit: cover;
     }
-   .teamMenu h3{
-       margin:30px 0 0 20px;
-       color:#fff;
-       font-weight: bold;
-       font-size: 25px;
-
-   }
-   .teamMenu .h3BLine{
-       width:70px;
-       height: 3px;
-       display: inline-block;
-       background-color: #fff;
-       margin-left: 20px;
-   }
-   .teamMItem{
-       height: 84px;
-       line-height: 84px;
-   }
-   .teamMItem.active{
-       background-color:#fff;
-   }
-    .teamMItem.active span{
+    .supText{
+        width:auto;
+        font-size:px2rem(24);
+        padding-left:px2rem(30);
         color:#152b59;
-    }
-    .teamMItem span{
-        display: block;
-        color:#fff;
-        font-size:16px;
-        font-weight: bold;
-        margin:0 20px;
-        border-bottom:2px solid #5b4b7e;
-    }
-    .teamMItem span:hover{
-        cursor:pointer;
-    }
-    .teamList{
-        width:780px;
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-    .teamItem{
-       width:240px;
-       height: 306px;
-       background-color: #fff;
-       margin:0 0 20px 20px;
-   }
-   .teamItem img{
-       width:240px;
-       height: 140px;
-       object-fit: cover;
-   }
-   .teamItem h4{
-       font-size: 15px;
-       font-weight: bold;
-       color:#333;
-       padding:5px 20px 0 20px;
-   }
-    .teamItem p{
-        font-size: 12px;
+        line-height: px2rem(42);
+        overflow: hidden;
         overflow: hidden ;
         display: -webkit-box ;
         -webkit-line-clamp: 4;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        color:#333;
-        padding:0 20px;
-        margin-bottom:10px;
-        height:88px;
-        line-height: 22px;
     }
-    .teamItem .arrow{
-       width:30px;
-       height: 32px;
-       background-color: #152b59;
-       border-radius: 30px 30px 0 0;
-       display: inline-block;
-       text-align: center;
+    .supText .tit:hover{
+        cursor:pointer;
+        text-decoration: underline;
     }
-    .teamItem .arrow img{
-       width:20px;
-       height: 20px;
-       padding-top:6px;
-    }
+    
 
 </style>

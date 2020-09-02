@@ -2,9 +2,9 @@
     <div class="bg">
         <head-top webActive="experiment" title="研究方向"></head-top>
         <div class="resBg">
-            <h3>{{list[0]}}</h3>
+            <h3>{{list.contentTitle}}</h3>
             <img src="../../images/whiteLine.png">
-            <div class="resTopItem" v-for="(item,index) in list.slice(1)" :key="index">
+            <div class="resTopItem" v-for="(item,index) in titleList" :key="index">
                 <img src="../../images/star.png">
                 <span>{{item}}</span>
             </div>
@@ -12,7 +12,7 @@
         
         <div class="ctBg">
             <div class="container">
-                <img src="../../images/resPic.png">
+               <div class="resText" v-html="list.contentHtml"></div>
             </div>
         </div>
     </div>
@@ -29,20 +29,16 @@
                 cn:0,
                 id:'',
                 organizationId:'',
+                titleList:[],
                 list:''
-                
             }
         },
         components:{
             headTop
         },
         mounted(){
-            // 获取首页产品
+            this.cn = getStore("inCN");
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -51,7 +47,8 @@
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
                 var res = await content(this.cn,this.id,this.organizationId);
-                this.list = res.data.list[0].plainText.split("###");
+                this.list = res.data.list[0];
+                this.titleList = res.data.list[0].contentSubtitle.split("###");
             }
 
         },
@@ -66,7 +63,7 @@
 <style lang="scss">
     @import '../../style/mixin';
     .resBg{
-        height:px2rem(400);
+        height:px2rem(300);
         margin-top:px2rem(180);
         background: url('../../images/sciBg.png') no-repeat;
         background-size:100% 100%;
@@ -103,5 +100,9 @@
     }
     .ctBg img{
         width:100%;
+    }
+    .resText{
+        font-size:14px;
+        line-height: px2rem(60);
     }
 </style>

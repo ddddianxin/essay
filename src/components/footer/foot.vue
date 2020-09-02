@@ -1,48 +1,9 @@
 <template>
     <div id='webfoot'>
         <div class="container foot">
-            <div class="footItem">
-                <h3 @click="jumpTo('/home')">首页</h3>
-                <router-link to="/news/scinews?id=13&organizationId=1">科研动态</router-link>
-                <router-link to="/science/project?id=25&organizationId=1">科研成果</router-link>
-                <router-link to="/news/exchange?id=14&organizationId=1">学术交流</router-link>
-                <router-link to="/team/higher?id=20&organizationId=1">科研队伍</router-link>
-                <router-link to="/recruit/index?id=11&organizationId=1">人才招聘</router-link>
-                <router-link to="/contactus/index?id=12&organizationId=1">联系我们</router-link>
-            </div>
-            <div class="footItem">
-                <h3>中心简介</h3>
-                <router-link to="/introduce/aboutus?id=3&organizationId=1">中心概况</router-link>
-                <router-link to="/introduce/research?id=5&organizationId=1">研究方向</router-link>
-            </div>
-            <div class="footItem">
-                <h3>新闻动态</h3>
-                <router-link to="/news/scinews?id=13&organizationId=1">科研动态</router-link>
-                <router-link to="/news/exchange?id=14&organizationId=1">学术交流</router-link>
-                <router-link to="/news/industry?id=18&organizationId=1">业内活动</router-link>
-                <router-link to="/news/activity?id=19&organizationId=1">中心活动</router-link>
-            </div>
-            <div class="footItem">
-                <h3>科研队伍</h3>
-                <router-link to="/team/higher?id=20&organizationId=1">高级职称</router-link>
-                <router-link to="/team/medium?id=21&organizationId=1">中级职称</router-link>
-                <router-link to="/team/primary?id=22&organizationId=1">初级职称</router-link>
-                <router-link to="/team/manage?id=23&organizationId=1">支撑管理</router-link>
-                <router-link to="/team/student?id=24&organizationId=1">学生</router-link>
-            </div>
-            <div class="footItem">
-                <h3>科研成果</h3>
-                <router-link to="/science/project?id=25&organizationId=1">科研项目</router-link>
-                <router-link to="/science/paper?id=26&organizationId=1">期刊论文</router-link>
-                <router-link to="/science/patent?id=27&organizationId=1">专利专著</router-link>
-                <router-link to="/science/technology?id=28&organizationId=1">成果转移转化</router-link>
-                <router-link to="/science/award?id=29&organizationId=1">成果奖励</router-link>
-            </div>
-            <div class="footItem">
-                <h3>实验平台</h3>
-                <router-link to="/platform/supporter?id=30&organizationId=1">支撑载体</router-link>
-                <router-link to="/platform/lab?id=31&organizationId=1">实验室</router-link>
-                <router-link to="/platform/equipment?id=32&organizationId=1">仪器设备</router-link>
+            <div class="footItem" v-for="(item,index) in menuData.slice(0, -2)" :key="index">
+                <h3 @click="toUrl(item.items?'/':item.menuUrl,item.id,item.organizationId)">{{item.menuName}}</h3>
+                <span v-for="(iitem,iindex) in item.items" :key="iindex" @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
             </div>
             <div class="contact">
                 <div class="erCode"><img></div>
@@ -60,24 +21,38 @@
 
 <script>
     import wxapi from '../../service/wxapi.js';
+    import {mapState, mapMutations, mapActions} from 'vuex'
+    import {setStore,getStore} from '../../config/mUtils'
+    import {menuList} from '../../service/api'
     export default {
         name: 'foot',
     	data(){
             return{
-
+                menuData:[]
             }
         },
+        mounted(){
+            this.cn = getStore("inCN");
+            this.getMenu();
+        },
+        computed: {
+           ...mapState([
+               'inCN'
+           ])
+        },
         methods:{
-            async initData(){
-                
+            async getMenu(){
+               var res = await menuList(this.cn,1);
+               this.menuData = res.data;
             },
-            jumpTo(url){
-                // this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
-                this.$router.push({path:url});
-            },
+            toUrl(url,id,organizationId){
+               if(url!='/'){
+                   this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
+               }
+            }
         },
         created(){
-            this.initData();
+            
         }
     }
 
@@ -105,10 +80,13 @@
         margin:0 0 15px 0;
         color:#fff;
     }
-    .footItem a{
+    .footItem span{
         font-size: 12px;
         display: block;
         color:#ddd;
+    }
+    .footItem span:hover{
+        cursor:pointer;
     }
     .contact{
         width:100px;

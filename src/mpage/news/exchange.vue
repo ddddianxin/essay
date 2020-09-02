@@ -1,27 +1,31 @@
 <template>
     <div class="bg">
-        <head-top webActive="news" title="学术交流"></head-top>
-        <div class="newsBg">
-            <div class="container">
-                <div class="sciEMenu">
-                    <div class="sciEMList">
-                        <span class="active">分类一</span>
-                        <span>分类二</span>
-                        <span>分类三</span>
-                        <span>分类四</span>
-                    </div>
-                </div>
-                <div class="teamBox">
-                    <div class="newsList">
-                        <div class="newsItem" v-for="(item,index) in newsData" :key="index">               
-                            <div class="newsInfo">
-                                <h2>{{item.title}}</h2>
-                                <p>{{item.des}}</p>
+        <head-top webActive="news" title="新闻动态"></head-top>
+        <div class="sciNewsBg">
+            <side-menu webTitle="新闻动态" webActive="学术交流"></side-menu>
+            <div class="sciNewsList">
+                <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
+                    :data="listData"
+                    :listenScroll="true"
+                    :pulldown="true"
+                    @pulldown="getData"
+                    @scrollToEnd="getmoredata"
+                    :pullup="true">
+                    <div class="sciList">
+                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">
+                            <div class="sciNewsPic">
+                                <img :src="item.mainPic">
+                            </div>              
+                            <div class="sciNewsInfo">
+                                <div class="title">{{item.contentTitle}}</div>
+                                <div class="subTitle">{{item.plainText}}</div>
+                                <div class='sciNewsDate'>{{item.publishTime}}</div>
                             </div>
-                            <div class='newsDate'>{{item.date}}</div>
                         </div>
+                        <view class="loading">{{loadingText}}</view>
                     </div>
-                </div>
+                    <div class="loading-wrapper"></div>
+                </scroll>
             </div>
         </div>
     </div>
@@ -29,50 +33,103 @@
 
 <script>
     import headTop from '../../components/mobile/headTop';
+    import sideMenu from '../../components/mobile/sideMenu'
+    import {contentPage} from '../../service/api'
+    import {getStore} from '../../config/mUtils'
+    import Scroll from '../../components/common/scroll'
+    //var page=1
     export default {
         name: 'news',
         data(){
             return{
-                newsData:[
-                    {
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    },{
-                        title:'一个研究相关标题',
-                        des:'50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。50多年来，我们再分子生命科学的发展以及分子和细胞生物学，遗传学，基因组学和计算生物学的革命中发挥了核心作用。',
-                        date:'2020/02/05',
-                        url:''
-                    }
-
-                ]
+                cn:0,
+                id:'',
+                totalPage:1,
+                totalRow:1,
+                organizationId:'',
+                scrollY: 0,
+                page:1,
+                rows:10,
+                noData: false,//false为无数据，true为有数据
+                loadingText:'加载中...',
+                scrollH:300,
+                listData:[]
                 
             }
         },
         components:{
-            headTop
+            headTop,sideMenu,Scroll
+        },
+        created(){
+            
+        },
+        beforeMount(height) {
+            var h = document.documentElement.clientHeight || document.body.clientHeight;
+            this.scrollH = h-90-30-102;//头部、菜单栏、尾部
         },
         mounted(){
-            // 获取首页产品
+            this.cn = getStore("inCN");
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
         methods:{
-            async initData(){
-                
-            }
+            initData(){
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                this.page = 1;
+                this.getData();
+            },
+            toUrl(url){
+                this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
+            },
+            toNewsDetail(id){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            async getData(){
+                var resApi = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                var res = resApi.data.list;
 
+                if (res.length != 0 && res.length == this.rows) {
+					this.noData = false;
+					this.page++;
+					this.listData = res;
+					this.loadingText = '上拉加载更多';
+				} else {
+					this.page++;
+					this.listData = res;
+					this.noData = true;
+					this.loadingText = '';
+                }
+            },
+            async getmoredata(){
+				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
+				    return false;
+                }
+                this.loadingText = '加载中...';
+                var resApi = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                var res = resApi.data.list;
+				this.loadingText = '';
+				if(res.length == 0){
+				  this.loadingText = '已加载全部';
+				  return false;
+				}
+				this.page++;
+				this.listData  = this.listData.concat(res);
+				this.loadingText = '上拉加载更多';
+			}
         },
         created(){
 
@@ -84,86 +141,111 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .newsBg{
-        margin-top:px2rem(180);
-        background-color:#fff;
-    }
-    .bgTop{
-        height:205px;
-        width: 100%;
-        object-fit: cover;
-    }
-    .teamBox{
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-    }
-    .sciEMenu{
-        background-color:rgb(180,0,125);
-        height:px2rem(60);
-        line-height:px2rem(60);
-    }
-    .sciEMList{
-        margin:0 px2rem(40);
+    .sciSearch{
         display:flex;
         flex-wrap: nowrap;
-        
-    }
-    .sciEMList span{
-        width:px2rem(110);
-        text-align: center;
-        color:#fff;
-    }
-    .sciEMList span.active{
-        background-color:#fff;
-        color:#152b59;
-        height:px2rem(60);
-        line-height:px2rem(60);
-    }
-    
-    .newsList{
-        width:100%;
+        justify-content: space-between;
         padding:0 px2rem(40);
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
+        background-color: #152b59;
     }
-    .newsItem{
+    .sciSearch h2{
+        color:#fff;
+        height: px2rem(80);
+        line-height: px2rem(80);
+        font-weight: bold;
+        font-size:px2rem(32);
+    }
+    .sSearch{
+        width:px2rem(440);
         display: flex;
         flex-wrap: nowrap;
-        justify-content: space-between;
-        border-bottom:1px dashed #ddd;
-        padding:15px 0;
-        
+        justify-content: flex-end;
+        display: inline-block;
     }
-    .newsInfo{
-        width:100%;
-    }
-    .newsInfo h2{
-        font-size:16px;
-        font-weight: bold;
-        color:#333;
-        margin-bottom:5px;
-        line-height: 20px;;
-    }
-    .newsInfo h2:hover{
-        cursor:pointer;
-        color:#152b59;
-    }
-    .newsInfo p{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        font-size:12px;
-        color:#666;
-    }
-    .newsDate{
-        line-height: 50px;
-        width:90px;
-        text-align: right;
-    }
+.sSearBox{
+    width:px2rem(440);
+    height: px2rem(40);
+    background-color: #fff;
+    border:1px solid #707070;
+    border-radius: 30px;
+    float:right;
+    margin-top:px2rem(20);
+    overflow: hidden;
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+
+.sSearBox i{
+    font-size:px2rem(34);
+    padding:px2rem(4) 0 0 px2rem(10);
+    width:px2rem(40);
+}
+.sSearBox input{
+    background-color: #fff;
+    font-size: px2rem(24);
+    z-index:100;
+    width:px2rem(400);
+    text-align: right;
+    padding:0 px2rem(20);
+}
+.sciNewsBg{
+    margin-top:px2rem(180);
+}
+.sciNewsList{
+    display: block;
+    padding:0 px2rem(40);
+    background-color: #f7f7f7;
+    overflow: hidden;
+}
+.sciNewsItem{
+    border-bottom:1px dashed #ddd;
+    padding:px2rem(20) 0;
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.sciNewsPic{
+    width:px2rem(100);
+    height:px2rem(100);
+}
+.sciNewsPic img{
+    width:px2rem(100);
+    height:px2rem(100);
+    object-fit: cover;
+}
+.sciNewsInfo{
+    width:px2rem(570);
+    padding-left:px2rem(20);
+}
+.sciNewsInfo .title{
+    color:#152b59;
+    overflow: hidden ;
+    display: -webkit-box ;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical ;
+    word-break: break-all ;
+    font-size:px2rem(26);
+    line-height: px2rem(40);
+    font-weight: bold;
+}
+.sciNewsInfo .subTitle{
+    overflow: hidden ;
+    display: -webkit-box ;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical ;
+    word-break: break-all ;
+    font-size:px2rem(24);
+    color:#152b59;
+    line-height: px2rem(30);
+}
+.sciNewsDate{
+    font-size:px2rem(24);
+    line-height: px2rem(30);
+    width:100%;
+    text-align: right;
+    color:#152b59;
+}
     
 
 </style>

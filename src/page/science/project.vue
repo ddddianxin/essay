@@ -18,7 +18,7 @@
                                 <div class="pjIndex">{{iindex+1}}</div>
                                 <div class="pjTypeTit">{{iitem.contentSubtitle}}</div>
                                 <div class="pjTypeName">{{iitem.typeName}}</div>
-                                <div class="pjName" @click="toSciDetail(iitem.id)">{{iitem.contentTitle}}</div>
+                                <div class="pjName">{{iitem.contentTitle}}</div>
                                 <div class="pjRespon">{{iitem.author}}</div>
                             </div>
                         </div>
@@ -64,12 +64,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -127,11 +122,7 @@
                 }
                 console.log(newList);
                 this.sortList = newList;
-            },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
-            },
-
+            }
         },
         created(){
 

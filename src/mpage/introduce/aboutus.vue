@@ -1,23 +1,25 @@
 <template>
     <div class="bg">
         <head-top webActive="experiment" title="中心概况"></head-top>
-        <img class="bgTop" src="../../images/mCtIntro.png">
+        <img class="mbgTop" src="../../images/mCtIntro.png">
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">
                     <div v-for="(item,index) in list" :key="index">
                         <h3>{{item.contentTitle}}</h3>
                         <div class="tc pl15 pr15"><img class="w" src="../../images/ctTitLine.png"></div>
-                        <div class="ctText" v-html="item.contentHtml">
+                        <div class="ctText" v-html="item.contentHtml"></div>
+                        <div class="picShow">
+                            <img :src="item.mainPic">
                         </div>
                     </div>
-                    <div class="ctVideo">
+                    <!-- <div class="ctVideo">
                         <video-player  class="video-player vjs-custom-skin"
                             ref="videoPlayer" 
                             :playsinline="true" 
                             :options="playerOptions"
                         ></video-player>
-                    </div>
+                    </div> -->
                 </div>
             </div>
         </div>
@@ -27,6 +29,7 @@
 <script>
     import headTop from '../../components/mobile/headTop';
     import { videoPlayer } from 'vue-video-player'
+    import {getStore} from '../../config/mUtils'
     import {content} from '../../service/api'
     export default {
         name: 'news',
@@ -66,12 +69,8 @@
             headTop,videoPlayer
         },
         mounted(){
-            // 获取首页产品
+            this.cn = getStore("inCN");
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -100,7 +99,7 @@
     .ctBg{
         padding-bottom:35px;
     }
-    .bgTop{
+    .mbgTop{
         height:px2rem(400);
         width: px2rem(750);
         object-fit: cover;
@@ -130,7 +129,6 @@
         line-height: px2rem(60);
         margin:px2rem(30) 0 px2rem(40) 0;
         padding:0 px2rem(40);
-        height:auto;
     }
     .ctVideo{
         border-radius: px2rem(40);
@@ -142,6 +140,14 @@
         height: 100%;
         display: block;
     }
-        
+    .picShow{
+        padding:px2rem(30);
+        display:block;
+    }   
+    .picShow img{
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+    }    
 
 </style>

@@ -175,14 +175,14 @@
             async initData(){
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
-                console.log(this.bannerInfo);
                 var res2 = await indexContent(this.cn,1,this.isPc);
                 console.log(res2.data);
-                this.sciNewsData = res2.data.science.slice(0,this.newsShowNum);
+                this.sciNewsData = res2.data.science;
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
                 this.teamData = res2.data.higher.concat(res2.data.medium).concat(res2.data.primary);
                 this.achieve = res2.data.achievement;
+                 console.log(this.achieve);
                 
                 setTimeout(function(){
                     new Swiper ('.teamContainer', {

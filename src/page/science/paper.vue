@@ -1,15 +1,15 @@
 <template>
     <div class="bg">
         <head-top webActive="科研成果" webChildActive="期刊论文"></head-top>
-        <div class="teamBg">
+        <div class="paperBg">
             <div class="container">
                 <div class="lsideBox">
                     <side-menu webTitle="科研成果" webActive="期刊论文"></side-menu>
-                    <div class="sciList">
-                        <div class="sciBox" v-for="(item,index) in yearList" :key="index">
+                    <div class="paperList">
+                        <div class="paperBox" v-for="(item,index) in yearList" :key="index">
                             <h2 class="yearTit f16 fb">{{item}}年</h2>
-                            <div class="sciItem" v-for="(iitem,iindex) in listData" :key="iindex" @click="toSciDetail(iitem.id)">
-                                <div class="ppName" v-if="iitem.year==item">{{iitem.contentTitle}}</div>
+                            <div class="paperItem" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                                <div class="ppName">{{iindex+1}}. {{iitem.contentTitle}}</div>
                             </div>
                         </div>
                         <div class="tc" style="margin:0 auto;">
@@ -44,38 +44,9 @@
                 totalPage:1,
                 totalRow:1,
                 listData:[],
-                text:[
-                    {
-                        contentTitle:'dfsfsdff',
-                        year:2020
-                    },
-                    {
-                        contentTitle:'dsfsdff',
-                        year:2020
-                    },
-                    {
-                        contentTitle:'dfsfdff',
-                        year:2020
-                    },
-                    {
-                        contentTitle:'多个地方郭德纲电饭锅',
-                        year:2019
-                    },
-                    {
-                        contentTitle:'郭德纲电饭锅',
-                        year:2019
-                    },
-                    {
-                        contentTitle:'是非得失方顺丰电饭锅',
-                        year:2018
-                    },
-                    {
-                        contentTitle:'是发的发的是发风格饭锅',
-                        year:2018
-                    }
-                ],
-                yearList:[]
-                
+                text:[],
+                yearList:[],
+                sortList:[]
             }
         },
         components:{
@@ -83,12 +54,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -138,7 +104,18 @@
                 })
 
                 this.yearList = hash;
-               
+                var newList=[];
+                for(var i = 0 ; i < hash.length ;i++){
+                    var valList=[];
+                    for(var j = 0 ; j< this.listData.length ; j++){
+                        if(hash[i]==this.listData[j].year){
+                            valList.push(this.listData[j]);
+                        }
+                    }
+                    newList.push(valList);
+                }
+                console.log(newList);
+                this.sortList = newList;
                 
             },
             
@@ -155,29 +132,29 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .teamBg{
+    .paperBg{
         background-color: #f7f7f7;
         padding:36px 0;
     }
-    .sciList{
+    .paperList{
         width:780px;
         padding-left:75px;
         min-height: 850px;
         display: block;
         color:#152b59;
     }
-    .sciList .yearTit{
+    .paperList .yearTit{
         font-weight: bold;
         color:#152b59;
     }
-    .sciBox{
+    .paperBox{
         margin-bottom:50px;
     }
-    .sciItem{
+    .paperItem{
         width:100%;
         margin-bottom:5px;
     }
-    .sciNav .ppName{
+    .paperNav .ppName{
         font-size:18px;
         text-align:center;
         color:#152b59;

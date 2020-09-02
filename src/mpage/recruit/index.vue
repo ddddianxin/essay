@@ -1,23 +1,31 @@
 <template>
     <div class="bg">
-        <head-top webActive="experiment" title="中心概况"></head-top>
-        <img class="bgTop" src="../../images/mCtIntro.png">
-        <div class="ctBg">
-            <div class="container">
-                <div class="ctBox">
-                    <h3>仿生触觉与智能传感研究中心</h3>
-                    <h4>中心概况</h4>
-                    <div class="ctText">
-                        代课老师复健科多杜鹃花科拉多加湖可怜的就是看了好久疯狂的解放军队上看见好看的就是看少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了代课老师复健科多少积分叫苏打绿发来多少叫罚款了多少解放东路收缴罚款劳动竞赛来飞机都试了
+        <head-top webActive="recruit" title="人才招聘"></head-top>
+        <div class="webRecBg">
+            <img class="bgTop" src="../../images/mCtIntro.png">
+            <div class="webRecList">
+                <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
+                    :data="listData"
+                    :listenScroll="true"
+                    :pulldown="true"
+                    @pulldown="getData"
+                    @scrollToEnd="getmoredata"
+                    :pullup="true">
+                    <div>
+                        <div class="mrecList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">
+                            <div class="mrecInfo">
+                                <div class="mrecName">{{item.contentTitle}}</div>
+                                <div>
+                                    <span class="mrecSalary">{{item.contentSubtitle}}</span>
+                                    <span class="mrecExp">{{item.remark}}</span>
+                                </div>
+                                <p>岗位简介：</p>
+                                <div class="mrecText">{{item.plainText}}</div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="ctVideo">
-                        <video-player  class="video-player vjs-custom-skin"
-                            ref="videoPlayer" 
-                            :playsinline="true" 
-                            :options="playerOptions"
-                        ></video-player>
-                    </div>
-                </div>
+                    <div class="loading-wrapper"></div>
+                </scroll>
             </div>
         </div>
     </div>
@@ -25,114 +33,155 @@
 
 <script>
     import headTop from '../../components/mobile/headTop';
-    import { videoPlayer } from 'vue-video-player'
+    import {contentPage} from '../../service/api'
+    import {getStore} from '../../config/mUtils'
+    import Scroll from '../../components/common/scroll'
+    //var page=1
     export default {
-        name: 'news',
+        name: 'team',
         data(){
             return{
-                playerOptions : {
-                    playbackRates: [0.7, 1.0, 1.5, 2.0], //播放速度
-                    autoplay: false, //如果true,浏览器准备好时开始回放。
-                    muted: false, // 默认情况下将会消除任何音频。
-                    loop: false, // 导致视频一结束就重新开始。
-                    preload: 'auto', // 建议浏览器在<video>加载元素后是否应该开始下载视频数据。auto浏览器选择最佳行为,立即开始加载视频（如果浏览器支持）
-                    language: 'zh-CN',
-                    aspectRatio: '16:9', // 将播放器置于流畅模式，并在计算播放器的动态大小时使用该值。值应该代表一个比例 - 用冒号分隔的两个数字（例如"16:9"或"4:3"）
-                    fluid: true, // 当true时，Video.js player将拥有流体大小。换句话说，它将按比例缩放以适应其容器。
-                    sources: [{
-                        type: "",//这里的种类支持很多种：基本视频格式、直播、流媒体等，具体可以参看git网址项目
-                        src: "http://t.cn/A6yivmCw" //url地址
-                    }],
-                    poster: require('../../images/banner2.png'), //你的封面地址
-                    // width: document.documentElement.clientWidth, //播放器宽度
-                    notSupportedMessage: '此视频暂无法播放，请稍后再试', //允许覆盖Video.js无法播放媒体源时显示的默认信息。
-                    controlBar: {
-                        timeDivider: true,
-                        durationDisplay: true,
-                        remainingTimeDisplay: false,
-                        fullscreenToggle: true  //全屏按钮
-                    }
-                }
+                cn:0,
+                id:'',
+                totalPage:1,
+                totalRow:1,
+                organizationId:'',
+                scrollY: 0,
+                page:1,
+                rows:10,
+                noData: false,//false为无数据，true为有数据
+                loadingText:'加载中...',
+                scrollH:300,
+                listData:[]
                 
             }
         },
         components:{
-            headTop,videoPlayer
+            headTop,Scroll
+        },
+        created(){
+            
+        },
+        beforeMount(height) {
+            var h = document.documentElement.clientHeight || document.body.clientHeight;
+            this.scrollH = h-90-120-102;//头部、菜单栏、尾部
         },
         mounted(){
-            // 获取首页产品
+            this.cn = getStore("inCN");
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
         methods:{
-            async initData(){
-                
-            }
+            initData(){
+                this.id = this.$route.query.id;
+                this.organizationId = this.$route.query.organizationId;
+                this.page = 1;
+                this.getData();
+            },
+            toDetail(id){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:this.organizationId}});
+            },
+            async getData(){
+                var resApi = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                var res = resApi.data.list;
 
+                if (res.length != 0 && res.length == this.rows) {
+					this.noData = false;
+					this.page++;
+					this.listData = res;
+					this.loadingText = '上拉加载更多';
+				} else {
+					this.page++;
+					this.listData = res;
+					this.noData = true;
+					this.loadingText = '';
+                }
+            },
+            async getmoredata(){
+				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
+				    return false;
+                }
+                this.loadingText = '加载中...';
+                var resApi = await contentPage(
+                    this.cn,
+                    this.page,
+                    this.rows,
+                    this.organizationId,
+                    this.id
+                );
+                var res = resApi.data.list;
+				this.loadingText = '';
+				if(res.length == 0){
+				  this.loadingText = '已加载全部';
+				  return false;
+				}
+				this.page++;
+				this.listData  = this.listData.concat(res);
+				this.loadingText = '上拉加载更多';
+			}
         },
         created(){
 
 
-        }, 
+        },
     }
 
 </script>
 
 <style lang="scss">
     @import '../../style/mixin';
-    .bg{
-        background-color:#fff;
+    .webRecBg{
+        padding-top:px2rem(180);
     }
-    .ctBg{
-        padding-bottom:35px;
+    .webRecList{
+        display: block;
+        background-color: #f7f7f7;
+        overflow: hidden;
     }
     .bgTop{
-        height:px2rem(400);
+        height:px2rem(240);
         width: px2rem(750);
         object-fit: cover;
-        margin-top:px2rem(180);
         text-align: center;
-    }
-    .ctBox{
-        width:100%;
-    }
-    .ctBox h3{
-       margin:px2rem(40) 0;
-       color:#152b59;
-       font-size: px2rem(46);
-       font-weight: normal;
-       text-align: center;
-    }
-    .ctBox h4{
-        text-align:center;
-        font-size:px2rem(40);
-        color:#152b59;
-        font-weight:bold;
-        
-    }
-    .ctText{
-        color:#666;
-        font-size:px2rem(32);
-        line-height: px2rem(60);
-        margin:px2rem(30) 0 px2rem(40) 0;
-        padding:0 px2rem(40);
-        height:auto;
-    }
-    .ctVideo{
-        border-radius: px2rem(40);
-        overflow: hidden;
-        margin:0 px2rem(40);
-    }
-    .video-js .vjs-icon-placeholder {
-        width: 100%;
-        height: 100%;
         display: block;
     }
-        
+    .mrecList{
+        margin:0 px2rem(30);
+        padding:px2rem(30) 0;
+        border-bottom:px2rem(4) dashed #d8d8d8;
+    }
+    
+    .mrecInfo{
+        width:100%;
+        font-size:px2rem(28);
+        color:#152b59;
+    }
+    .mrecName{
+        color:#152b59;
+        font-size:px2rem(32);
+        font-weight: bold;
+        margin:px2rem(10) 0;
+    }
+    .mrecSalary{
+        color:#b12b6e;
+        font-size:px2rem(32);
+        margin-right:px2rem(30);
+    }
+    .mrecText{
+        overflow: hidden ;
+        display: -webkit-box ;
+        -webkit-line-clamp: 4 ;
+        -webkit-box-orient: vertical ;
+        word-break: break-all ;
+        max-height: 125px;
+        color:#152b59;
+    }
 
 </style>

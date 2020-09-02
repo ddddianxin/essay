@@ -2,9 +2,9 @@
     <div class="bg">
         <head-top webActive="中心介绍" webChildActive="研究方向"></head-top>
         <div class="resBg">
-            <h3>{{list[0]}}</h3>
+            <h3>{{list.contentTitle}}</h3>
             <img src="../../images/whiteLine.png">
-            <div class="resTopItem" v-for="(item,index) in list.slice(1)" :key="index">
+            <div class="resTopItem" v-for="(item,index) in titleList" :key="index">
                 <img src="../../images/star.png">
                 <span>{{item}}</span>
             </div>
@@ -12,7 +12,7 @@
         
         <div class="ctBg">
             <div class="container">
-                <img class="mt30" :src="pic">
+                <div class="resText" v-html="list.contentHtml"></div>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
                 id:'',
                 organizationId:'',
                 list:'',
-                pic:''
+                titleList:[]
             }
         },
         components:{
@@ -38,12 +38,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },
@@ -52,8 +47,9 @@
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
                 var res = await content(this.cn,this.id,this.organizationId);
-                this.list = res.data.list[0].plainText.split("###");
-                this.pic = res.data.list[0].mainPic;
+                this.list = res.data.list[0];
+                this.titleList = res.data.list[0].contentSubtitle.split("###");
+                console.log(this.titleList);
                 console.log(res);
             }
 
@@ -105,6 +101,11 @@
         height:528px;
         width: 100%;
         object-fit: cover;
+    }
+    .resText{
+        font-size:16px;
+        line-height: 30px;
+        padding:30px 0;
     }
     
 

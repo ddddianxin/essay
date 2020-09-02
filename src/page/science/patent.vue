@@ -129,10 +129,7 @@
                 }
                 console.log(newList);
                 this.sortList = newList;
-            },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
-            },
+            }
 
         },
         created(){

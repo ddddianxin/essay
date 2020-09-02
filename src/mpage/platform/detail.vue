@@ -1,6 +1,6 @@
 <template>
     <div class="bg">
-        <head-top webActive="achievement" title="科研成果"></head-top>
+        <head-top webActive="experiment" title="实验平台"></head-top>
         <div class="mDetail">
             <h2 class="mDetailTit">{{val.contentTitle}}</h2>
             <div class="mDetailSource">
@@ -18,7 +18,7 @@
     import {getStore} from '../../config/mUtils'
     //var page=1
     export default {
-        name: 'achievement',
+        name: 'experiment',
         data(){
             return{
                 cn:0,

@@ -19,36 +19,6 @@
                                 <img :src="iitem.mainPic">
                             </div>
                         </div>
-                        
-                        <!-- <div class="supTit">
-                            <span>创新团队</span>
-                        </div>
-                        <div class="supInfo">
-                            <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
-                            <img src="../../images/labAward.jpg">
-                        </div>
-                        <div class="supTit">
-                            <span>创新载体</span>
-                        </div>
-                        <div class="supInfo">
-                            <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
-                            <img src="../../images/labAward.jpg">
-                        </div>
-                        <div class="supInfo">
-                            <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
-                            <img src="../../images/labAward.jpg">
-                        </div>
-                        <div class="supTit">
-                            <span>联合实验室</span>
-                        </div>
-                        <div class="supInfo">
-                            <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
-                            <img src="../../images/labAward.jpg">
-                        </div>
-                        <div class="supInfo">
-                            <div class="supText">实验室建设的内容包括：科研团队培养、实验室关联的场地建设、核心技术研发用的设备购置、核心技术研发、关键工艺的完善、科研装置和装备的研制和产业化推广等。</div>
-                            <img src="../../images/labAward.jpg">
-                        </div> -->
                     </div>
                 </div>
                 

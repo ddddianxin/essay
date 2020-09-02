@@ -56,6 +56,8 @@ const mContactus = r => require.ensure([], () => r(require('../mpage/contactus/i
 const mTeamDetail = r => require.ensure([], () => r(require('../mpage/team/detail')), 'mTeamDetail');
 const mNewsDetail = r => require.ensure([], () => r(require('../mpage/news/detail')), 'mNewsDetail');
 const mSciDetail = r => require.ensure([], () => r(require('../mpage/science/detail')), 'mSciDetail');
+const mPlatformDetail = r => require.ensure([], () => r(require('../mpage/platform/detail')), 'mPlatformDetail');
+const mRecruitDetail = r => require.ensure([], () => r(require('../mpage/recruit/detail')), 'mRecruitDetail');
 
 var pc = [{
     path: '/',
@@ -339,6 +341,16 @@ var wap = [{
             path: '/science/detail',
             name: 'mSciDetail',
             component: mSciDetail
+        },
+        {
+            path: '/platform/detail',
+            name: 'mPlatformDetail',
+            component: mPlatformDetail
+        },
+        {
+            path: '/recruit/detail',
+            name: 'mRecruitDetail',
+            component: mRecruitDetail
         },
     ]
 }];

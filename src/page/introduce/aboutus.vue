@@ -68,12 +68,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
         },

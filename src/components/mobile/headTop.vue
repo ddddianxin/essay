@@ -14,7 +14,7 @@
                     <span @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                 </div>
             </div>
-            <div class="mLogo">
+            <div class="mLogo" @click="toHome()">
                 <img src="../../images/logo.png">
             </div>
         </div>
@@ -31,7 +31,7 @@
                 <div class="sideItem" v-for="(item,index) in menuData" :key="index">
                     <div class="sideBtn" @click="toUrl(item.menuUrl,item.id,item.organizationId)">
                         <span>{{item.menuName}}</span>
-                        <img v-if="item.items" src="../../images/lfArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
+                        <img v-if="item.items" src="../../images/whiteArrow.png" :style="ctShow?'transform:rotate(90deg);':'transform:rotate(270deg);'">
                     </div>
                     <div class="sidechild" v-show="ctShow" @click="menuShow=!menuShow">
                         <p v-for="(iitem,iindex) in item.items" :key="iindex">
@@ -103,6 +103,9 @@
                }else{
                    this.ctShow = !this.ctShow
                }
+           },
+           toHome(){
+               this.$router.push('/home')
            }
         }
     }
@@ -126,7 +129,7 @@
     height:px2rem(90);
     padding-left:px2rem(40);
     display:block;
-    background-color:rgba(21,43,89,.85);
+    background-color:rgba(21,43,89,.90);
 }
 .sideMenuIcon img{
     width:px2rem(40);
@@ -135,7 +138,7 @@
     float:left;
 }
 .sideMList{
-    background-color:rgba(21,43,89,.85);
+    background-color:rgba(21,43,89,.90);
     height:100%;
     overflow: auto;
 }
@@ -269,7 +272,7 @@
 }
 .mLfBtn span{
     font-size: px2rem(32);
-    color:#555;
+    color:#152b59;
     font-weight:bold;
     line-height: px2rem(90);
     padding-left:px2rem(14);
@@ -296,6 +299,7 @@
     font-size:px2rem(24);
     float:right;
     line-height: px2rem(90);
+    color:#152b59;
 }
 .mSearBox{
     overflow: hidden;
@@ -313,13 +317,14 @@
     font-size: px2rem(24);
     z-index:100;
     width:px2rem(88);
+    color:#152b59;
 }
 .mLogo{
     height:px2rem(90);
     background-color: #fff;
 }
 .mLogo img{
-    height:px2rem(80);
+    height:px2rem(88);
     width:auto;
 }
 

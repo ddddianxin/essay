@@ -35,9 +35,7 @@
                         <div v-html="this.valArr[7]"></div>
                         <div v-html="this.valArr[8]"></div>
                     </div>
-                    <!-- <div v-for="(item,index) in this.valArr" :key="index" v-html="item"></div> -->
                 </div>
-                
             </div>
         </div>
     </div>
@@ -59,8 +57,6 @@
                 val:'',
                 valArr:'',
                 plainArr:'',
-                
-
             }
         },
         components:{
@@ -68,7 +64,6 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
         },
         computed:{

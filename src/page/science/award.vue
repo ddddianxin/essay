@@ -1,13 +1,13 @@
 <template>
     <div class="bg">
         <head-top webActive="科研成果" webChildActive="成果奖励"></head-top>
-        <div class="teamBg">
+        <div class="awardBg">
             <div class="container">
                 <div class="lsideBox">
                     <side-menu webTitle="科研成果" webActive="成果奖励"></side-menu>
                     <div>
-                        <div  class="teamList">
-                            <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">    
+                        <div  class="awardList">
+                            <div class="awardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">    
                                 <img :src="item.mainPic">              
                                 <h4 class="">{{item.contentTitle}}</h4>
                                 <div class="tc">
@@ -38,7 +38,7 @@
     import {getStore} from '../../config/mUtils'
 
     export default {
-        name: 'team',
+        name: 'award',
         data(){
             return{
                 cn:0,
@@ -101,45 +101,45 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .teamBg{
+    .awardBg{
         background-color: #f7f7f7;
         padding:36px 0;
     }
-    .teamBox{
+    .awardBox{
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
-    .teamMenu{
+    .awardMenu{
         width:240px;
         height:850px;
         background-image: linear-gradient( #162a59, #530760);
     }
-   .teamMenu h3{
+   .awardMenu h3{
        margin:30px 0 0 20px;
        color:#fff;
        font-weight: bold;
        font-size: 25px;
 
    }
-   .teamMenu .h3BLine{
+   .awardMenu .h3BLine{
        width:70px;
        height: 3px;
        display: inline-block;
        background-color: #fff;
        margin-left: 20px;
    }
-   .teamMItem{
+   .awardMItem{
        height: 84px;
        line-height: 84px;
    }
-   .teamMItem.active{
+   .awardMItem.active{
        background-color:#fff;
    }
-    .teamMItem.active span{
+    .awardMItem.active span{
         color:#152b59;
     }
-    .teamMItem span{
+    .awardMItem span{
         display: block;
         color:#fff;
         font-size:16px;
@@ -147,30 +147,30 @@
         margin:0 20px;
         border-bottom:2px solid #5b4b7e;
     }
-    .teamMItem span:hover{
+    .awardMItem span:hover{
         cursor:pointer;
     }
-    .teamList{
+    .awardList{
         width:780px;
         display: flex;
         flex-wrap: wrap;
         align-content: flex-start;
     }
-    .teamItem{
+    .awardItem{
       width:240px;
        height: 410px;
        background-color: #fff;
        margin:0 0 20px 20px;
    }
-   .teamItem:hover{
+   .awardItem:hover{
        cursor: pointer;
    }
-   .teamItem img{
+   .awardItem img{
        width:240px;
        height: 316px;
        object-fit: cover;
    }
-   .teamItem h4{
+   .awardItem h4{
        font-size: 15px;
        font-weight: bold;
        color:#152b59;
@@ -182,7 +182,7 @@
         word-break: break-all ;
    }
     
-    .teamItem .arrow{
+    .awardItem .arrow{
        width:30px;
        height: 32px;
        background-color: #152b59;
@@ -190,7 +190,7 @@
        display: inline-block;
        text-align: center;
     }
-    .teamItem .arrow img{
+    .awardItem .arrow img{
        width:20px;
        height: 20px;
        padding-top:6px;

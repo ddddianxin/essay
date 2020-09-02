@@ -118,7 +118,7 @@
 }
 .searchTit{
     line-height: 30px;
-    color:#666;
+    color:#152b59;
     font-weight: bold;
     font-size: 16px;
     padding-right: 20px;
