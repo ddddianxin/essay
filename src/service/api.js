@@ -26,10 +26,11 @@ export const menuList = (chineseOrEnglish, organizationId) => post(baseUrl + '/c
 
 
 //banner
-export const banner = (organizationId, chineseOrEnglish, isPc) => post(baseUrl + '/cms/banner/queryBannerList', {
+export const banner = (organizationId, chineseOrEnglish, isPc, bannerType) => post(baseUrl + '/cms/banner/queryBannerList', {
     organizationId,
     chineseOrEnglish,
-    isPc
+    isPc,
+    bannerType
 });
 
 //查询某菜单下的所有内容（不分页）
@@ -73,4 +74,11 @@ export const indexContent = (chineseOrEnglish, organizationId, isPc) => post(bas
 export const dictionary = (type_key, psn) => post(baseUrl + '/api/common/getDictionaryByPkey', {
     type_key,
     psn
+});
+
+//全局搜索keyWords必填,pageNumber页码（非必填）,pageSize同rows（非必填）
+export const globalSearchContent = (keyWords, pageNumber, pageSize) => post(baseUrl + '/cms/content/globalSearchContent', {
+    keyWords,
+    pageNumber,
+    pageSize
 });

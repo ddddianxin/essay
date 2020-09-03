@@ -3,6 +3,8 @@ import mApp from '../mApp' //移动端
 import { setStore, getStore } from '../config/mUtils'
 //PC端
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home');
+const search = r => require.ensure([], () => r(require('../page/home/search')), 'search');
+const bannerDetail = r => require.ensure([], () => r(require('../page/home/bannerdetail')), 'bannerDetail');
 const aboutus = r => require.ensure([], () => r(require('../page/introduce/aboutus')), 'aboutus');
 const research = r => require.ensure([], () => r(require('../page/introduce/research')), 'research');
 const scinews = r => require.ensure([], () => r(require('../page/news/scinews')), 'scinews');
@@ -32,6 +34,7 @@ const recruitDetail = r => require.ensure([], () => r(require('../page/recruit/d
 
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
+const mBannerDetail = r => require.ensure([], () => r(require('../mpage/home/bannerdetail')), 'mBannerDetail');
 const mAboutus = r => require.ensure([], () => r(require('../mpage/introduce/aboutus')), 'mAboutus');
 const mResearch = r => require.ensure([], () => r(require('../mpage/introduce/research')), 'mResearch');
 const mScinews = r => require.ensure([], () => r(require('../mpage/news/scinews')), 'mScinews');
@@ -73,6 +76,16 @@ var pc = [{
             path: '/home',
             name: 'home',
             component: home
+        },
+        {
+            path: '/home/search',
+            name: 'search',
+            component: search
+        },
+        {
+            path: '/home/bannerdetail',
+            name: 'bannerDetail',
+            component: bannerDetail
         },
         {
             path: '/introduce/aboutus',
@@ -221,6 +234,11 @@ var wap = [{
             path: '/home',
             name: 'mHome',
             component: mHome
+        },
+        {
+            path: '/home/bannerdetail',
+            name: 'mBannerDetail',
+            component: mBannerDetail
         },
         {
             path: '/introduce/aboutus',

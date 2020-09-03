@@ -5,12 +5,14 @@
             <div class="banner">
                  <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
                     <el-carousel-item v-for="(item,index) in bannerInfo" :key="index" >
-                        <div class="coverBg" @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
-                            <div class="bannerText">
-                                <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
+                        <div @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink,item.organizationId)">
+                            <div class="coverBg">
+                                <div class="bannerText">
+                                    <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
+                                </div>
                             </div>
+                            <img :src="item.imgurl">
                         </div>
-                        <img :src="item.imgurl">
                     </el-carousel-item>
                 </el-carousel>
             </div>
@@ -30,9 +32,13 @@
                         <div class="sciRg">
                             <h3>科研成果</h3>
                             <span class="h3BLine"></span>
-                            <div class="sciRgItem" v-for="(item,index) in sciCommunit" :key="index">
-                                <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.publishTime}}</p>
+                            <div class="swiper-container achiContainer">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide sciRgItem" v-for="(item,index) in achieve" :key="index" @click="toScienceDetail(item.id,item.organizationId)">    
+                                        <h4>{{item.contentTitle}}</h4>
+                                        <p>{{item.publishTime}}</p>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -42,9 +48,13 @@
                 <h3>学术交流</h3>
                 <span class="h3BLine"></span>
                 <div class="hmLf_box">
-                    <div class="hmLf_item" v-for="(item,index) in sciCommunit.slice(0,4)" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
-                        <h4>{{item.contentTitle}}</h4>
-                        <p>{{item.publishTime}}</p>
+                    <div class="swiper-container comContainer">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide hmLf_item" v-for="(item,index) in sciCommunit" :key="index" @click="toNewsDetail(item.id,item.organizationId)">    
+                                <h4>{{item.contentTitle}}</h4>
+                                <p class="date">{{item.publishTime}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -52,10 +62,14 @@
                 <h3>人才招聘</h3>
                 <span class="h3BLine"></span>
                 <div class="hmRg_box">
-                    <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
-                        <h4>{{item.contentTitle}}</h4>
-                        <span>岗位介绍：</span>
-                        <p>{{item.plainText}}</p>
+                    <div class="swiper-container jobContainer">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide hmRg_item" v-for="(item,index) in recruitData" :key="index" @click="toRecruitDetail(item.id,item.organizationId)">    
+                                <h4>{{item.contentTitle}}</h4>
+                                <span>岗位介绍：</span>
+                                <p>{{item.plainText}}</p>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -68,7 +82,7 @@
                     <div class="teamSwiper">
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index">    
+                                <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                                     <img :src="'http://sensing.zwin.work/'+item.mainImage">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p>{{item.plainText}}</p>
@@ -124,21 +138,21 @@
                 this.bannerHeight = '218px';
                 this.newsShowNum = 3;
             }
-            new Swiper ('.swiper-container', {
-                loop: true,
-                speed:1000,
-                slidesPerView : 3,
-                spaceBetween : 10,
-                slidesPerGroup : 1,
-                navigation: {
-                    nextEl: '.rgArrow',
-                    prevEl: '.lfArrow',
-                },
-                autoplay: {
-                        delay: 3000,//时间 毫秒
-                        disableOnInteraction: false,//用户操作之后是否停止自动轮播
-                }
-            })
+            // new Swiper ('.swiper-container', {
+            //     loop: true,
+            //     speed:1000,
+            //     slidesPerView : 3,
+            //     spaceBetween : 10,
+            //     slidesPerGroup : 1,
+            //     navigation: {
+            //         nextEl: '.rgArrow',
+            //         prevEl: '.lfArrow',
+            //     },
+            //     autoplay: {
+            //             delay: 3000,//时间 毫秒
+            //             disableOnInteraction: false,//用户操作之后是否停止自动轮播
+            //     }
+            // })
         },
         computed: {
            ...mapState([
@@ -150,17 +164,80 @@
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                console.log(res2);
+                console.log(res2.data);
                 this.sciNewsData = res2.data.science;
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
-                this.teamData = res2.data.higher;
+                this.teamData = res2.data.team;
                 this.achieve = res2.data.achievement;
+                setTimeout(function(){
+                    new Swiper ('.achiContainer', {
+                        autoplay: {
+                            delay: 0,//时间 毫秒
+                            disableOnInteraction: false,//用户操作之后是否停止自动轮播
+                        },
+                        loop: true,
+                        speed:4000,
+                        direction:'vertical',
+                        slidesPerView : 4,
+                        spaceBetween : 0,
+                        slidesPerGroup : 1  
+                    })
+
+                    new Swiper ('.teamContainer', {
+                        autoplay: {
+                            delay: 3000,//时间 毫秒
+                            disableOnInteraction: false,//用户操作之后是否停止自动轮播
+                        },
+                        loop: true,
+                        navigation: {
+                            nextEl: '.rgArrow',
+                            prevEl: '.lfArrow',
+                        },
+                        speed:1000,
+                        slidesPerView : 3,
+                        spaceBetween : 10,
+                        slidesPerGroup : 1  
+                    })
+
+                    new Swiper ('.comContainer', {
+                        autoplay: {
+                            delay: 0,//时间 毫秒
+                            disableOnInteraction: false,//用户操作之后是否停止自动轮播
+                        },
+                        loop: true,
+                        direction:'vertical',
+                        speed:4000,
+                        slidesPerView : 4,
+                        slidesPerGroup : 1
+                    })
+
+                    new Swiper ('.jobContainer', {
+                        autoplay: {
+                            delay: 0,//时间 毫秒
+                            disableOnInteraction: false,//用户操作之后是否停止自动轮播
+                        },
+                        loop: true,
+                        direction:'vertical',
+                        speed:6000,
+                        slidesPerView : 2,
+                        slidesPerGroup : 1
+                    })
+                },1000)
+            },
+            toScienceDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             toNewsDetail(id,organizationId){
                 this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
-            toBannerJump(isExternalLink,contentId,jumpLink){
+            toTeamDetail(id,organizationId){
+                this.$router.push({path:'/team/detail',query:{id:id,organizationId:organizationId}});
+            },
+            toRecruitDetail(id,organizationId){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:organizationId}});
+            },
+            toBannerJump(isExternalLink,contentId,jumpLink,organizationId){
                 // 当isExternalLink=0时，无需跳转任何页面
                 // 当isExternalLink=1时，跳转到详情页，查询/cms/content/queryDetailContent?id=contentId
                 // 当isExternalLink=2时，跳转到外部链接，即jumpLink指定的链接
@@ -170,9 +247,8 @@
                         jumpLink = 'http://'+jumpLink;
                     }
                     window.open(jumpLink,"_blank");
-
                 }else if(isExternalLink==1){
-                    //this.$router.push({path:'/team/detail',query:{id:id,organizationId:this.organizationId}});
+                    this.$router.push({path:'/home/bannerdetail',query:{id:contentId,organizationId:organizationId}});
                 }else{
 
                 }
@@ -361,6 +437,10 @@
    }
 
     /* 中心介绍 */
+    .comContainer,.jobContainer,.achiContainer{
+        height:px2rem(600);
+        overflow: hidden !important;
+    }
     .centerBg{
         background-color: #f0edf1;
         padding:px2rem(20) px2rem(40);
@@ -451,9 +531,9 @@
         -webkit-line-clamp: 2;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
-        color:#333;
+        color:#152b59;
         padding:0 px2rem(20);
-        margin:px2rem(10) 0;
+        margin:px2rem(2) 0 px2rem(10) 0;
         height:auto;
         line-height: px2rem(34);
     }
@@ -643,7 +723,7 @@
         margin-top:px2rem(0);
    }
    .hmRg_item h4{
-       font-size:px2rem(36);
+       font-size:px2rem(28);
        font-weight: bold;
        text-align: center;
        margin-top:px2rem(30);
@@ -652,15 +732,15 @@
        font-size:px2rem(14);
    }
    .hmRg_item p{
-       color:#fff;
-       line-height: px2rem(40);
+        color:#fff;
+        line-height: px2rem(40);
         font-weight: normal;
         line-height: 22px;
         padding:px2rem(4) 0 px2rem(4);
         margin-bottom:px2rem(8);
-       overflow: hidden ;
+        overflow: hidden ;
         display: -webkit-box ;
-        -webkit-line-clamp: 5;
+        -webkit-line-clamp: 3;
         -webkit-box-orient: vertical ;
         word-break: break-all ;
    }

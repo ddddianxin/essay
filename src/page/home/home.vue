@@ -4,8 +4,8 @@
         <div id="home">
             <div class="banner">
                  <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
-                    <el-carousel-item v-for="(item,index) in bannerInfo" :key="index"  @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
-                        <div class="coverBg">
+                    <el-carousel-item v-for="(item,index) in bannerInfo" :key="index">
+                        <div class="coverBg" @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink,item.organizationId)">
                             <div class="bannerText">
                                 <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
                                 <!-- <p>{{item.jumpLink}}</p> -->
@@ -38,10 +38,18 @@
                         <div class="sciRg">
                             <h3>科研成果</h3>
                             <span class="h3BLine"></span>
-                            <div class="sciRgItem" v-for="(item,index) in achieve" :key="index">
+                            <div class="swiper-container achiContainer">
+                                <div class="swiper-wrapper">
+                                    <div class="swiper-slide sciRgItem" v-for="(item,index) in achieve" :key="index" @click="toScienceDetail(item.id,item.organizationId)">
+                                        <h4>{{item.contentTitle}}</h4>
+                                        <p>{{item.publishTime}}</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="sciRgItem" v-for="(item,index) in achieve" :key="index" @click="toScienceDetail(item.id,item.organizationId)">
                                 <h4>{{item.contentTitle}}</h4>
                                 <p>{{item.publishTime}}</p>
-                            </div>
+                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -67,14 +75,13 @@
                     <div class="hmRg_box">
                         <div class="swiper-container jobContainer">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide hmRg_item" v-for="(item,index) in recruitData" :key="index" >    
+                                <div class="swiper-slide hmRg_item" v-for="(item,index) in recruitData" :key="index" @click="toRecruitDetail(item.id,item.organizationId)">    
                                     <h4>{{item.contentTitle}}</h4>
                                     <span>岗位介绍：</span>
                                     <p>{{item.plainText}}</p>
                                 </div>
                             </div>
                         </div>
-
                         <!-- <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
                             <h4>{{item.contentTitle}}</h4>
                             <span>岗位介绍：</span>
@@ -107,7 +114,7 @@
                     <div class="teamSwiper">
                         <div class="swiper-container teamContainer">
                             <div class="swiper-wrapper">
-                                <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index" @click="toTeamDetail(item.id)">    
+                                <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                                     <img :src="'http://sensing.zwin.work/'+item.mainImage">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p>{{item.plainText}}</p>
@@ -157,14 +164,11 @@
         mounted(){
             this.cn = getStore("inCN");
             this.isPc = getStore("isPc");
-            // 获取首页产品
             this.initData();
             if(document.body.clientWidth<=1024){
-                this.bannerHeight = '218px';
                 this.newsShowNum = 3;
                 this.teamShowNum = 4;
             }
-            
         },
         computed:{
             ...mapState([
@@ -176,15 +180,32 @@
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                console.log(res2.data);
-                this.sciNewsData = res2.data.science;
+                console.log(this.bannerInfo);
+                this.sciNewsData = res2.data.science.slice(0,6);
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
-                this.teamData = res2.data.higher.concat(res2.data.medium).concat(res2.data.primary);
+                this.teamData = res2.data.team;
                 this.achieve = res2.data.achievement;
-                 console.log(this.achieve);
                 
                 setTimeout(function(){
+                    new Swiper ('.achiContainer', {
+                        autoplay: {
+                            delay: 1000,//时间 毫秒
+                            disableOnInteraction: false,//用户操作之后是否停止自动轮播
+                        },
+                        loop: true,
+                        navigation: {
+                            nextEl: '.rgArrow',
+                            prevEl: '.lfArrow',
+                        },
+                        speed:4000,
+                        direction:'vertical',
+                        slidesPerView : 6,
+                        spaceBetween : 0,
+                        slidesPerGroup : 1  
+                    })
+
+
                     new Swiper ('.teamContainer', {
                         autoplay: {
                             delay: 1000,//时间 毫秒
@@ -231,10 +252,16 @@
             toNewsDetail(id,organizationId){
                 this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
-            toTeamDetail(id){
-                this.$router.push({path:'/team/detail',query:{id:id,organizationId:this.organizationId}});
+            toTeamDetail(id,organizationId){
+                this.$router.push({path:'/team/detail',query:{id:id,organizationId:organizationId}});
             },
-            toBannerJump(isExternalLink,contentId,jumpLink){
+            toScienceDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
+            },
+            toRecruitDetail(id,organizationId){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:organizationId}});
+            },
+            toBannerJump(isExternalLink,contentId,jumpLink,organizationId){
                 // 当isExternalLink=0时，无需跳转任何页面
                 // 当isExternalLink=1时，跳转到详情页，查询/cms/content/queryDetailContent?id=contentId
                 // 当isExternalLink=2时，跳转到外部链接，即jumpLink指定的链接
@@ -246,11 +273,10 @@
                     window.open(jumpLink,"_blank");
 
                 }else if(isExternalLink==1){
-                    //this.$router.push({path:'/team/detail',query:{id:id,organizationId:this.organizationId}});
+                    this.$router.push({path:'/home/bannerdetail',query:{id:contentId,organizationId:organizationId}});
                 }else{
 
                 }
-
             }
 
         },
@@ -465,6 +491,10 @@
        
    }
     /* 中心介绍 */
+    .achiContainer{
+        height:510px;
+        overflow: hidden !important;
+    }
     .comContainer,.jobContainer{
         height:400px;
         overflow: hidden !important;

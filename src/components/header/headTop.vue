@@ -11,7 +11,7 @@
                     <span class="searchTit" @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                     <div class="searchBox">
                         <input value="" placeholder="">
-                        <button>搜索</button>
+                        <button @click="toSearch">搜索</button>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,8 @@
             return{
                 cn:0,
                 menu:['home','centerIntro','news','team','achievement','experiment','recruit','contactUs'],
-                menuData:''
+                menuData:'',
+                val:''
             }
         },
         props: ['webActive','webChildActive'],
@@ -87,8 +88,11 @@
                if(url!='/'){
                    this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
                }
+           },
+           toSearch(){
+               console.log("search");
+               this.$router.push({path:'/home/search',query:{val:this.val}});
            }
-            
         }
 
     }

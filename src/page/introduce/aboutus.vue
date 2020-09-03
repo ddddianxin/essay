@@ -1,7 +1,14 @@
 <template>
     <div class="bg">
         <head-top webActive="中心介绍" webChildActive="中心概论"></head-top>
-        <img class="bgTop" src="../../images/ctIntro.png">
+        <div class="banner">
+                <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
+                <el-carousel-item v-for="(item,index) in bannerInfo" :key="index"  >
+                    <div @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)"><img :src="item.imgurl"></div>
+                </el-carousel-item>
+            </el-carousel>
+        </div>
+        <!-- <img class="bgTop" src="../../images/ctIntro.png"> -->
         <div class="ctBg">
             <div class="container">
                 <div class="ctBox">
@@ -28,12 +35,13 @@
     import headTop from '../../components/header/headTop';
     import { videoPlayer } from 'vue-video-player';
     import {getStore} from '../../config/mUtils';
-    import {content} from '../../service/api'
+    import {content,banner} from '../../service/api'
     export default {
         name: 'news',
         data(){
             return{
                 cn:0,
+                isPc:1,
                 id:'',
                 organizationId:'',
                 playerOptions : {
@@ -59,7 +67,9 @@
                         fullscreenToggle: true  //全屏按钮
                     }
                 },
-                list:''
+                list:'',
+                bannerHeight:'613px',
+                bannerInfo:[],
                 
             }
         },
@@ -67,7 +77,12 @@
             headTop,videoPlayer
         },
         mounted(){
+            if(document.body.clientWidth<=1024){
+                this.bannerHeight = '218px';
+                this.newsShowNum = 3;
+            }
             this.cn = getStore("inCN");
+            this.isPc = getStore("isPc");
             this.initData();
         },
         computed:{
@@ -78,7 +93,28 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await content(this.cn,this.id,this.organizationId);
                 this.list = res.data.list;
-                console.log(this.list);
+
+                var res2 = await banner(1,this.cn,this.isPc,'introduction');
+                this.bannerInfo = res2.data;
+                console.log(res2);
+            },
+            toBannerJump(isExternalLink,contentId,jumpLink){
+                console.log("isExternalLink:"+isExternalLink+" | contentId:"+contentId+" | jumpLink:"+jumpLink)
+                // 当isExternalLink=0时，无需跳转任何页面
+                // 当isExternalLink=1时，跳转到详情页，查询/cms/content/queryDetailContent?id=contentId
+                // 当isExternalLink=2时，跳转到外部链接，即jumpLink指定的链接
+                if(isExternalLink==2){
+                    var arr = jumpLink.match(/http/g);
+                    if(!arr){
+                        jumpLink = 'http://'+jumpLink;
+                    }
+                    window.open(jumpLink,"_blank");
+                }else if(isExternalLink==1){
+                    this.$router.push({path:'/home/bannerdetail',query:{id:contentId,organizationId:this.organizationId}});
+                }else{
+
+                }
+
             }
 
         },
@@ -131,6 +167,32 @@
         width: 100%;
         height: 100%;
         object-fit: contain;
+    }
+    // banner
+    .banner{
+       height: 613px;
+       position: relative;
+   }
+   .banner img{
+       height: 613px;
+       width:100%;
+       object-fit: cover;
+   }
+    .el-carousel__indicators.el-carousel__indicators--horizontal{
+        left:50%;
+        bottom:30px;
+        
+    }
+    .el-carousel__indicators--horizontal li{
+        float:right;
+    }
+    .el-carousel__indicator--horizontal{
+        padding:0 6px 8px 0;
+    }
+    .el-carousel__button{
+        width:10px;
+        height: 10px;
+        border-radius: 30px;
     }
         
 
