@@ -11,20 +11,20 @@
                     </div>
                     <div class="sciNList" v-else>
                         <div>
-                            <div class="topPanel" @click="toNewsDetail(listData[0].id)">
+                            <div class="topPanel" v-if="topVal" @click="toNewsDetail(topVal.id,topVal.organizationId)">
                                 <div class="tPimg">
-                                    <img :src="listData[0].mainPic">
+                                    <img :src="topVal.mainPic">
                                 </div>
                                 <div class="tPinfo">
-                                    <h4 class="wto">{{listData[0].contentTitle}}</h4>
-                                    <p class="plain">{{listData[0].plainText}}</p>
-                                    <p class="date">{{listData[0].publishTime}}</p>
+                                    <h4 class="wto">{{topVal.contentTitle}}</h4>
+                                    <p class="plain">{{topVal.plainText}}</p>
+                                    <p class="date">{{topVal.publishTime}}</p>
                                 </div>
                                 <div class="tPsign">
-                                    <span>置顶</span>
+                                    <span>{{topVal.attributeTypeName}}</span>
                                 </div>
                             </div>
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">    
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
@@ -44,30 +44,6 @@
                         </div>
                     </div>
                 </div>
-                <!-- <div class="cenBox">
-                    <h3>中心动态</h3>
-                    <span class="h3BLine"></span>
-                    <div class='viewShow'>
-                        <img :src="listData[0].mainPic">
-                        <div class="ctNinfo">
-                            <h4>{{listData[0].contentTitle}}</h4>
-                            <p>{{listData[0].plainText}}</p>
-                            <span>{{listData[0].publishTime.slice(0,10)}}</span>
-                        </div>
-                        <div class="ctNSign">
-                            <span class="toTop">置顶</span>
-                        </div>
-                    </div>
-                    <div class="cenList">
-                        <div class="cenItem" v-for="(item,index) in listData.slice(1)" :key="index">
-                            <div class="cenInfo">
-                                <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.plainText}}</p>
-                            </div>
-                            <div class="date">{{item.publishTime.slice(0,10)}}</div>
-                        </div>
-                    </div>
-                </div> -->
             </div>
         </div>
     </div>
@@ -90,7 +66,8 @@
                 page:1,
                 totalPage:1,
                 totalRow:1,
-                listData:[]
+                listData:[],
+                topVal:''//置顶的内容
                 
             }
         },
@@ -99,12 +76,7 @@
         },
         mounted(){
             this.cn = getStore("inCN");
-            // 获取首页产品
             this.initData();
-            if(document.body.clientWidth<=1024){
-                
-            }
-            
         },
         computed:{
             ...mapState([
@@ -118,13 +90,12 @@
                 this.page = 1;
                 this.getData();
             },
-            toNewsDetail(id){
-                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -135,6 +106,12 @@
                     this.id
                 );
                 this.listData = res.data.list;
+                if(this.page==1 && this.listData[0].attributeTypeName!=null){
+                    this.topVal = this.listData[0];
+                    this.listData.splice(0,1);
+                }else{
+                    this.topVal=''
+                }
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
                 console.log(res);

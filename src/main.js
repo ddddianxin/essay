@@ -28,7 +28,6 @@ Vue.prototype.WXConfig = WXConfig;
 Vue.config.productionTip = false;
 Vue.prototype.$ajax = axios;
 
-
 if (!getStore("inCN")) {
     setStore('inCN', 0);
 }

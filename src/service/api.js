@@ -15,9 +15,6 @@ Vue.prototype.$del = del;
 //const baseUrl = 'http://juice666.gz2vip.idcfengye.com';
 const baseUrl = 'http://sensing.zwin.work';
 
-//测试翻页接口
-export const test = (name, page, rows) => fetch('https://api.huaxuejia.cn/api/v1/enterpriseList?name=' + name + '&isCheck=1&page=' + page + '&rows=' + rows);
-
 //首页菜单
 export const menuList = (chineseOrEnglish, organizationId) => post(baseUrl + '/cms/menu/queryMenuList', {
     chineseOrEnglish,
@@ -81,4 +78,10 @@ export const globalSearchContent = (keyWords, pageNumber, pageSize) => post(base
     keyWords,
     pageNumber,
     pageSize
+});
+
+//请求头部和底部信息专用
+export const queryMenuAndHeaderFooter = (chineseOrEnglish, organizationId) => post(baseUrl + '/cms/menu/queryMenuAndHeaderFooter', {
+    chineseOrEnglish,
+    organizationId
 });

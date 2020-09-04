@@ -1,20 +1,20 @@
 <template>
     <div class="bg">
-        <head-top webActive="home" webChildActive=""></head-top>
-        <img class="bgTop" src="../../images/bgTop.png">
+        <head-top webActive="home" webChildActive="" @toSearch="getVal" :searchVal="keywords"></head-top>
+        <img class="searbgTop" src="../../images/bgTop.png">
         <div class="sciNBg">
             <div class="container">
                 <div class="lsideBox">
                     <div class="sciNList">
-                        <div>
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">    
+                        <div class="mb15">
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
                                 </div>         
                                 <div class="sciNdate">{{item.publishTime}}</div>
                                 <div class="sciNimg">
-                                    <img :src="'http://sensing.zwin.work/'+item.mainImage">
+                                    <img :src="item.mainImage?'http://sensing.zwin.work/'+item.mainImage:require('../../images/default.jpg')">
                                 </div>
                             </div>
                         </div>
@@ -42,10 +42,9 @@
             return{
                 cn:0,
                 id:'',
-                rows:9,
+                rows:10,
                 page:1,
-                totalPage:1,
-                totalRow:1,
+                totalPage:1,//总页码数
                 organizationId:'',
                 listData:[],
                 keywords:''
@@ -55,6 +54,13 @@
         components:{
             headTop
         },
+        watch:{
+    $route(n,o){
+        if(n.fullPath !== o.fullPath){ //监听路由参数是否变化
+           this.getData()  //methods中封装的加载数据函数
+        }
+    }
+},
         mounted(){
             this.cn = getStore("inCN");
             this.initData();
@@ -65,28 +71,30 @@
             async initData(){
                 this.id = this.$route.query.id;
                 this.organizationId = this.$route.query.organizationId;
-                this.keywords = this.$route.query.val;
                 this.page = 1;
                 this.getData();
             },
-            toDetail(id){
-                this.$router.push({path:'/home/bannerdetail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/home/bannerdetail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
                 //console.log(`当前页: ${val}`);
             },
+            getVal(val){
+                this.keywords = val;
+            },
             async getData(){
+                this.keywords = this.$route.query.val;
                 var res = await globalSearchContent(
-                    '科',//this.keywords,
+                    this.keywords,//this.keywords
                     this.page,
                     this.rows
                 );
                 this.listData = res.data;
-                this.totalPage = res.data.totalPage;
-                this.totalRow = res.data.totalRow;
-                console.log(this.listData);
+                this.totalPage = res.totalPage;
+                console.log(res);
             }
 
         },
@@ -100,7 +108,7 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .bgTop{
+    .searbgTop{
         height:205px;
         width: 100%;
         object-fit: cover;

@@ -8,20 +8,7 @@
                     <side-menu webTitle="新闻动态" webActive="业内动态"></side-menu>
                     <div class="sciNList">
                         <div>
-                            <!-- <div class="topPanel"  @click="toNewsDetail(listData[0].id)">
-                                <div class="tPimg">
-                                    <img :src="listData[0].mainPic">
-                                </div>
-                                <div class="tPinfo">
-                                    <h4 class="wto">{{listData[0].contentTitle}}</h4>
-                                    <p class="plain">{{listData[0].plainText}}</p>
-                                    <p class="date">{{listData[0].publishTime}}</p>
-                                </div>
-                                <div class="tPsign">
-                                    <span>置顶</span>
-                                </div>
-                            </div> -->
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index"  @click="toNewsDetail(item.id)">    
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index"  @click="toNewsDetail(item.id,item.organizationId)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
@@ -94,8 +81,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toNewsDetail(id){
-                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

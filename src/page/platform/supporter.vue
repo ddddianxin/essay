@@ -11,7 +11,7 @@
                             <div class="supTit">
                                 <span>{{item}}</span>
                             </div>
-                            <div class="supInfo" v-for="(iitem,iindex) in listData" :key="iindex" v-if="iitem.typeName==item" @click="toDetail(iitem.id)">
+                            <div class="supInfo" v-for="(iitem,iindex) in listData" :key="iindex" v-if="iitem.typeName==item" @click="toDetail(iitem.id,iitem.organizationId)">
                                 <div class="supText">
                                     <p class="fb tit">{{iitem.contentTitle}}</p>
                                     <p>{{iitem.plainText}}</p>
@@ -96,8 +96,8 @@
                 }
                 this.sortTit = hash;
             },
-            toDetail(id){
-                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:organizationId}});
             }
         },
         created(){

@@ -6,7 +6,7 @@
         </div>
         <div class="contact">
             <div class="ercode">
-                <img>
+                <img :src="qrcode">
             </div>
             <p>联系我们</p>
         </div>
@@ -15,46 +15,37 @@
 
 <script>
     import {mapState, mapMutations, mapActions} from 'vuex'
+    import {setStore,getStore} from '../../config/mUtils'
+    import {queryMenuAndHeaderFooter} from '../../service/api'
     // import wxapi from '../../service/wxapi.js';
     export default {
         name: 'navFoot',
     	data(){
             return{
                 menu:['home','sort','cart','message','mine'],
+                cn:0,
+                isPc:0,//0为手机，1为pc
+                menuData:[],
+                qrcode:''
             }
         },
         props: ['menuActive'],
         computed: {
-
         },
         mounted(){
-            //获取用户信息
-           
-
+            this.cn = getStore("inCN");
+            this.isPc = getStore("isPc");
+            this.getMenu();
         },
         methods: {
             async initData(){
-                var url=encodeURIComponent(location.href.split('#')[0]);
-                // var data = await wxjssdk(url);
-                var option = {
-                    title:window.location.title?window.location.title:'六摩尔直营商城 www.sixmol.com',
-                    desc:'主营医药中间体、原料药、化妆品高端原料、日化清洗行业原材料，包括进出口国际贸易业务。',
-                    link:window.location.href,
-                    imgUrl:'http://www.huaxuejia.cn/Public/home/images/logo.jpg'
-                }
-                // wxapi.wxRegister(data,option);
-
             },
-            toMessage(){
-                // if (this.userInfo && this.userInfo.user_id){
-                //     this.$router.push({path:"/userCenter/message/message"})
-                // }else{
-                //     this.$message({
-                //         message: '请先登录',
-                //         type: 'warning'
-                //     });
-                // }
-            }
+            async getMenu(){
+               var res = await queryMenuAndHeaderFooter(this.cn,1);
+               this.menuData = res.data.menu.list;
+               this.qrcode = res.data.footer.mobileData.qrcode;
+               console.log(res.data);
+            },
         },
         created(){
             this.initData();
@@ -92,6 +83,11 @@
         width:px2rem(120);
         height: px2rem(120);
         background-color:#fff;
+    }
+    .ercode img{
+        width:px2rem(120);
+        height: px2rem(120);
+        object-fit: cover;
     }
     
 

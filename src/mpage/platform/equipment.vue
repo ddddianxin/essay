@@ -12,7 +12,7 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div  class="webAList">
-                        <div class="webEquItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">    
+                        <div class="webEquItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">    
                             <img :src="item.mainPic">
                             <div class="mEquName">
                                 <span class="wto">{{item.contentTitle}}</span>
@@ -74,8 +74,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toDetail(id){
-                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
                 var resApi = await contentPage(

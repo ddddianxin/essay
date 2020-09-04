@@ -7,7 +7,7 @@
                     <side-menu webTitle="科研成果" webActive="成果奖励"></side-menu>
                     <div>
                         <div  class="awardList">
-                            <div class="awardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">    
+                            <div class="awardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id,item.organizationId)">    
                                 <img :src="item.mainPic">              
                                 <h4 class="">{{item.contentTitle}}</h4>
                                 <div class="tc">
@@ -68,8 +68,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

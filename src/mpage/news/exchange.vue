@@ -12,7 +12,7 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div class="sciList">
-                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">
+                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                             <div class="sciNewsPic">
                                 <img :src="item.mainPic">
                             </div>              
@@ -83,8 +83,8 @@
             toUrl(url){
                 this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
             },
-            toNewsDetail(id){
-                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
                 var resApi = await contentPage(
@@ -95,7 +95,6 @@
                     this.id
                 );
                 var res = resApi.data.list;
-
                 if (res.length != 0 && res.length == this.rows) {
 					this.noData = false;
 					this.page++;

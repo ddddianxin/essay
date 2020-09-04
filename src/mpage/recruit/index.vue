@@ -12,7 +12,7 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div>
-                        <div class="mrecList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">
+                        <div class="mrecList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id.item.organizationId)">
                             <div class="mrecInfo">
                                 <div class="mrecName">{{item.contentTitle}}</div>
                                 <div>
@@ -79,8 +79,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toDetail(id){
-                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
                 var resApi = await contentPage(
@@ -91,7 +91,6 @@
                     this.id
                 );
                 var res = resApi.data.list;
-
                 if (res.length != 0 && res.length == this.rows) {
 					this.noData = false;
 					this.page++;

@@ -20,5 +20,9 @@
 <style>
   @import './style/base.css';
   @import './style/common.css';
+  #app{
+    min-width: 1024px;
+    font-family: 'pingFangSC-Medium, sans-serif';
+  }
 
 </style>

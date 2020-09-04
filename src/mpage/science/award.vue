@@ -12,7 +12,7 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div  class="webAList">
-                        <div class="webAwardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id)">    
+                        <div class="webAwardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id,item.organizationId)">    
                             <img :src="item.mainPic">              
                             <h4>{{item.contentTitle}}</h4>
                             <div class="tc">
@@ -78,8 +78,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
                 var resApi = await contentPage(

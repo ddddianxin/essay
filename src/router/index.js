@@ -19,7 +19,6 @@ const student = r => require.ensure([], () => r(require('../page/team/student'))
 const project = r => require.ensure([], () => r(require('../page/science/project')), 'project');
 const paper = r => require.ensure([], () => r(require('../page/science/paper')), 'paper');
 const patent = r => require.ensure([], () => r(require('../page/science/patent')), 'patent');
-const technology = r => require.ensure([], () => r(require('../page/science/technology')), 'technology');
 const award = r => require.ensure([], () => r(require('../page/science/award')), 'award');
 const supporter = r => require.ensure([], () => r(require('../page/platform/supporter')), 'supporter');
 const lab = r => require.ensure([], () => r(require('../page/platform/lab')), 'lab');
@@ -34,6 +33,7 @@ const recruitDetail = r => require.ensure([], () => r(require('../page/recruit/d
 
 //移动端
 const mHome = r => require.ensure([], () => r(require('../mpage/home/home')), 'mHome');
+const mSearch = r => require.ensure([], () => r(require('../mpage/home/search')), 'mSearch');
 const mBannerDetail = r => require.ensure([], () => r(require('../mpage/home/bannerdetail')), 'mBannerDetail');
 const mAboutus = r => require.ensure([], () => r(require('../mpage/introduce/aboutus')), 'mAboutus');
 const mResearch = r => require.ensure([], () => r(require('../mpage/introduce/research')), 'mResearch');
@@ -49,7 +49,6 @@ const mStudent = r => require.ensure([], () => r(require('../mpage/team/student'
 const mProject = r => require.ensure([], () => r(require('../mpage/science/project')), 'mProject');
 const mPaper = r => require.ensure([], () => r(require('../mpage/science/paper')), 'mPaper');
 const mPatent = r => require.ensure([], () => r(require('../mpage/science/patent')), 'mPatent');
-const mTechnology = r => require.ensure([], () => r(require('../mpage/science/technology')), 'mTechnology');
 const mAward = r => require.ensure([], () => r(require('../mpage/science/award')), 'mAward');
 const mSupporter = r => require.ensure([], () => r(require('../mpage/platform/supporter')), 'mSupporter');
 const mLab = r => require.ensure([], () => r(require('../mpage/platform/lab')), 'mLab');
@@ -158,11 +157,6 @@ var pc = [{
             component: patent
         },
         {
-            path: '/science/technology',
-            name: 'technology',
-            component: technology
-        },
-        {
             path: '/science/award',
             name: 'award',
             component: award
@@ -234,6 +228,11 @@ var wap = [{
             path: '/home',
             name: 'mHome',
             component: mHome
+        },
+        {
+            path: '/home/search',
+            name: 'mSearch',
+            component: mSearch
         },
         {
             path: '/home/bannerdetail',
@@ -309,11 +308,6 @@ var wap = [{
             path: '/science/patent',
             name: 'mPatent',
             component: mPatent
-        },
-        {
-            path: '/science/technology',
-            name: 'mTechnology',
-            component: mTechnology
         },
         {
             path: '/science/award',

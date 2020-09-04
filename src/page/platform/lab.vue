@@ -9,7 +9,7 @@
                     <div class="expBox">
                         <div class="expB">
                             <div class="expPanel">
-                                <div class="expInbox" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">
+                                <div class="expInbox" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">
                                     <img :src="item.mainPic">
                                     <div class="expName">
                                         <span class="wto">{{item.contentTitle}}</span>
@@ -84,8 +84,8 @@
                 this.totalRow = res.data.totalRow;
                 console.log(res);
             },
-            toDetail(id){
-                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/platform/detail',query:{id:id,organizationId:organizationId}});
             }
 
 

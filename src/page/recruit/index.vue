@@ -4,7 +4,7 @@
         <img class="bgTop" src="../../images/bgTop.png">
         <div class="recBg">
             <div class="container">
-                <div class="recList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id)">
+                <div class="recList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">
                     <div class="recImg">
                         <img :src="item.mainPic">
                     </div>
@@ -71,8 +71,8 @@
                 this.getData();
                 //console.log(`当前页: ${val}`);
             },
-            toDetail(id){
-                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:this.organizationId}});
+            toDetail(id,organizationId){
+                this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
                 var res = await contentPage(
@@ -105,6 +105,10 @@
         width: 100%;
         object-fit: cover;
         display: block;
+    }
+    .recBg{
+        background-color: #f7f7f7;
+        padding:30px 0;
     }
     .recList{
         display: flex;

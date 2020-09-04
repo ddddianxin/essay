@@ -6,7 +6,7 @@
                 <span v-for="(iitem,iindex) in item.items" :key="iindex" @click="toUrl(iitem.menuUrl,iitem.id,iitem.organizationId)">{{iitem.menuName}}</span>
             </div>
             <div class="contact">
-                <div class="erCode"><img></div>
+                <div class="erCode"><img :src="qrcode"></div>
                 <p>联系我们</p>
             </div>
         </div>
@@ -23,16 +23,20 @@
     import wxapi from '../../service/wxapi.js';
     import {mapState, mapMutations, mapActions} from 'vuex'
     import {setStore,getStore} from '../../config/mUtils'
-    import {menuList} from '../../service/api'
+    import {menuList,queryMenuAndHeaderFooter} from '../../service/api'
     export default {
         name: 'foot',
     	data(){
             return{
-                menuData:[]
+                menuData:[],
+                cn:0,
+                isPc:1,//0为手机，1为pc
+                qrcode:''
             }
         },
         mounted(){
             this.cn = getStore("inCN");
+            this.isPc = getStore("isPc");
             this.getMenu();
         },
         computed: {
@@ -42,8 +46,9 @@
         },
         methods:{
             async getMenu(){
-               var res = await menuList(this.cn,1);
-               this.menuData = res.data;
+               var res = await queryMenuAndHeaderFooter(this.cn,1);
+               this.menuData = res.data.menu.list;
+               this.qrcode = res.data.footer.pcData.qrcode;
             },
             toUrl(url,id,organizationId){
                if(url!='/'){
@@ -96,6 +101,11 @@
         width:100px;
         height: 100px; 
         background-color: #fff;
+    }
+    .erCode img{
+        width:100px;
+        height: 100px; 
+        object-fit: cover;
     }
     .contact p{
         color:#fff;

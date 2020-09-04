@@ -7,7 +7,7 @@
                 <div class="mAchiList">
                     <div class="mpaperBox" v-for="(item,index) in yearList" :key="index">
                         <h2 class="yearTit f16 fb">{{item}}年</h2>
-                        <div class="mpaperItem" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                        <div class="mpaperItem" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id,iitem.organizationId)">
                             <div class="mppName">{{iindex+1}}. {{iitem.contentTitle}}</div>
                         </div>
                     </div>
@@ -65,8 +65,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

@@ -14,7 +14,7 @@
                                 <div class="pjName">项目名称</div>
                                 <div class="pjRespon">项目负责人</div>
                             </div>
-                            <div class="sciIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                            <div class="sciIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id,item.organizationId)">
                                 <div class="pjIndex">{{iindex+1}}</div>
                                 <div class="pjTypeTit">{{iitem.contentSubtitle}}</div>
                                 <div class="pjTypeName">{{iitem.typeName}}</div>
@@ -75,8 +75,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

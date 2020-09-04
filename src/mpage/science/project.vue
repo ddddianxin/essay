@@ -7,7 +7,7 @@
                 <div class="mAchiList">
                     <div class="mAchiPanel" v-for="(item,index) in sortTit" :key="index">
                         <div class="tit">{{item}}</div>
-                        <div class="mAchiIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                        <div class="mAchiIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id,iitem.organizationId)">
                             <div class="mPjIndex">{{iindex+1}}</div>
                             <div class="mPjInfo">
                                 <p>项目名称：{{iitem.contentTitle}}</p>
@@ -69,8 +69,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

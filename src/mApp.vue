@@ -26,9 +26,10 @@
 
   #app{
       background-color: $bggray;
-      font-family: pingFangSC-Medium, sans-serif;
+      font-family: 'pingFangSC-Medium, sans-serif';
   }
     #mApp{
+        min-width:auto;
         margin:0 auto;
         width:100%;
         display: block;

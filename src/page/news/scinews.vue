@@ -8,7 +8,7 @@
                     <side-menu webTitle="新闻动态" webActive="科研动态"></side-menu>
                     <div class="sciNList">
                         <div>
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">    
+                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">    
                                 <div class="sciNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
@@ -69,8 +69,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toNewsDetail(id){
-                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

@@ -122,8 +122,8 @@
                 sciNewsData:[],
                 sciCommunit:[],
                 teamData:[],
-                recruitData:[]
-                
+                recruitData:[],
+                achieve:[]
             }
         },
         components:{
@@ -138,21 +138,6 @@
                 this.bannerHeight = '218px';
                 this.newsShowNum = 3;
             }
-            // new Swiper ('.swiper-container', {
-            //     loop: true,
-            //     speed:1000,
-            //     slidesPerView : 3,
-            //     spaceBetween : 10,
-            //     slidesPerGroup : 1,
-            //     navigation: {
-            //         nextEl: '.rgArrow',
-            //         prevEl: '.lfArrow',
-            //     },
-            //     autoplay: {
-            //             delay: 3000,//时间 毫秒
-            //             disableOnInteraction: false,//用户操作之后是否停止自动轮播
-            //     }
-            // })
         },
         computed: {
            ...mapState([
@@ -164,7 +149,6 @@
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                console.log(res2.data);
                 this.sciNewsData = res2.data.science;
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
@@ -533,7 +517,7 @@
         word-break: break-all ;
         color:#152b59;
         padding:0 px2rem(20);
-        margin:px2rem(2) 0 px2rem(10) 0;
+        margin:px2rem(12) 0 px2rem(16) 0;
         height:auto;
         line-height: px2rem(34);
     }

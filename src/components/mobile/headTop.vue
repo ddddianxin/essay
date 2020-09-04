@@ -7,9 +7,9 @@
                     <span>{{title?title:'首页'}}</span>
                 </div>
                 <div class="mSearch">
-                    <div class="mSearBox">
+                    <div class="mSearBox" v-if="showSearch!='false'" @click="toSearch()">
                         <i class="el-icon-search"></i>
-                        <input type="text" value="搜索" placeholder="搜索">
+                        <input type="text" value="" placeholder="搜索">
                     </div>
                     <span @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                 </div>
@@ -61,7 +61,7 @@
                 menuHeight:''
             }
         },
-        props: ['webActive','title'],
+        props: ['webActive','title','showSearch'],
         created(){
             //获取用户信息
             //this.getUserInfo();
@@ -106,7 +106,10 @@
            },
            toHome(){
                this.$router.push('/home')
-           }
+           },
+           toSearch() {
+                this.$router.push({path:'/home/search'});
+            }
         }
     }
 

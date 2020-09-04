@@ -16,10 +16,10 @@
                                 <div class="ptType">专利类型</div>
                                 <div class="ptDate">授权日期</div>
                             </div>
-                            <div class="sciIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id)">
+                            <div class="sciIt" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toSciDetail(iitem.id,item.organizationId)">
                                 <div class="ptIndex">{{iindex+1}}</div>
                                 <div class="ptNumber">{{iitem.remark}}</div>
-                                <div class="ptName" @click="toSciDetail(iitem.id)">{{iitem.contentTitle}}</div>
+                                <div class="ptName">{{iitem.contentTitle}}</div>
                                 <div class="ptAuthor">{{iitem.author}}</div>
                                 <div class="ptType">{{iitem.typeName}}</div>
                                 <div class="ptDate">{{iitem.publishTime}}</div>
@@ -82,8 +82,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toSciDetail(id){
-                this.$router.push({path:'/science/detail',query:{id:id,organizationId:this.organizationId}});
+            toSciDetail(id,organizationId){
+                this.$router.push({path:'/science/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

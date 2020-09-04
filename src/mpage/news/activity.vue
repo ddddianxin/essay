@@ -12,7 +12,17 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div class="sciList">
-                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id)">
+                        <div class="mActItem" v-if="topVal" @click="toNewsDetail(topVal.id,topVal.organizationId)">
+                            <div class="mActPic">
+                                <img :src="topVal.mainPic">
+                            </div>              
+                            <div class="mActInfo">
+                                <div class="title">{{topVal.contentTitle}}</div>
+                                <div class="subTitle">{{topVal.plainText}}</div>
+                                <div class='mActDate'><span class="mr10">{{topVal.attributeTypeName}}</span>{{topVal.publishTime}}</div>
+                            </div>
+                        </div>
+                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                             <div class="sciNewsPic">
                                 <img :src="item.mainPic">
                             </div>              
@@ -53,7 +63,8 @@
                 noData: false,//false为无数据，true为有数据
                 loadingText:'加载中...',
                 scrollH:300,
-                listData:[]
+                listData:[],
+                topVal:''//置顶的内容
                 
             }
         },
@@ -83,10 +94,11 @@
             toUrl(url){
                 this.$router.push({path:url,query:{id:id,organizationId:organizationId}});
             },
-            toNewsDetail(id){
-                this.$router.push({path:'/news/detail',query:{id:id,organizationId:this.organizationId}});
+            toNewsDetail(id,organizationId){
+                this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
+                console.log("getdata");
                 var resApi = await contentPage(
                     this.cn,
                     this.page,
@@ -97,18 +109,33 @@
                 var res = resApi.data.list;
 
                 if (res.length != 0 && res.length == this.rows) {
-					this.noData = false;
+                    this.noData = false;
+                    this.listData = res;
+                    if(this.page==1 && this.listData[0].attributeTypeName!=null){
+                        this.topVal = this.listData[0];
+                        this.listData.splice(0,1);
+                    }else{
+                        this.topVal=''
+                    }
 					this.page++;
-					this.listData = res;
 					this.loadingText = '上拉加载更多';
 				} else {
+                    this.listData = res;
+                    if(this.page==1 && this.listData[0].attributeTypeName!=null){
+                        this.topVal = this.listData[0];
+                        this.listData.splice(0,1);
+                    }else{
+                        this.topVal=''
+                    }
 					this.page++;
-					this.listData = res;
 					this.noData = true;
 					this.loadingText = '';
                 }
+                console.log(this.topVal);
+                console.log(this.listData);
             },
             async getmoredata(){
+                console.log("getmoredata");
 				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
 				    return false;
                 }
@@ -141,54 +168,6 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .sciSearch{
-        display:flex;
-        flex-wrap: nowrap;
-        justify-content: space-between;
-        padding:0 px2rem(40);
-        background-color: #152b59;
-    }
-    .sciSearch h2{
-        color:#fff;
-        height: px2rem(80);
-        line-height: px2rem(80);
-        font-weight: bold;
-        font-size:px2rem(32);
-    }
-    .sSearch{
-        width:px2rem(440);
-        display: flex;
-        flex-wrap: nowrap;
-        justify-content: flex-end;
-        display: inline-block;
-    }
-.sSearBox{
-    width:px2rem(440);
-    height: px2rem(40);
-    background-color: #fff;
-    border:1px solid #707070;
-    border-radius: 30px;
-    float:right;
-    margin-top:px2rem(20);
-    overflow: hidden;
-    display: flex;
-    flex-wrap: nowrap;
-    justify-content: space-between;
-}
-
-.sSearBox i{
-    font-size:px2rem(34);
-    padding:px2rem(4) 0 0 px2rem(10);
-    width:px2rem(40);
-}
-.sSearBox input{
-    background-color: #fff;
-    font-size: px2rem(24);
-    z-index:100;
-    width:px2rem(400);
-    text-align: right;
-    padding:0 px2rem(20);
-}
 .sciNewsBg{
     margin-top:px2rem(180);
 }
@@ -240,6 +219,56 @@
     line-height: px2rem(30);
 }
 .sciNewsDate{
+    font-size:px2rem(24);
+    line-height: px2rem(30);
+    width:100%;
+    text-align: right;
+    color:#152b59;
+}
+// 置顶
+.mActItem{
+    border-bottom:1px dashed #ddd;
+    padding:px2rem(20) 0;
+    display:flex;
+    flex-wrap: nowrap;
+    justify-content: space-between;
+}
+.mActPic{
+    width:px2rem(160);
+    height:px2rem(160);
+}
+.mActPic img{
+    width:px2rem(160);
+    height:px2rem(160);
+    object-fit: cover;
+}
+.mActInfo{
+    width:px2rem(510);
+    padding-left:px2rem(20);
+}
+.mActInfo .title{
+    color:#152b59;
+    overflow: hidden ;
+    display: -webkit-box ;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical ;
+    word-break: break-all ;
+    font-size:px2rem(26);
+    line-height: px2rem(40);
+    font-weight: bold;
+}
+.mActInfo .subTitle{
+    overflow: hidden ;
+    display: -webkit-box ;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical ;
+    word-break: break-all ;
+    font-size:px2rem(24);
+    color:#152b59;
+    line-height: px2rem(36);
+    margin-bottom:px2rem(10);
+}
+.mActDate{
     font-size:px2rem(24);
     line-height: px2rem(30);
     width:100%;

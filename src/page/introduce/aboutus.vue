@@ -1,8 +1,8 @@
 <template>
     <div class="bg">
         <head-top webActive="中心介绍" webChildActive="中心概论"></head-top>
-        <div class="banner">
-                <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
+        <div class="introBanner">
+            <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
                 <el-carousel-item v-for="(item,index) in bannerInfo" :key="index"  >
                     <div @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)"><img :src="item.imgurl"></div>
                 </el-carousel-item>
@@ -77,10 +77,10 @@
             headTop,videoPlayer
         },
         mounted(){
-            if(document.body.clientWidth<=1024){
-                this.bannerHeight = '218px';
-                this.newsShowNum = 3;
-            }
+            // if(document.body.clientWidth<=1024){
+            //     this.bannerHeight = '218px';
+            //     this.newsShowNum = 3;
+            // }
             this.cn = getStore("inCN");
             this.isPc = getStore("isPc");
             this.initData();
@@ -169,11 +169,11 @@
         object-fit: contain;
     }
     // banner
-    .banner{
+    .introBanner{
        height: 613px;
        position: relative;
    }
-   .banner img{
+   .introBanner img{
        height: 613px;
        width:100%;
        object-fit: cover;

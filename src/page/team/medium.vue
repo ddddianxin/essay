@@ -7,7 +7,7 @@
                     <side-menu webTitle="科研队伍" webActive="中级职称"></side-menu>
                     <div>
                         <div class="teamList">
-                            <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id)">    
+                            <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                                 <img :src="item.mainPic">              
                                 <h4 class="wto">{{item.contentTitle}}</h4>
                                 <p>{{item.plainText}}</p>
@@ -73,8 +73,8 @@
                 this.page = 1;
                 this.getData();
             },
-            toTeamDetail(id){
-                this.$router.push({path:'/team/detail',query:{id:id,organizationId:this.organizationId}});
+            toTeamDetail(id,organizationId){
+                this.$router.push({path:'/team/detail',query:{id:id,organizationId:organizationId}});
             },
             handleCurrentChange(val) {
                 this.page = val;

@@ -10,7 +10,7 @@
                 <div class="search">
                     <span class="searchTit" @click="changelanguage">{{cn==0?'English':'中文'}}</span>
                     <div class="searchBox">
-                        <input value="" placeholder="">
+                        <input value="" v-model="val" placeholder="请输入搜索关键词">
                         <button @click="toSearch">搜索</button>
                     </div>
                 </div>
@@ -50,7 +50,7 @@
                 val:''
             }
         },
-        props: ['webActive','webChildActive'],
+        props: ['webActive','webChildActive','searchVal'],
         created(){
             //获取用户信息
             //this.getUserInfo();
@@ -90,7 +90,8 @@
                }
            },
            toSearch(){
-               console.log("search");
+               console.log(this.val);
+               this.$emit("toSearch",this.val);
                this.$router.push({path:'/home/search',query:{val:this.val}});
            }
         }
@@ -141,7 +142,7 @@
 .searchBox input{
     width: 186px;
     text-align: left;
-    font-size: 16px;
+    font-size: 14px;
     padding:0 10px
 }
 .searchBox button{

@@ -1,9 +1,11 @@
 <template>
     <div class="bg">
         <head-top webActive="experiment" title="研究方向"></head-top>
-        <div class="resBg">
-            <h3>{{list.contentTitle}}</h3>
-            <img src="../../images/whiteLine.png">
+        <div class="resTopBg">
+            <div class="resH3">{{list.contentTitle}}</div>
+            <div class="resTopImg">
+                <img src="../../images/whiteLine.png">
+            </div>
             <div class="resTopItem" v-for="(item,index) in titleList" :key="index">
                 <img src="../../images/star.png">
                 <span>{{item}}</span>
@@ -62,7 +64,7 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .resBg{
+    .resTopBg{
         height:px2rem(300);
         margin-top:px2rem(180);
         background: url('../../images/sciBg.png') no-repeat;
@@ -70,14 +72,18 @@
         text-align: center;
         padding-bottom:px2rem(40);
     }
-    .resBg h3{
+    .resH3{
         text-align: center;
+        display: block;
         font-size:16px;
         font-weight: bold;
         color:#fff;
         padding:px2rem(20) 0 0 0;
     }
-    .resBg img{
+    .resTopImg{
+        display:block;
+    }
+    .resTopImg img{
         margin:0px auto;
         width:80%;
     }
