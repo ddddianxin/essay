@@ -62,10 +62,6 @@ export function post(url,data = {}){
 				reject(err);
 				let message = '请求失败！请检查网络';
 				if(err.response)message=err.response.data.message;
-				console.log(message);
-
-
-
 			})
 	})
 }

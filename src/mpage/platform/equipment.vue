@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="experiment" title="实验平台"></head-top>
         <div class="webEquBg">
             <side-menu webTitle="实验平台" webActive="仪器设备"></side-menu>
@@ -100,7 +100,6 @@
                 }
             },
             async getmoredata(){
-                console.log("getmore data page:"+this.page);
 				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
 				    return false;
                 }

@@ -75,7 +75,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -89,10 +88,8 @@
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
             }
-
         },
         created(){
-
 
         },
     }

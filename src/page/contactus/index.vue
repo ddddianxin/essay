@@ -60,14 +60,9 @@
                 this.listData = res.data.list[0];
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             }
-            
-
-
         },
         created(){
-
 
         },
     }

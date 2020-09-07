@@ -116,7 +116,6 @@
         if (this.pulldown) {
           this.scroll.on('touchend', (pos) => {
             // 下拉动作
-            console.log("plugin touchend");
             if (pos.y > 50) {
               this.$emit('pulldown')
             }

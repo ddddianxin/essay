@@ -1,12 +1,13 @@
 <template>
     <div id='foot'>
         <div class="lfText">
-            <p>版权所有：中国科学院深圳先进技术研究院</p>
-            <p>深圳市南山区西丽深圳大学城学院大道1068号*****号</p>
+            <p @click="toLink(pcData.copyrightUrl)">{{mobileData.copyright}}</p>
+            <p @click="toLink(pcData.icpUrl)">{{mobileData.icp}}</p>
+            <p>{{mobileData.address}}</p>
         </div>
         <div class="contact">
             <div class="ercode">
-                <img :src="qrcode">
+                <img :src="mobileData.qrcode">
             </div>
             <p>联系我们</p>
         </div>
@@ -26,7 +27,7 @@
                 cn:0,
                 isPc:0,//0为手机，1为pc
                 menuData:[],
-                qrcode:''
+                mobileData:''
             }
         },
         props: ['menuActive'],
@@ -43,9 +44,17 @@
             async getMenu(){
                var res = await queryMenuAndHeaderFooter(this.cn,1);
                this.menuData = res.data.menu.list;
-               this.qrcode = res.data.footer.mobileData.qrcode;
-               console.log(res.data);
+               this.mobileData = res.data.footer.mobileData;
             },
+            toLink(url){
+                if(url){
+                    var arr = url.match(/http/g);
+                    if(!arr){
+                        url = 'http://'+url;
+                    }
+                    window.open(url,"_blank");
+                }
+            }
         },
         created(){
             this.initData();

@@ -90,7 +90,6 @@
                }
            },
            toSearch(){
-               console.log(this.val);
                this.$emit("toSearch",this.val);
                this.$router.push({path:'/home/search',query:{val:this.val}});
            }

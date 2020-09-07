@@ -11,12 +11,12 @@
                     <div class="recInfo">
                         <div class="recName">{{item.contentTitle}}</div>
                         <div>
-                            <span class="recSalary">{{item.contentSubtitle}}</span>
+                            <span class="wrecSalary">{{item.contentSubtitle}}</span>
                             <span class="recExp">{{item.remark}}</span>
                         </div>
                         <p>岗位简介：</p>
                         <!-- <div class="recText" v-html="item.contentHtml"></div> -->
-                        <div class="recText">{{item.plainText}}</div>
+                        <div class="recText" style="-webkit-box-orient: vertical;">{{item.plainText}}</div>
                     </div>
                     
                 </div>
@@ -69,7 +69,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             toDetail(id,organizationId){
                 this.$router.push({path:'/recruit/detail',query:{id:id,organizationId:organizationId}});
@@ -85,10 +84,7 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             }
-
-
         },
         created(){
 
@@ -141,17 +137,17 @@
         cursor:pointer;
         text-decoration: underline;
     }
-    .recSalary{
+    .wrecSalary{
         color:#b12b6e;
         font-size:16px;
         margin-right:15px;
     }
     .recText{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 4 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
         max-height: 125px;
     }
     

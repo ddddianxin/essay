@@ -1,23 +1,22 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="experiment" title="中心概况"></head-top>
-        <div class="banner">
-            <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
+        <div class="m_us_banner">
+            <el-carousel class="m_us_bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
                 <el-carousel-item v-for="(item,index) in bannerInfo" :key="index" >
                     <div @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink)">
-                        <img :src="item.imgurl">
+                        <img class="m_us_banner_img" :src="item.imgurl">
                     </div>
                 </el-carousel-item>
             </el-carousel>
         </div>
-        <!-- <img class="mbgTop" src="../../images/mCtIntro.png"> -->
-        <div class="ctBg">
+        <div class="m_us_ctBg">
             <div class="container">
-                <div class="ctBox">
+                <div class="m_us_ctBox">
                     <div v-for="(item,index) in list" :key="index">
                         <h3>{{item.contentTitle}}</h3>
                         <div class="tc pl15 pr15"><img class="w" src="../../images/ctTitLine.png"></div>
-                        <div class="ctText" v-html="item.contentHtml"></div>
+                        <div class="m_us_ctText" v-html="item.contentHtml"></div>
                         <div class="picShow">
                             <img :src="item.mainPic">
                         </div>
@@ -127,37 +126,30 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .bg{
+    .m_bg{
         background-color:#fff;
     }
-    .ctBg{
+    .m_us_ctBg{
         padding-bottom:35px;
     }
-    .mbgTop{
-        height:px2rem(400);
-        width: px2rem(750);
-        object-fit: cover;
-        margin-top:px2rem(180);
-        text-align: center;
-    }
-    .ctBox{
+    .m_us_ctBox{
         width:100%;
     }
-    .ctBox h3{
+    .m_us_ctBox h3{
        margin:px2rem(40) 0;
        color:#152b59;
        font-size: px2rem(46);
        font-weight: normal;
        text-align: center;
     }
-    .ctBox h4{
+    .m_us_ctBox h4{
         text-align:center;
         font-size:px2rem(40);
         color:#152b59;
         font-weight:bold;
         
     }
-    .ctText{
+    .m_us_ctText{
         color:#666;
         font-size:px2rem(32);
         line-height: px2rem(60);
@@ -184,30 +176,30 @@
         object-fit: contain;
     }    
     // banner
-    .banner{
-        height:218px;
+    .m_us_banner{
+        height:px2rem(400);
         margin-top:px2rem(180);
         position: relative;
    }
-   .banner img{
-       height:218px;
+   .m_us_banner_img{
+       height:px2rem(400);
        width:100%;
        object-fit: cover;
    }
-   .el-carousel__indicators.el-carousel__indicators--horizontal{
+   .m_us_banner .el-carousel__indicators.el-carousel__indicators--horizontal{
         right:0;
         left:initial;
     }
-    .el-carousel__indicators--horizontal li{
+    .m_us_banner .el-carousel__indicators--horizontal li{
         float:right;
     }
-    .el-carousel__indicator--horizontal{
-        padding:0 6px 8px 0;
+    .m_us_banner .el-carousel__indicator--horizontal{
+        padding:0 px2rem(12) px2rem(16) 0;
     }
-    .el-carousel__button{
-        width:10px;
-        height: 10px;
-        border-radius: 30px;
+    .m_us_banner .el-carousel__button{
+        width:px2rem(20);
+        height: px2rem(20);
+        border-radius: px2rem(60);
     }
 
 </style>

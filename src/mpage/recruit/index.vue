@@ -1,8 +1,8 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="recruit" title="人才招聘"></head-top>
         <div class="webRecBg">
-            <img class="bgTop" src="../../images/mCtIntro.png">
+            <img class="m_bgTop" src="../../images/mCtIntro.png">
             <div class="webRecList">
                 <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
                     :data="listData"
@@ -12,7 +12,7 @@
                     @scrollToEnd="getmoredata"
                     :pullup="true">
                     <div>
-                        <div class="mrecList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id.item.organizationId)">
+                        <div class="mrecList" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">
                             <div class="mrecInfo">
                                 <div class="mrecName">{{item.contentTitle}}</div>
                                 <div>
@@ -20,7 +20,7 @@
                                     <span class="mrecExp">{{item.remark}}</span>
                                 </div>
                                 <p>岗位简介：</p>
-                                <div class="mrecText">{{item.plainText}}</div>
+                                <div class="mrecText" style="-webkit-box-orient: vertical;">{{item.plainText}}</div>
                             </div>
                         </div>
                     </div>
@@ -102,6 +102,7 @@
 					this.noData = true;
 					this.loadingText = '';
                 }
+                console.log(this.listData);
             },
             async getmoredata(){
 				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
@@ -136,15 +137,15 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .webRecBg{
-        padding-top:px2rem(180);
-    }
+    // .webRecBg{
+    //     padding-top:px2rem(180);
+    // }
     .webRecList{
         display: block;
         background-color: #f7f7f7;
         overflow: hidden;
     }
-    .bgTop{
+    .m_bgTop{
         height:px2rem(240);
         width: px2rem(750);
         object-fit: cover;
@@ -174,11 +175,11 @@
         margin-right:px2rem(30);
     }
     .mrecText{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 4 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
         max-height: 125px;
         color:#152b59;
     }

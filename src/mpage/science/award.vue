@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="achievement" title="科研成果"></head-top>
         <div class="webAwardBg">
             <side-menu webTitle="科研成果" webActive="成果奖励"></side-menu>
@@ -14,7 +14,7 @@
                     <div  class="webAList">
                         <div class="webAwardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id,item.organizationId)">    
                             <img :src="item.mainPic">              
-                            <h4>{{item.contentTitle}}</h4>
+                            <h4 style="-webkit-box-orient: vertical;">{{item.contentTitle}}</h4>
                             <div class="tc">
                                 <span class="arrow">
                                     <img src="../../images/arrow.png">
@@ -104,7 +104,6 @@
                 }
             },
             async getmoredata(){
-                console.log("getmore data page:"+this.page);
 				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
 				    return false;
                 }
@@ -172,11 +171,11 @@
     font-size: px2rem(28);
     color:#152b59;
     padding:0 px2rem(24);
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
     line-height: px2rem(38);
     height: px2rem(80);
 }

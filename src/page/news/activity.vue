@@ -17,7 +17,7 @@
                                 </div>
                                 <div class="tPinfo">
                                     <h4 class="wto">{{topVal.contentTitle}}</h4>
-                                    <p class="plain">{{topVal.plainText}}</p>
+                                    <p class="plain" style="-webkit-box-orient: vertical;">{{topVal.plainText}}</p>
                                     <p class="date">{{topVal.publishTime}}</p>
                                 </div>
                                 <div class="tPsign">
@@ -114,7 +114,6 @@
                 }
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             }
 
         },
@@ -174,40 +173,6 @@
        text-align: right;
        line-height: 70px;
    }
-   .cenInfo{
-       width:382px;
-   }
-   .cenInfo h4{
-       font-size: 16px;
-       color:#333;
-       font-weight: bold;
-       padding:0;
-       line-height: 30px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-   }
-   .cenInfo h4:hover{
-       cursor:pointer;
-       color:#152b59;
-       text-decoration: underline;
-   }
-   .cenInfo p{
-       line-height: 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        color:#666;
-        height: 40px;
-   }
-   .cenInfo span{
-       color:#999;
-       font-size:12px;
-   }
 
    .viewShow{
        margin-top:15px;
@@ -220,31 +185,7 @@
        height: 150px;
        object-fit: cover;
    }
-   .ctNinfo{
-       width: 690px;
-       height: 150px;
-       padding:0 20px;
-   }
-   .ctNinfo h4{
-       font-size:16px;
-       color:#333;
-       font-weight: bold;
-       margin-bottom:10px;
-   }
-   .ctNinfo p{
-       line-height: 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 3 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-   }
-   .ctNinfo span{
-       margin-top:10px;
-       color:#999;
-       font-size:12px;
-       display: block;
-   }
+
    .ctNSign{
        width:100px;
        display: flex;
@@ -347,11 +288,11 @@
    .tPinfo .plain{
        font-size:14px;
        color:#152b59;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 3 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
         height: 72px;
    }
    .tPinfo .date{

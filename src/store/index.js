@@ -20,12 +20,10 @@ const store = new Vuex.Store({
         [IN_CN](state) {
             state.inCN = 0;
             setStore('inCN', 0);
-            console.log("setStore('inCN', 0);");
         },
         [IN_EN](state) {
             state.inCN = 1;
             setStore('inCN', 1);
-            console.log("setStore('inCN', 1);");
         }
     },
     actions: {

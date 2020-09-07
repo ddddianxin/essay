@@ -9,7 +9,7 @@
                     </div>
                     <div class="desInfo">
                         <h3>{{val.contentTitle}}</h3>
-                        <div class="info" v-html="this.valArr[0]"></div>
+                        <div class="info" style="-webkit-box-orient: vertical;" v-html="this.valArr[0]"></div>
                     </div>
                 </div>
                 <div class="desNav">
@@ -76,8 +76,6 @@
                 this.val = res.data.list[0];
                 this.valArr = this.val.contentHtml.split("###");
                 this.plainArr = this.val.plainText.split("###");
-                console.log(res);
-                console.log(this.valArr);
             },
             clickTab(tabNum){
                 this.tab = tabNum;
@@ -124,11 +122,11 @@
         font-size:18px;
         margin-bottom:10px;
         line-height: 36px;;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 3 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
     }
     .desNav{
         display:flex;

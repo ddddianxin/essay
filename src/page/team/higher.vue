@@ -10,7 +10,7 @@
                             <div class="teamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                                 <img :src="item.mainPic">              
                                 <h4 class="wto">{{item.contentTitle}}</h4>
-                                <p>{{item.plainText}}</p>
+                                <p style="-webkit-box-orient: vertical;">{{item.plainText}}</p>
                                 <div class="tc">
                                     <span class="arrow">
                                         <img src="../../images/arrow.png">
@@ -75,7 +75,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -88,13 +87,9 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             }
-
         },
         created(){
-
-
         },
     }
 
@@ -179,11 +174,11 @@
    }
     .teamItem p{
         font-size: 12px;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
         color:#152b59;
         padding:0 20px;
         margin-bottom:10px;

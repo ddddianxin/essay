@@ -9,7 +9,7 @@
                         <div  class="awardList">
                             <div class="awardItem" v-for="(item,index) in listData" :key="index" @click="toSciDetail(item.id,item.organizationId)">    
                                 <img :src="item.mainPic">              
-                                <h4 class="">{{item.contentTitle}}</h4>
+                                <h4 style="-webkit-box-orient: vertical;">{{item.contentTitle}}</h4>
                                 <div class="tc">
                                     <span class="arrow">
                                         <img src="../../images/arrow.png">
@@ -74,7 +74,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -87,13 +86,9 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             }
-
         },
         created(){
-
-
         },
     }
 
@@ -175,11 +170,11 @@
        font-weight: bold;
        color:#152b59;
        padding:2px 20px 5px 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
    }
     
     .awardItem .arrow{

@@ -815,6 +815,7 @@
 
 /* 强制替换页码样式 */
 
+.el-pager li,
 .el-pagination button,
 .el-pagination button:disabled,
 .el-pager.el-pager .number {

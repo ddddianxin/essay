@@ -87,7 +87,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -100,14 +99,9 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
-               
             }
-
         },
         created(){
-
-
         },
     }
 
@@ -173,69 +167,5 @@
        height: 70px;
        object-fit: cover;
    }
-
-//    .topPanel{
-//        display: flex;
-//        flex-wrap: nowrap;
-//        justify-content: space-between;
-//        border-bottom:1px solid #ddd;
-//        padding-bottom:20px;
-//    }
-//    .tPimg{
-//        width:200px;
-//        height:140px;
-//    }
-//    .tPimg img{
-//        width:200px;
-//        height:140px;
-//        object-fit: cover;
-//    }
-//    .tPinfo{
-//        width:420px;
-//        padding-left:20px;
-//    }
-//    .tPinfo h4{
-//        font-size:16px;
-//        color:#333;
-//        font-weight: bold;
-//    }
-//    .tPinfo h4:hover{
-//        cursor:pointer;
-//        color: #152b59;
-//        text-decoration: underline;
-//    }
-//    .tPinfo .plain{
-//        font-size:14px;
-//        color:#666;
-//        overflow: hidden ;
-//         display: -webkit-box ;
-//         -webkit-line-clamp: 3 ;
-//         -webkit-box-orient: vertical ;
-//         word-break: break-all ;
-//         height: 72px;
-//    }
-//    .tPinfo .date{
-//        font-size:13px;
-//        color:#999;
-//        margin-top:15px;
-//    }
-//    .tPsign{
-//        width:160px;
-//    }
-//    .tPsign span{
-//        width:80px;
-//        height:40px;
-//        line-height: 40px;
-//        border-radius: 30px;
-//         background-color:#c3c3c3;
-//         color:#fff;
-//         text-align: center;
-//         display: block;
-//         font-size:16px;
-//         font-weight: bold;
-//         float:right;
-//         margin-top:20px;
-//    }
-    
 
 </style>

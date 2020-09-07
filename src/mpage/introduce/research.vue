@@ -1,20 +1,20 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="experiment" title="研究方向"></head-top>
-        <div class="resTopBg">
-            <div class="resH3">{{list.contentTitle}}</div>
-            <div class="resTopImg">
+        <div class="m_resTopBg" :style="{background: 'url(' + bgImg + ') no-repeat'}">
+            <div class="m_resH3">{{list.contentTitle}}</div>
+            <div class="m_resTopImg">
                 <img src="../../images/whiteLine.png">
             </div>
-            <div class="resTopItem" v-for="(item,index) in titleList" :key="index">
+            <div class="m_resTopItem" v-for="(item,index) in titleList" :key="index">
                 <img src="../../images/star.png">
                 <span>{{item}}</span>
             </div>
         </div>
         
-        <div class="ctBg">
+        <div class="m_ctBg">
             <div class="container">
-               <div class="resText" v-html="list.contentHtml"></div>
+               <div class="m_resText" v-html="list.contentHtml"></div>
             </div>
         </div>
     </div>
@@ -32,7 +32,8 @@
                 id:'',
                 organizationId:'',
                 titleList:[],
-                list:''
+                list:'',
+                bgImg:require('../../images/sciBg.png')
             }
         },
         components:{
@@ -64,15 +65,16 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .resTopBg{
+    .m_resTopBg{
         height:px2rem(300);
         margin-top:px2rem(180);
-        background: url('../../images/sciBg.png') no-repeat;
-        background-size:100% 100%;
+        //background: url('../../images/sciBg.png') no-repeat;
+        // background-size:100% 100%;
+        background-size: cover;
         text-align: center;
         padding-bottom:px2rem(40);
     }
-    .resH3{
+    .m_resH3{
         text-align: center;
         display: block;
         font-size:16px;
@@ -80,14 +82,14 @@
         color:#fff;
         padding:px2rem(20) 0 0 0;
     }
-    .resTopImg{
+    .m_resTopImg{
         display:block;
     }
-    .resTopImg img{
+    .m_resTopImg img{
         margin:0px auto;
         width:80%;
     }
-    .resTopItem{
+    .m_resTopItem{
         font-size:12px;
         color:#fff;
         padding:0;
@@ -95,19 +97,19 @@
         display: flex;
         justify-content: center;
     }
-    .resTopItem img{
+    .m_resTopItem img{
         margin:0;
         width:px2rem(20);
         object-fit: contain;
         padding-right:10px;
     }
-    .ctBg{
+    .m_ctBg{
         padding:15px px2rem(20) 35px px2rem(20);
     }
-    .ctBg img{
+    .m_ctBg img{
         width:100%;
     }
-    .resText{
+    .m_resText{
         font-size:14px;
         line-height: px2rem(60);
     }

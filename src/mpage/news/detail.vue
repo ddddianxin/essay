@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="news" title="新闻动态"></head-top>
         <div class="mDetail">
             <h2 class="mDetailTit">{{val.contentTitle}}</h2>
@@ -42,7 +42,6 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await detailContent(this.id,this.organizationId,this.cn);
                 this.val = res.data.list[0];
-                console.log(res);
             }
         },
         created(){

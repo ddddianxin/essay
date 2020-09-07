@@ -9,9 +9,9 @@
             </el-carousel>
         </div>
         <!-- <img class="bgTop" src="../../images/ctIntro.png"> -->
-        <div class="ctBg">
+        <div class="aboutus_ctBg">
             <div class="container">
-                <div class="ctBox">
+                <div class="aboutus_ctBox">
                     <div v-for="(item,index) in list" :key="index">
                         <h3>{{item.contentTitle}}</h3>
                         <div class="tc"><img src="../../images/ctTitLine.png"></div>
@@ -96,10 +96,8 @@
 
                 var res2 = await banner(1,this.cn,this.isPc,'introduction');
                 this.bannerInfo = res2.data;
-                console.log(res2);
             },
             toBannerJump(isExternalLink,contentId,jumpLink){
-                console.log("isExternalLink:"+isExternalLink+" | contentId:"+contentId+" | jumpLink:"+jumpLink)
                 // 当isExternalLink=0时，无需跳转任何页面
                 // 当isExternalLink=1时，跳转到详情页，查询/cms/content/queryDetailContent?id=contentId
                 // 当isExternalLink=2时，跳转到外部链接，即jumpLink指定的链接
@@ -128,18 +126,20 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .ctBg{
+    .aboutus_ctBg{
         padding-bottom:35px;
+        background-color:#fff;
+        display:flex;
     }
     .bgTop{
         height:528px;
         width: 100%;
         object-fit: cover;
     }
-    .ctBox{
+    .aboutus_ctBox{
         width:1024px;
     }
-    .ctBox h3{
+    .aboutus_ctBox h3{
        margin:30px 0 0 0;
        color:#152b59;
        font-weight: bold;

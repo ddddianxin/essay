@@ -88,7 +88,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -101,7 +100,6 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
 
                 var sortArr=[];
                 for(var i =0 ; i < this.listData.length ; i++){
@@ -115,7 +113,6 @@
                         hash.push(sortArr[i]);
                     }
                 }
-                console.log(hash);
                 this.sortTit = hash;
                 var newList=[];
                 for(var i = 0 ; i < hash.length ;i++){
@@ -127,14 +124,10 @@
                     }
                     newList.push(valList);
                 }
-                console.log(newList);
                 this.sortList = newList;
             }
-
         },
         created(){
-
-
         },
     }
 

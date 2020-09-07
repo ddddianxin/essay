@@ -1,7 +1,7 @@
 <template>
     <div class="bg">
         <head-top webActive="中心介绍" webChildActive="研究方向"></head-top>
-        <div class="resBg">
+        <div class="resBg" :style="{background: 'url(' + bgImg + ') no-repeat'}">
             <h3>{{list.contentTitle}}</h3>
             <img src="../../images/whiteLine.png">
             <div class="resTopItem" v-for="(item,index) in titleList" :key="index">
@@ -30,7 +30,8 @@
                 id:'',
                 organizationId:'',
                 list:'',
-                titleList:[]
+                titleList:[],
+                bgImg:require('../../images/sciBg.png')
             }
         },
         components:{
@@ -49,14 +50,9 @@
                 var res = await content(this.cn,this.id,this.organizationId);
                 this.list = res.data.list[0];
                 this.titleList = res.data.list[0].contentSubtitle.split("###");
-                console.log(this.titleList);
-                console.log(res);
             }
-
         },
         created(){
-
-
         },
     }
 
@@ -66,8 +62,9 @@
     @import '../../style/mixin';
     .resBg{
         min-height:325px;//525px
-        background: url('../../images/sciBg.png') no-repeat;
-        background-size:100% 100%;
+        //background: url('../../images/sciBg.png') no-repeat;
+        // background-size:100% 100%;
+        background-size: cover;
         text-align: center;
         padding-bottom:40px;
     }

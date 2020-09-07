@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="contactUs" title="联系我们"></head-top>
         <div class="ctBg">
             <div class="container">
@@ -60,16 +60,9 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .bg{
+    .m_bg{
         background-color:#fff;
         margin-top:px2rem(180);
-    }
-    .bgTop{
-        height:px2rem(400);
-        width: px2rem(750);
-        object-fit: cover;
-        margin-top:px2rem(180);
-        text-align: center;
     }
     .cmBox{
         width:100%;

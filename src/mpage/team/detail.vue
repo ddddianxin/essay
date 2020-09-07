@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="news" title="科研队伍"></head-top>
         <div class="mDetail">
             <div class="mdesTop">
@@ -74,16 +74,12 @@
                 this.val = res.data.list[0];
                 this.valArr = this.val.contentHtml.split("###");
                 this.plainArr = this.val.plainText.split("###");
-                console.log(res);
-                console.log(this.valArr);
             },
             clickTab(tabNum){
                 this.tab = tabNum;
             }
         },
         created(){
-
-
         },
     }
 

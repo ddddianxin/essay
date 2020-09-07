@@ -69,7 +69,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -82,13 +81,10 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
             },
             toDetail(id,organizationId){
                 this.$router.push({path:'/platform/detail',query:{id:id,organizationId:organizationId}});
             }
-
-
         },
         created(){
 
@@ -136,58 +132,7 @@
        background-color: #152b59;
        
    }
-   .expList{
-       width:100%;
-       margin-top:15px;
-       display: flex;
-       flex-wrap: wrap;
-       justify-content: space-between;
-   }
-   .expItem{
-       width:502px;
-       margin-bottom:20px;
-       display: flex;
-       flex-wrap: nowrap;
-       justify-content: space-between;
-   }
-   .expItem img{
-       width:100px;
-       height: 100px;
-       object-fit: cover;
-   }
-   .expInfo{
-       width:382px;
-   }
-   .expInfo h4{
-       font-size: 16px;
-       color:#333;
-       font-weight: bold;
-       padding:0;
-       line-height: 32px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-   }
-   .expInfo h4:hover{
-       cursor:pointer;
-       color:#152b59;
-   }
-   .expInfo p{
-       line-height: 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        color:#666;
-        height: 40px;
-   }
-   .expInfo span{
-       color:#999;
-       font-size:12px;
-   }
+  
    .expPanel{
        width:100%;
        display:flex;

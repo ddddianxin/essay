@@ -1,9 +1,9 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="news" title="新闻动态"></head-top>
-        <div class="sciNewsBg">
+        <div class="m_sciNewsBg">
             <side-menu webTitle="新闻动态" webActive="中心动态"></side-menu>
-            <div class="sciNewsList">
+            <div class="m_sciNewsList">
                 <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
                     :data="listData"
                     :listenScroll="true"
@@ -11,24 +11,24 @@
                     @pulldown="getData"
                     @scrollToEnd="getmoredata"
                     :pullup="true">
-                    <div class="sciList">
+                    <div class="m_sciList">
                         <div class="mActItem" v-if="topVal" @click="toNewsDetail(topVal.id,topVal.organizationId)">
                             <div class="mActPic">
                                 <img :src="topVal.mainPic">
                             </div>              
                             <div class="mActInfo">
-                                <div class="title">{{topVal.contentTitle}}</div>
-                                <div class="subTitle">{{topVal.plainText}}</div>
+                                <div class="title" style="-webkit-box-orient: vertical;">{{topVal.contentTitle}}</div>
+                                <div class="subTitle" style="-webkit-box-orient: vertical;">{{topVal.plainText}}</div>
                                 <div class='mActDate'><span class="mr10">{{topVal.attributeTypeName}}</span>{{topVal.publishTime}}</div>
                             </div>
                         </div>
-                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
-                            <div class="sciNewsPic">
+                        <div class="m_sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
+                            <div class="m_sciNewsPic">
                                 <img :src="item.mainPic">
                             </div>              
-                            <div class="sciNewsInfo">
-                                <div class="title">{{item.contentTitle}}</div>
-                                <div class="subTitle">{{item.plainText}}</div>
+                            <div class="m_sciNewsInfo">
+                                <div class="title" style="-webkit-box-orient: vertical;">{{item.contentTitle}}</div>
+                                <div class="subTitle" style="-webkit-box-orient: vertical;">{{item.plainText}}</div>
                                 <div class='sciNewsDate'>{{item.publishTime}}</div>
                             </div>
                         </div>
@@ -98,7 +98,6 @@
                 this.$router.push({path:'/news/detail',query:{id:id,organizationId:organizationId}});
             },
             async getData(){
-                console.log("getdata");
                 var resApi = await contentPage(
                     this.cn,
                     this.page,
@@ -131,11 +130,8 @@
 					this.noData = true;
 					this.loadingText = '';
                 }
-                console.log(this.topVal);
-                console.log(this.listData);
             },
             async getmoredata(){
-                console.log("getmoredata");
 				if(this.loadingText != '' && this.loadingText != '上拉加载更多'){
 				    return false;
                 }
@@ -168,57 +164,57 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-.sciNewsBg{
+.m_sciNewsBg{
     margin-top:px2rem(180);
 }
-.sciNewsList{
+.m_sciNewsList{
     display: block;
     padding:0 px2rem(40);
     background-color: #f7f7f7;
     overflow: hidden;
 }
-.sciNewsItem{
+.m_sciNewsItem{
     border-bottom:1px dashed #ddd;
     padding:px2rem(20) 0;
     display:flex;
     flex-wrap: nowrap;
     justify-content: space-between;
 }
-.sciNewsPic{
+.m_sciNewsPic{
     width:px2rem(100);
     height:px2rem(100);
 }
-.sciNewsPic img{
+.m_sciNewsPic img{
     width:px2rem(100);
     height:px2rem(100);
     object-fit: cover;
 }
-.sciNewsInfo{
+.m_sciNewsInfo{
     width:px2rem(570);
     padding-left:px2rem(20);
 }
-.sciNewsInfo .title{
+.m_sciNewsInfo .title{
     color:#152b59;
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
     font-size:px2rem(26);
     line-height: px2rem(40);
     font-weight: bold;
 }
-.sciNewsInfo .subTitle{
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+.m_sciNewsInfo .subTitle{
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
     font-size:px2rem(24);
     color:#152b59;
     line-height: px2rem(30);
 }
-.sciNewsDate{
+.m_sciNewsDate{
     font-size:px2rem(24);
     line-height: px2rem(30);
     width:100%;
@@ -248,21 +244,21 @@
 }
 .mActInfo .title{
     color:#152b59;
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
     font-size:px2rem(26);
     line-height: px2rem(40);
     font-weight: bold;
 }
 .mActInfo .subTitle{
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
     font-size:px2rem(24);
     color:#152b59;
     line-height: px2rem(36);

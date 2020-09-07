@@ -11,7 +11,7 @@
                             <div class="supTit">
                                 <span>{{item}}</span>
                             </div>
-                            <div class="supInfo" v-for="(iitem,iindex) in listData" :key="iindex" v-if="iitem.typeName==item" @click="toDetail(iitem.id,iitem.organizationId)">
+                            <div class="supInfo" v-for="(iitem,iindex) in sortList[index]" :key="iindex" @click="toDetail(iitem.id,iitem.organizationId)">
                                 <div class="supText">
                                     <p class="fb tit">{{iitem.contentTitle}}</p>
                                     <p>{{iitem.plainText}}</p>
@@ -46,7 +46,6 @@
                 listData:[],
                 sortList:[],
                 sortTit:[]
-                
             }
         },
         components:{
@@ -68,7 +67,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var res = await contentPage(
@@ -81,7 +79,6 @@
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
                 this.totalRow = res.data.totalRow;
-                console.log(res);
 
                 var sortArr = [];
                 for(var i=0;i<this.listData.length;i++){
@@ -95,6 +92,20 @@
                     }
                 }
                 this.sortTit = hash;
+
+                var newList=[];
+                for(var i = 0 ; i < hash.length ;i++){
+                    var valList=[];
+                    for(var j = 0 ; j< this.listData.length ; j++){
+                        if(hash[i]==this.listData[j].typeName){
+                            valList.push(this.listData[j]);
+                        }
+                    }
+                    newList.push(valList);
+                }
+                this.sortList = newList;
+
+                console.log(this.sortList);
             },
             toDetail(id,organizationId){
                 this.$router.push({path:'/platform/detail',query:{id:id,organizationId:organizationId}});

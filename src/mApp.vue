@@ -1,5 +1,5 @@
 <template>
-  <div id="mApp">
+  <div id="mApp" class="mobileapp">
    <!-- <head-top></head-top> -->
     <router-view></router-view>
    <nav-foot></nav-foot>
@@ -29,12 +29,12 @@
       font-family: 'pingFangSC-Medium, sans-serif';
   }
     #mApp{
-        min-width:auto;
         margin:0 auto;
         width:100%;
         display: block;
         background-color: $bggray;
     }
+    
 
 
 </style>

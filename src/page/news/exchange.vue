@@ -131,14 +131,12 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             async getData(){
                 var dicRes = await dictionary(
                     'contentType',
                     'academic_exchange'
                 )
-                console.log(dicRes);
                 this.sortList = dicRes.data;
                 var res = await contentPage(
                     this.cn,
@@ -148,7 +146,6 @@
                     this.id,
                     dicRes.data[this.sortNum].id
                 );
-                console.log(res);
                 
                 this.listData = res.data.list;
                 this.totalPage = res.data.totalPage;
@@ -202,40 +199,7 @@
        text-align: right;
        line-height: 70px;
    }
-   .sciInfo{
-       width:664px;
-   }
-   .sciInfo h4{
-       font-size: 16px;
-       color:#333;
-       font-weight: bold;
-       padding:0;
-       line-height: 30px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-   }
-   .sciInfo h4:hover{
-       cursor:pointer;
-       color:#152b59;
-   }
-   .sciInfo p{
-       line-height: 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
-        color:#666;
-        height: 40px;
-   }
-   .sciInfo span{
-       color:#999;
-       font-size:12px;
-   }
-
+   
    .sciNList{
         width:780px;
         min-height: 850px;

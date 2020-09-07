@@ -6,7 +6,7 @@
                 <h2 class="newsH2">{{val.contentTitle}}</h2>
                 <div class="newsSource"> 
                     <div>
-                        <span class="recSalary">{{val.contentSubtitle}}</span>
+                        <span class="wdrecSalary">{{val.contentSubtitle}}</span>
                         <span class="recExp">{{val.remark}}</span> 
                     </div>
                     <span>{{val.publishTime}}</span>
@@ -55,13 +55,9 @@
                 this.organizationId = this.$route.query.organizationId;
                 var res = await detailContent(this.id,this.organizationId,this.cn);
                 this.val = res.data.list[0];
-                console.log(res);
             }
-
         },
         created(){
-
-
         },
     }
 
@@ -94,7 +90,7 @@
         color:#152b59;
         line-height: 36px;
     }
-    .recSalary{
+    .wdrecSalary{
         color:#b12b6e;
         font-size:16px;
         margin-right:15px;

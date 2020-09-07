@@ -5,15 +5,15 @@
         <div class="sciNBg">
             <div class="container">
                 <div class="lsideBox">
-                    <div class="sciNList">
+                    <div class="searNList">
                         <div class="mb15">
-                            <div class="sciNItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">    
-                                <div class="sciNInfo">
+                            <div class="searNItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">    
+                                <div class="searNInfo">
                                     <h4 class="wto">{{item.contentTitle}}</h4>
                                     <p class="wto">{{item.plainText}}</p>    
                                 </div>         
-                                <div class="sciNdate">{{item.publishTime}}</div>
-                                <div class="sciNimg">
+                                <div class="searNdate">{{item.publishTime}}</div>
+                                <div class="searNimg">
                                     <img :src="item.mainImage?'http://sensing.zwin.work/'+item.mainImage:require('../../images/default.jpg')">
                                 </div>
                             </div>
@@ -80,7 +80,6 @@
             handleCurrentChange(val) {
                 this.page = val;
                 this.getData();
-                //console.log(`当前页: ${val}`);
             },
             getVal(val){
                 this.keywords = val;
@@ -94,9 +93,7 @@
                 );
                 this.listData = res.data;
                 this.totalPage = res.totalPage;
-                console.log(res);
             }
-
         },
         created(){
 
@@ -119,48 +116,48 @@
         padding:36px 0;
     }
    
-   .sciNList{
+   .searNList{
         width:100%;
         min-height: 850px;
         display: flex;
         flex-wrap: wrap;
         align-content:space-between;
     }
-    .sciNItem{
+    .searNItem{
        display:flex;
        flex-wrap: nowrap;
        justify-content: space-between;
        padding-top:8px;
        border-bottom:1px solid #ddd;
    }
-   .sciNInfo{
+   .searNInfo{
        width:809px;
    }
-   .sciNInfo h4{
+   .searNInfo h4{
        font-size:16px;
        font-weight: bold;
        color:#152b59;
        line-height: 40px;
    }
-   .sciNInfo h4:hover{
+   .searNInfo h4:hover{
        cursor:pointer;
        color:#152b59;
        text-decoration: underline;
    }
-   .sciNInfo p{
+   .searNInfo p{
        font-size:15px;
        color:#152b59;
    }
-   .sciNdate{
+   .searNdate{
        width:110px;
        line-height: 70px;
        text-align: center;
        color:#152b59;
    }
-   .sciNimg{
+   .searNimg{
        width:105px;
    }
-   .sciNimg img{
+   .searNimg img{
        width:105px;
        height: 70px;
        object-fit: cover;

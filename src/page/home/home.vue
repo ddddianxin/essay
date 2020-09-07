@@ -6,7 +6,7 @@
                  <el-carousel class="bannerBox" indicator-position="" :interval="4500" :height='bannerHeight'>
                     <el-carousel-item v-for="(item,index) in bannerInfo" :key="index">
                         <div class="coverBg" @click="toBannerJump(item.isExternalLink,item.contentId,item.jumpLink,item.organizationId)">
-                            <div class="bannerText">
+                            <div class="bannerText" style="-webkit-box-orient: vertical;">
                                 <h2 class="wto">{{item.bannerTitle!=''&&item.bannerTitle!=null?item.bannerTitle:item.contentTitle}}</h2>
                                 <!-- <p>{{item.jumpLink}}</p> -->
                                 <!-- <p>{{item.content}}</p> -->
@@ -25,8 +25,8 @@
                         <div class="sciLf">
                             <div class="sciLfItem" v-for="(item,index) in sciNewsData" :key="index" @click="toNewsDetail(item.id,item.organizationId)">
                                 <img :src="'http://sensing.zwin.work/'+item.mainImage">
-                                <h4>{{item.contentTitle}}</h4>
-                                <p class="plain">{{item.plainText}}</p>
+                                <h4 style="-webkit-box-orient: vertical;">{{item.contentTitle}}</h4>
+                                <p class="plain" style="-webkit-box-orient: vertical;">{{item.plainText}}</p>
                                 <p class="date">{{item.publishTime}}</p>
                                 <div class="tc">
                                     <span class="arrow">
@@ -41,15 +41,11 @@
                             <div class="swiper-container achiContainer">
                                 <div class="swiper-wrapper">
                                     <div class="swiper-slide sciRgItem" v-for="(item,index) in achieve" :key="index" @click="toScienceDetail(item.id,item.organizationId)">
-                                        <h4>{{item.contentTitle}}</h4>
+                                        <h4 style="-webkit-box-orient: vertical;">{{item.contentTitle}}</h4>
                                         <p>{{item.publishTime}}</p>
                                     </div>
                                 </div>
                             </div>
-                            <!-- <div class="sciRgItem" v-for="(item,index) in achieve" :key="index" @click="toScienceDetail(item.id,item.organizationId)">
-                                <h4>{{item.contentTitle}}</h4>
-                                <p>{{item.publishTime}}</p>
-                            </div> -->
                         </div>
                     </div>
                 </div>
@@ -62,7 +58,7 @@
                         <div class="swiper-container comContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide hmLf_item" v-for="(item,index) in sciCommunit" :key="index" @click="toNewsDetail(item.id,item.organizationId)">    
-                                    <h4>{{item.contentTitle}}</h4>
+                                    <h4 style="-webkit-box-orient: vertical;">{{item.contentTitle}}</h4>
                                     <p class="date">{{item.publishTime}}</p>
                                 </div>
                             </div>
@@ -76,35 +72,15 @@
                         <div class="swiper-container jobContainer">
                             <div class="swiper-wrapper">
                                 <div class="swiper-slide hmRg_item" v-for="(item,index) in recruitData" :key="index" @click="toRecruitDetail(item.id,item.organizationId)">    
-                                    <h4>{{item.contentTitle}}</h4>
+                                    <h4 class="wto">{{item.contentTitle}}</h4>
                                     <span>岗位介绍：</span>
-                                    <p>{{item.plainText}}</p>
+                                    <p style="-webkit-box-orient: vertical;">{{item.plainText}}</p>
                                 </div>
                             </div>
                         </div>
-                        <!-- <div class="hmRg_item" v-for="(item,index) in recruitData.slice(0,2)" :key="index">
-                            <h4>{{item.contentTitle}}</h4>
-                            <span>岗位介绍：</span>
-                            <p>{{item.plainText}}</p>
-                        </div> -->
                     </div>
                 </div>
             </div>
-            <!-- <div class="centerBg">
-                <div class="container centerIntro">
-                    <img src="../../images/centerIntro.jpg">
-                    <div class="ctIntro">
-                        <h3>中心介绍</h3>
-                        <span class="h3BLine"></span>
-                        <div class="ctText">
-                            <p>能发快递今飞凯达数据库服大佬就是都看了放假的上飞机的抗裂砂浆付贷款老是假放得开了上飞机的开始放假看到了书法家李德生科技</p>
-                            <p>今飞凯达水力发电是否考虑的健身房困了就睡犯了大忌是浪费极度空灵上飞机的间极乐空间离开家打发时间开具我kin模拟开接口分开搭建方式付款的健身房里的水就反垄断收缴罚款利健康觉得绿色放假的看来是呢分类多少积分理科生</p>
-                            <p>今飞凯达水力发电是否考虑的健身房困了就睡犯了大忌是浪费极度空灵上飞机的极乐空间离开家</p>
-                            <router-link to=''>了解更多</router-link>
-                        </div>
-                    </div>
-                </div>
-            </div> -->
             <div class="teamBg">
                 <div class="container">
                     <div class="teamTit">
@@ -117,7 +93,7 @@
                                 <div class="swiper-slide teamItem" v-for="(item,index) in teamData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                                     <img :src="'http://sensing.zwin.work/'+item.mainImage">              
                                     <h4 class="wto">{{item.contentTitle}}</h4>
-                                    <p>{{item.plainText}}</p>
+                                    <p style="-webkit-box-orient: vertical;">{{item.plainText}}</p>
                                     <div class="tc">
                                         <span class="arrow">
                                             <img src="../../images/arrow.png">
@@ -180,7 +156,6 @@
                 var res = await banner(1,this.cn,this.isPc);
                 this.bannerInfo = res.data;
                 var res2 = await indexContent(this.cn,1,this.isPc);
-                console.log(this.bannerInfo);
                 this.sciNewsData = res2.data.science.slice(0,6);
                 this.sciCommunit = res2.data.learning;
                 this.recruitData = res2.data.recruit;
@@ -324,11 +299,11 @@
        line-height: 40px;
    }
    .bannerText p{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 7 ;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 7;
+-webkit-box-orient: vertical;
         font-size:13px;
    }
    .bannerText a{
@@ -403,11 +378,11 @@
        margin-top:15px;
    }
    .sciRgItem h4{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
         font-weight: bold;
         font-size: 13px;
         line-height: 22px;
@@ -447,11 +422,11 @@
    }
    .sciLfItem h4{
        font-size: 13px;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
         font-weight: bold;
         color:#152b59;
         padding:0 20px;
@@ -463,11 +438,11 @@
        color:#152b59;
        font-size: 10px;
        padding:0 20px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
         height:48px;
    }
    .sciLfItem .date{
@@ -567,11 +542,11 @@
    }
     .teamItem p{
         font-size: 12px;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 4;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 4;
+-webkit-box-orient: vertical;
         color:#152b59;
         padding:0 20px;
         margin-bottom:10px;
@@ -593,7 +568,7 @@
     }
     .teamSwiper{
         width:1024px;
-        height: 360px;
+        height: 376px;
         position:relative;
         overflow: hidden;
     }
@@ -666,11 +641,11 @@
     }
     .recItem p{
         font-size: 12px;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 5;
+-webkit-box-orient: vertical;
         color:#333;
         margin-bottom:10px;
         height:115px;
@@ -717,11 +692,11 @@
    }
    .hmLf_item h4{
        font-size:13px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
         font-weight: bold;
         height: 24px;
    }
@@ -733,11 +708,11 @@
        color:#96a3bb;
        font-size:12px;
        margin-top:5px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 2;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 2;
+-webkit-box-orient: vertical;
    }
    .hmLf_item .date{
        color:#8db7c0;
@@ -782,11 +757,11 @@
        color:#fff;
        font-size:12px;
        margin-top:5px;
-       overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 5;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+       overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 5;
+-webkit-box-orient: vertical;
    }
 
 </style>

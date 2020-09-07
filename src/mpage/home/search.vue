@@ -1,7 +1,7 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="home" showSearch="false"></head-top>
-        <div class="sciNewsBg">
+        <div class="gSearchBg">
             <div class="globalSearch">
                 <div class="gSearBox">
                     <i class="el-icon-search"></i>
@@ -9,7 +9,7 @@
                 </div>
                 <span class="searBtn" @click="getData()">搜索</span>
             </div>
-            <div class="sciNewsList">
+            <div class="gSearchList">
                 <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
                     :data="listData"
                     :listenScroll="true"
@@ -17,15 +17,15 @@
                     @pulldown="getData"
                     @scrollToEnd="getmoredata"
                     :pullup="true">
-                    <div class="sciList">
-                        <div class="sciNewsItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">
-                            <div class="sciNewsPic">
+                    <div class="gsList">
+                        <div class="gSearItem" v-for="(item,index) in listData" :key="index" @click="toDetail(item.id,item.organizationId)">
+                            <div class="gSearPic">
                                 <img :src="item.mainImage?'http://sensing.zwin.work/'+item.mainImage:require('../../images/default.jpg')">
                             </div>              
-                            <div class="sciNewsInfo">
-                                <div class="title">{{item.contentTitle}}</div>
-                                <div class="subTitle">{{item.plainText}}</div>
-                                <div class='sciNewsDate'>{{item.publishTime}}</div>
+                            <div class="gSearInfo">
+                                <div class="title" style="-webkit-box-orient: vertical;">{{item.contentTitle}}</div>
+                                <div class="subTitle" style="-webkit-box-orient: vertical;">{{item.plainText}}</div>
+                                <div class='gSearDate'>{{item.publishTime}}</div>
                             </div>
                         </div>
                         <view class="loading">{{loadingText}}</view>
@@ -96,7 +96,6 @@
                     this.rows
                 );
                 var res = resApi.data;
-                console.log(resApi);
                 if (res.length != 0 && res.length == this.rows) {
 					this.noData = false;
 					this.page++;
@@ -147,13 +146,6 @@
         padding:px2rem(20) px2rem(30);
         background-color: #152b59;
     }
-    .gSearch{
-        // width:px2rem(440);
-        // display: flex;
-        // flex-wrap: nowrap;
-        // justify-content: flex-end;
-        // display: inline-block;
-    }
     .gSearBox{
         width:px2rem(540);
         height: px2rem(46);
@@ -188,57 +180,57 @@
         text-align: center;
         border-radius: px2rem(50);
     }
-    .sciNewsBg{
+    .gSearchBg{
         margin-top:px2rem(180);
     }
-    .sciNewsList{
+    .gSearchList{
         display: block;
         padding:0 px2rem(40);
         background-color: #f7f7f7;
         overflow: hidden;
     }
-    .sciNewsItem{
+    .gSearItem{
         border-bottom:1px dashed #ddd;
         padding:px2rem(20) 0;
         display:flex;
         flex-wrap: nowrap;
         justify-content: space-between;
     }
-    .sciNewsPic{
+    .gSearPic{
         width:px2rem(100);
         height:px2rem(100);
     }
-    .sciNewsPic img{
+    .gSearPic img{
         width:px2rem(100);
         height:px2rem(100);
         object-fit: cover;
     }
-    .sciNewsInfo{
+    .gSearInfo{
         width:px2rem(570);
         padding-left:px2rem(20);
     }
-    .sciNewsInfo .title{
+    .gSearInfo .title{
         color:#152b59;
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
         font-size:px2rem(26);
         line-height: px2rem(40);
         font-weight: bold;
     }
-    .sciNewsInfo .subTitle{
-        overflow: hidden ;
-        display: -webkit-box ;
-        -webkit-line-clamp: 1;
-        -webkit-box-orient: vertical ;
-        word-break: break-all ;
+    .gSearInfo .subTitle{
+        overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 1;
+-webkit-box-orient: vertical;
         font-size:px2rem(24);
         color:#152b59;
         line-height: px2rem(30);
     }
-    .sciNewsDate{
+    .gSearDate{
         font-size:px2rem(24);
         line-height: px2rem(30);
         width:100%;

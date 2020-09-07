@@ -1,5 +1,5 @@
 <template>
-    <div class="bg">
+    <div class="m_bg">
         <head-top webActive="team" title="科研队伍"></head-top>
         <div class="webTeamBg">
             <side-menu webTitle="科研队伍" webActive="高级职称"></side-menu>
@@ -15,7 +15,7 @@
                         <div class="webteamItem" v-for="(item,index) in listData" :key="index" @click="toTeamDetail(item.id,item.organizationId)">    
                             <img :src="item.mainPic">              
                             <h4 class="wto">{{item.contentTitle}}</h4>
-                            <p>{{item.plainText}}</p>
+                            <p style="-webkit-box-orient: vertical;">{{item.plainText}}</p>
                             <div class="tc">
                                 <span class="arrow">
                                     <img src="../../images/arrow.png">
@@ -174,11 +174,11 @@
 }
 .webteamItem p{
     font-size: px2rem(24);
-    overflow: hidden ;
-    display: -webkit-box ;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical ;
-    word-break: break-all ;
+    overflow : hidden;
+text-overflow: ellipsis;
+display: -webkit-box;
+-webkit-line-clamp: 3;
+-webkit-box-orient: vertical;
     color:#152b59;
     padding:0 px2rem(24);
     margin-bottom:px2rem(20);

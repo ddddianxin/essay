@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="app" class="pcapp">
 <!--    <head-top></head-top>-->
     <router-view></router-view>
     <foot-bottom></foot-bottom>
@@ -21,8 +21,10 @@
   @import './style/base.css';
   @import './style/common.css';
   #app{
-    min-width: 1024px;
     font-family: 'pingFangSC-Medium, sans-serif';
+  }
+  .pcapp{
+    min-width: 1024px;
   }
 
 </style>
