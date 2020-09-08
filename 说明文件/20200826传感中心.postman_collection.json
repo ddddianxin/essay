@@ -1,0 +1,802 @@
+{
+	"info": {
+		"_postman_id": "75bd2a87-d162-4787-a30b-a280408faa48",
+		"name": "传感中心",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "首页请求菜单",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/menu/queryMenuList?chineseOrEnglish=0&organizationId=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"menu",
+						"queryMenuList"
+					],
+					"query": [
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0中文，1英文"
+						},
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "首页请求菜单",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cms/menu/queryMenuList?Chinese_or_English=0&organization_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cms",
+								"menu",
+								"queryMenuList"
+							],
+							"query": [
+								{
+									"key": "Chinese_or_English",
+									"value": "0",
+									"description": "中文或英文菜单；0中文，1英文（int类型）"
+								},
+								{
+									"key": "organization_id",
+									"value": "1",
+									"description": "机构id（int类型）"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Accept, X-Requested-With, remember-me"
+						},
+						{
+							"key": "Server",
+							"value": "JFinal 4.9"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Jul 2020 11:03:19 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "593"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, DELETE, HEAD"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"查询成功\", //接口返回信息\n    \"data\": [  //请求成功获取到的详细数据\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-06-18 17:06:26\",\n            \"creatorId\": 1,\n            \"id\": 1,  //菜单id\n            \"isDiy\": 0, //用于判断菜单的跳转路径是否为内部路由路径。当为0时，为系统配置的路径，取menuUrl字段的路由地址；当为1时，为外部路径，会有diyUrl字段\n            \"isHomeShow\": 0,\n            \"isParent\": 1,  //判断是否为一级菜单，0为二级菜单，1为一级菜单\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"首页\",  //菜单名称\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/menu/index\",  //才当映射的路由地址\n            \"organizationId\": 1,\n            \"sort\": 1,\n            \"state\": 1,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-06-18 19:36:20\",\n            \"creatorId\": 1,\n            \"id\": 2,\n            \"isDiy\": 0,\n            \"isHomeShow\": 1,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"items\": [  //有该字段说明该一级菜单下有二级菜单，二级菜单的字段与一级菜单一致\n                {\n                    \"chineseOrEnglish\": 0,\n                    \"createTime\": \"2020-06-18 23:13:57\",\n                    \"creatorId\": 1,\n                    \"diyUrl\": \"www.baidu.com\",\n                    \"id\": 3,\n                    \"isDiy\": 0,\n                    \"isHomeShow\": 0,\n                    \"isParent\": 0,\n                    \"isShowIndexMenu\": 1,\n                    \"menuName\": \"数字所简介\",\n                    \"menuType\": 0,\n                    \"menuUrl\": \"cms/menu/introduce/a\",\n                    \"organizationId\": 1,\n                    \"pid\": 2,\n                    \"sort\": 1,\n                    \"state\": 1,\n                    \"templateId\": 2,\n                    \"valid\": 1\n                },\n                {\n                    \"chineseOrEnglish\": 0,\n                    \"createTime\": \"2020-06-19 14:15:59\",\n                    \"creatorId\": 1,\n                    \"id\": 5,\n                    \"isDiy\": 0,\n                    \"isHomeShow\": 0,\n                    \"isParent\": 0,\n                    \"isShowIndexMenu\": 1,\n                    \"menuName\": \"所长致辞\",\n                    \"menuType\": 0,\n                    \"menuUrl\": \"cms/menu/introd/bbb\",\n                    \"organizationId\": 1,\n                    \"pid\": 2,\n                    \"sort\": 2,\n                    \"state\": 1,\n                    \"templateId\": 2,\n                    \"valid\": 1\n                }\n            ],\n            \"menuName\": \"机构概述\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/menu/instroduce\",\n            \"organizationId\": 1,\n            \"sort\": 2,\n            \"state\": 1,\n            \"templateId\": 2,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-06-19 14:16:31\",\n            \"creatorId\": 1,\n            \"id\": 6,\n            \"isDiy\": 0,\n            \"isHomeShow\": 1,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"科研队伍\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/menu/team\",\n            \"organizationId\": 1,\n            \"sort\": 3,\n            \"state\": 1,\n            \"templateId\": 1,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-07-06 21:30:24\",\n            \"creatorId\": 1,\n            \"id\": 7,\n            \"isDiy\": 0,\n            \"isHomeShow\": 1,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"科研动态\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/aaa\",\n            \"organizationId\": 1,\n            \"sort\": 4,\n            \"state\": 1,\n            \"templateId\": 2,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-07-09 17:58:38\",\n            \"creatorId\": 1,\n            \"id\": 8,\n            \"isDiy\": 0,\n            \"isHomeShow\": 0,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"科研成果\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/sss\",\n            \"organizationId\": 1,\n            \"sort\": 5,\n            \"state\": 1,\n            \"templateId\": 11,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-07-09 17:59:20\",\n            \"creatorId\": 1,\n            \"id\": 9,\n            \"isDiy\": 0,\n            \"isHomeShow\": 0,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"科研平台\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/qqq\",\n            \"organizationId\": 1,\n            \"sort\": 6,\n            \"state\": 1,\n            \"templateId\": 11,\n            \"valid\": 1\n        },\n        {\n            \"chineseOrEnglish\": 0,\n            \"createTime\": \"2020-07-09 18:00:15\",\n            \"creatorId\": 1,\n            \"id\": 10,\n            \"isDiy\": 0,\n            \"isHomeShow\": 0,\n            \"isParent\": 1,\n            \"isShowIndexMenu\": 1,\n            \"menuName\": \"人才教育\",\n            \"menuType\": 0,\n            \"menuUrl\": \"cms/www\",\n            \"organizationId\": 1,\n            \"sort\": 7,\n            \"state\": 1,\n            \"templateId\": 13,\n            \"valid\": 1\n        }\n    ],\n    \"state\": \"ok\" //接口请求状态。成功为ok，失败为fail。\n}"
+				}
+			]
+		},
+		{
+			"name": "查询某菜单下的所有内容（不分页）",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/content/queryContentApi?chineseOrEnglish=0&menuId=20&organizationId=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"content",
+						"queryContentApi"
+					],
+					"query": [
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0中文，1英文（int类型）"
+						},
+						{
+							"key": "menuId",
+							"value": "20",
+							"description": "菜单id（int类型）"
+						},
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id（int类型）"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "查询某菜单下的所有内容（不分页）",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cms/content/queryContentApi?Chinese_or_English=0&menu_id=6&organization_id=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cms",
+								"content",
+								"queryContentApi"
+							],
+							"query": [
+								{
+									"key": "Chinese_or_English",
+									"value": "0",
+									"description": "中文或英文菜单；0中文，1英文（int类型）"
+								},
+								{
+									"key": "menu_id",
+									"value": "6",
+									"description": "菜单id（int类型）"
+								},
+								{
+									"key": "organization_id",
+									"value": "1",
+									"description": "机构id（int类型）"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Accept, X-Requested-With, remember-me"
+						},
+						{
+							"key": "Server",
+							"value": "JFinal 4.9"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Jul 2020 11:12:31 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1466"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, DELETE, HEAD"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"查询成功\",  //返回msg\n    \"data\": [  //详细数据\n        {\n            \"attribute_type_name\": \"top\", //内容标志，top为置顶，new为最新，hot为最热\n            \"content_html\": \"<p>职务：院长&nbsp;<br/>职称：研究员&nbsp;&nbsp;&nbsp;<br/>所属单元高性能计算技术研究中心&nbsp;&nbsp;&nbsp;<br/>个人介绍：1990年获中国科学院工学博士学位。历任计算所课题组长、智能中心副总工、国家高性能计算机工程中心主任，计算所副所长。2006年起任深圳先进技术研究院院长，现为中国科学院计算技术研究所二级研究员。目前任《计算机研究与发展》杂志主编，南开大学兼职教授，中国数字图书馆工程建设专家顾问委员会委员，信息产业部国家十一五科技发展规划专家组成员，北京技术预见行动计划专家组成员，北京计算机学会常务理事，北京信息化协会副理事长，中科院青年创新联合会委员。近年主办并担任2007年全国高性能计算学术年会大会主席、GCC2008大会主席。&nbsp;<br/><br/>樊建平研究员在高性能计算机及应用领域具有深厚研究基础，作为曙光系列高性能计算机的奠基人之一，先后主持和参加研制成功了曙光1号并行计算机、曙光天演服务器、曙光1000、曙光3000、曙光4000系列国产高性能计算机和服务器系统，为曙光计算机达到和保持国际先进水平作出了卓越的贡献。共完成国家863和攻关项目十几项，申请专利11项，已授权专利4项，专著1本，发表文章70余篇。历获中国科学院科技进步特等奖、国家科学技术进步一等奖、国家科学技术进步二等奖、中国科学院科技进步二等奖、北京市科技进步一等奖、中国青年科技奖、中国科学院优秀青年奖等殊誉，1993年起享受政府特殊津贴，先后被评为863计划先进个人，国家九五攻关计划先进个人。</p>\",  //后台编辑器生成的带html标签的内容\n            \"content_title\": \"院长介绍\", //内容标题\n            \"create_time\": \"2020-07-02 18:36:45\", //创建时间\n            \"edit_time\": \"2020-07-09 19:37:17\", //修改时间\n            \"id\": 16,  //内容id\n            \"main_pic\": \"upload/cms/material/content/20200702/ddd1f7e7-472e-4139-8df1-94602bdfe4d4.jpg\", //内容主图\n            \"menu_id\": 6,\n            \"organization_id\": 1,\n            \"plain_text\": \"职务：院长职称：研究员所属单元高性能计算技术研究中心个人介绍：1990年获中国科学院工学博士学位。历任计算所课题组长、智能中心副总工、国家高性能计算机工程中心主任，计算所副所长。2006年起任深圳先进技术研究院院长，现为中国科学院计算技术研究所二级研究员。目前任《计算机研究与发展》杂志主编，南开大学兼职教授，中国数字图书馆工程建设专家顾问委员会委员，信息产业部国家十一五科技发展规划专家组成员，北京技术预见行动计划专家组成员，北京计算机学会常务理事，北京信息化协会副理事长，中科院青年创新联合会委员。近年主办并担任2007年全国高性能计算学术年会大会主席、GCC2008大会主席。樊建平研究员在高性能计算机及应用领域具有深厚研究基础，作为曙光系列高性能计算机的奠基人之一，先后主持和参加研制成功了曙光1号并行计算机、曙光天演服务器、曙光1000、曙光3000、曙光4000系列国产高性能计算机和服务器系统，为曙光计算机达到和保持国际先进水平作出了卓越的贡献。共完成国家863和攻关项目十几项，申请专利11项，已授权专利4项，专著1本，发表文章70余篇。历获中国科学院科技进步特等奖、国家科学技术进步一等奖、国家科学技术进步二等奖、中国科学院科技进步二等奖、北京市科技进步一等奖、中国青年科技奖、中国科学院优秀青年奖等殊誉，1993年起享受政府特殊津贴，先后被评为863计划先进个人，国家九五攻关计划先进个人。\",  //纯文本的内容\n            \"type_name\": \"employee\"\n        },\n        {\n            \"content_html\": \"<p>科研队伍介绍：</p><p><img src=\\\"upload/neditor/image/20200623/adc6220e-0a00-4c7f-9d34-2ec94ea8d9a9.jpg\\\" alt=\\\"message.jpg\\\"/></p>\",\n            \"content_title\": \"队伍介绍\",\n            \"create_time\": \"2020-06-23 14:41:50\",\n            \"edit_time\": \"2020-07-09 19:06:15\",\n            \"id\": 14,\n            \"main_pic\": \"upload/cms/material/content/20200623/8a3ec019-e53b-4ef7-a0f5-ea6303a34320.jpg\",\n            \"menu_id\": 6,\n            \"organization_id\": 1,\n            \"plain_text\": \"科研队伍介绍：\",\n            \"type_name\": \"employee\"\n        }\n    ],\n    \"state\": \"ok\",  //请求状态。成功为ok，失败为fail\n    \"type\": \"swiper2\"\n}"
+				}
+			]
+		},
+		{
+			"name": "查询某菜单下的所有内容（分页）、关键词搜索（分页）",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/content/queryContentPageApi?chineseOrEnglish=0&pageNumber=1&pageSize=5&organizationId=1&menuId=8",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"content",
+						"queryContentPageApi"
+					],
+					"query": [
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0中文，1英文（int类型）"
+						},
+						{
+							"key": "pageNumber",
+							"value": "1",
+							"description": "每页内容数（int类型）"
+						},
+						{
+							"key": "pageSize",
+							"value": "5",
+							"description": "页码（int类型）"
+						},
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id（int类型）"
+						},
+						{
+							"key": "menuId",
+							"value": "8",
+							"description": "菜单id，关键词搜索时该参数不用传（int类型）"
+						},
+						{
+							"key": "keywords",
+							"value": "简介",
+							"description": "关键词，搜索框查询时必须传的参数（string类型）",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "查询某菜单下的所有内容（分页）、关键词搜索（分页）",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cms/content/queryContentPageApi?Chinese_or_English=0&pageNumber=1&pageSize=5&organization_id=1&menu_id=3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cms",
+								"content",
+								"queryContentPageApi"
+							],
+							"query": [
+								{
+									"key": "Chinese_or_English",
+									"value": "0",
+									"description": "中文或英文菜单；0中文，1英文（int类型）"
+								},
+								{
+									"key": "pageNumber",
+									"value": "1",
+									"description": "每页内容数（int类型）"
+								},
+								{
+									"key": "pageSize",
+									"value": "5",
+									"description": "页码（int类型）"
+								},
+								{
+									"key": "organization_id",
+									"value": "1",
+									"description": "机构id（int类型）"
+								},
+								{
+									"key": "menu_id",
+									"value": "3",
+									"description": "菜单id，关键词搜索时该参数不用传（int类型）"
+								},
+								{
+									"key": "keywords",
+									"value": "简介",
+									"description": "关键词，搜索框查询时必须传的参数（string类型）",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Accept, X-Requested-With, remember-me"
+						},
+						{
+							"key": "Server",
+							"value": "JFinal 4.9"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Jul 2020 11:32:03 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1602"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, DELETE, HEAD"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"查询成功\",\n    \"data\": {\n        \"firstPage\": true, //是否为第一页\n        \"lastPage\": true,  //是否为最后一页\n        \"list\": [ //数据列表\n            {\n                \"attribute_type_name\": \"top\", //内容属性，top为置顶，new为最新，hot为最热\n                \"author\": \"总管理\", //作者\n                \"content_html\": \"<p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">中国科学院深圳先进技术研究院先进计算与数字工程研究所（以下简称“数字所”）为先进院的核心研究单元之一，是在中国科学院、深圳市政府共同支持下建立的、我国规模最大的以“计算科学和工程”为核心的研究机构。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所面向中国快速城市化和工业信息化的国家战略需求，基于高性能计算、网络和可视化技术发展数字城市和数字工程等方向的应用基础和核心关键技术，推动从数字生活向数字城市转型过程中相关技术的产业化。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所拥有华南地区性能最优的高性能计算机曙光4000L，浮点峰值运算能力高达每秒1.5万亿次，近期将建设千万亿次计算环境。高端计算环境将为计算密集、数据密集和访问密集为特点的城市资源信息处理、环境仿真、信息挖掘与服务、应急预案模拟、工程计算、信息可视化等众多领域提供高性能计算和存储服务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\\\"http://127.0.0.1/upload/neditor/image/20200621/46a35fc9-9a33-4869-8b9c-b344e90c14a8.gif\\\" alt=\\\"pic_tici_hk.gif\\\" style=\\\"float: left;\\\"/><span style=\\\"color: #333333; font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; text-indent: 24px;\\\"></span></p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所与国际诸多著名大学和研究院建立了紧密的学术交流与合作关系，是我国先进计算与数字工程领域对外合作与交流的重要窗口。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\"><br/></p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所将着眼于应用基础技术研究，构建国际一流的科研基地，引领数字工程学领域的创新进步，为促进和谐城市建设、增强自主创新能力不断做出基础性、战略性和前瞻性的重大贡献。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\"><br/></p><p><br/></p>\", \n                    //带html标签的内容\n                \"content_title\": \"数字所简介\", //内容主标题，若有副标题，则会增加content_subtitle字段\n                \"create_time\": \"2020-06-19 19:22:59\", //创建时间\n                \"edit_time\": \"2020-07-09 00:12:49\",  //编辑时间\n                \"id\": 1, //内容id\n                \"main_pic\": \"upload/cms/template/20200621/0ff5f3d0-8e3e-4414-8960-ed4f958ab8df.jpg\", //内容主题\n                \"menu_id\": 3,\n                \"organization_id\": 1,\n                \"plain_text\": \"中国科学院深圳先进技术研究院先进计算与数字工程研究所（以下简称“数字所”）为先进院的核心研究单元之一，是在中国科学院、深圳市政府共同支持下建立的、我国规模最大的以“计算科学和工程”为核心的研究机构。数字所面向中国快速城市化和工业信息化的国家战略需求，基于高性能计算、网络和可视化技术发展数字城市和数字工程等方向的应用基础和核心关键技术，推动从数字生活向数字城市转型过程中相关技术的产业化。数字所拥有华南地区性能最优的高性能计算机曙光4000L，浮点峰值运算能力高达每秒1.5万亿次，近期将建设千万亿次计算环境。高端计算环境将为计算密集、数据密集和访问密集为特点的城市资源信息处理、环境仿真、信息挖掘与服务、应急预案模拟、工程计算、信息可视化等众多领域提供高性能计算和存储服务。数字所与国际诸多著名大学和研究院建立了紧密的学术交流与合作关系，是我国先进计算与数字工程领域对外合作与交流的重要窗口。数字所将着眼于应用基础技术研究，构建国际一流的科研基地，引领数字工程学领域的创新进步，为促进和谐城市建设、增强自主创新能力不断做出基础性、战略性和前瞻性的重大贡献。\",  //纯文本的内容\n                \"publish_time\": \"2020-07-09 22:50:28\", //发布时间\n                \"type_name\": \"company\"\n            }\n        ],\n        \"pageNumber\": 1, //页码\n        \"pageSize\": 5,  //每页数据的数量\n        \"totalPage\": 1,  //总共页面\n        \"totalRow\": 1  //总共数据数\n    },\n    \"state\": \"ok\"\n}"
+				}
+			]
+		},
+		{
+			"name": "根据id查看内容详情",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/content/queryDetailContent?id=31&organizationId=1&chineseOrEnglish=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"content",
+						"queryDetailContent"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "31",
+							"description": "内容id（int类型）"
+						},
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id（int类型）"
+						},
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0中文，1英文（int类型）"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "根据id查看内容详情",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cms/content/queryDetailContent?id=1&organization_id=1&Chinese_or_English=0",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cms",
+								"content",
+								"queryDetailContent"
+							],
+							"query": [
+								{
+									"key": "id",
+									"value": "1",
+									"description": "内容id（int类型）"
+								},
+								{
+									"key": "organization_id",
+									"value": "1",
+									"description": "机构id（int类型）"
+								},
+								{
+									"key": "Chinese_or_English",
+									"value": "0",
+									"description": "中文或英文菜单；0中文，1英文（int类型）"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Accept, X-Requested-With, remember-me"
+						},
+						{
+							"key": "Server",
+							"value": "JFinal 4.9"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Jul 2020 11:37:20 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "1620"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, DELETE, HEAD"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"查询成功\",\n    \"data\": {\n        \"attributeType\": 309,\n        \"author\": \"总管理\", //作者\n        \"chineseOrEnglish\": 0,\n        \"contentBody\": \"<p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">中国科学院深圳先进技术研究院先进计算与数字工程研究所（以下简称“数字所”）为先进院的核心研究单元之一，是在中国科学院、深圳市政府共同支持下建立的、我国规模最大的以“计算科学和工程”为核心的研究机构。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所面向中国快速城市化和工业信息化的国家战略需求，基于高性能计算、网络和可视化技术发展数字城市和数字工程等方向的应用基础和核心关键技术，推动从数字生活向数字城市转型过程中相关技术的产业化。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所拥有华南地区性能最优的高性能计算机曙光4000L，浮点峰值运算能力高达每秒1.5万亿次，近期将建设千万亿次计算环境。高端计算环境将为计算密集、数据密集和访问密集为特点的城市资源信息处理、环境仿真、信息挖掘与服务、应急预案模拟、工程计算、信息可视化等众多领域提供高性能计算和存储服务。</p><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src=\\\"http://127.0.0.1/upload/neditor/image/20200621/46a35fc9-9a33-4869-8b9c-b344e90c14a8.gif\\\" alt=\\\"pic_tici_hk.gif\\\" style=\\\"float: left;\\\"/><span style=\\\"color: #333333; font-family: &quot;Microsoft YaHei&quot;; font-size: 12px; text-indent: 24px;\\\"></span></p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所与国际诸多著名大学和研究院建立了紧密的学术交流与合作关系，是我国先进计算与数字工程领域对外合作与交流的重要窗口。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">&nbsp;</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\"><br/></p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\">数字所将着眼于应用基础技术研究，构建国际一流的科研基地，引领数字工程学领域的创新进步，为促进和谐城市建设、增强自主创新能力不断做出基础性、战略性和前瞻性的重大贡献。</p><p style=\\\"margin-top: 0px; margin-bottom: 0px; padding: 0px; list-style: none; color: rgb(51, 51, 51); font-family: &quot;Microsoft YaHei&quot;; text-indent: 24px; font-size: 12px; white-space: normal;\\\"><br/></p><p><br/></p>\", //带html标签的内容\n        \"contentHref\": \"123\",  //跳转链接，当isHref为1是有效\n        \"contentTitle\": \"数字所简介\", //内容标题\n        \"contentType\": 301,\n        \"createTime\": \"2020-06-19 19:22:59\", //创建时间\n        \"creatorId\": 1,\n        \"editTime\": \"2020-07-09 00:12:49\", //编辑时间\n        \"editorId\": 1,\n        \"id\": 1, //内容id\n        \"isHref\": 0, //用于判断内容是否为跳转链接。0时为内容展示，使用contentBody字段；当为1时，即表示为跳转链接，一般用于内容为纯图片，点击图片跳转到其他的地方，1时用contentHref字段\n        \"keyWord\": \"简介\",\n        \"mainImage\": \"upload/cms/template/20200621/0ff5f3d0-8e3e-4414-8960-ed4f958ab8df.jpg\", //主图地址\n        \"materialId\": \"\",\n        \"menuId\": 3, //菜单id\n        \"organizationId\": 1,\n        \"plainText\": \"中国科学院深圳先进技术研究院先进计算与数字工程研究所（以下简称“数字所”）为先进院的核心研究单元之一，是在中国科学院、深圳市政府共同支持下建立的、我国规模最大的以“计算科学和工程”为核心的研究机构。数字所面向中国快速城市化和工业信息化的国家战略需求，基于高性能计算、网络和可视化技术发展数字城市和数字工程等方向的应用基础和核心关键技术，推动从数字生活向数字城市转型过程中相关技术的产业化。数字所拥有华南地区性能最优的高性能计算机曙光4000L，浮点峰值运算能力高达每秒1.5万亿次，近期将建设千万亿次计算环境。高端计算环境将为计算密集、数据密集和访问密集为特点的城市资源信息处理、环境仿真、信息挖掘与服务、应急预案模拟、工程计算、信息可视化等众多领域提供高性能计算和存储服务。数字所与国际诸多著名大学和研究院建立了紧密的学术交流与合作关系，是我国先进计算与数字工程领域对外合作与交流的重要窗口。数字所将着眼于应用基础技术研究，构建国际一流的科研基地，引领数字工程学领域的创新进步，为促进和谐城市建设、增强自主创新能力不断做出基础性、战略性和前瞻性的重大贡献。\", //纯文本的内容\n        \"publishId\": 1,\n        \"publishState\": 1,\n        \"publishTime\": \"2020-07-09 22:50:28\", //发布时间\n        \"sort\": 1,\n        \"state\": 1,\n        \"templateId\": 1,\n        \"valid\": 1\n    },\n    \"state\": \"ok\"\n}"
+				}
+			]
+		},
+		{
+			"name": "查询首页banner图",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/banner/queryBannerList?organizationId=1&chineseOrEnglish=0&isPc=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"banner",
+						"queryBannerList"
+					],
+					"query": [
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id（int类型）"
+						},
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0中文，1英文（int类型）"
+						},
+						{
+							"key": "isPc",
+							"value": "1",
+							"description": "手机或pc。0为手机，1为pc（int类型）"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "查询首页banner图",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/cms/banner/queryBannerList?organization_id=1&Chinese_or_English=0&is_pc=1",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"cms",
+								"banner",
+								"queryBannerList"
+							],
+							"query": [
+								{
+									"key": "organization_id",
+									"value": "1",
+									"description": "机构id（int类型）"
+								},
+								{
+									"key": "Chinese_or_English",
+									"value": "0",
+									"description": "中文或英文菜单；0中文，1英文（int类型）"
+								},
+								{
+									"key": "is_pc",
+									"value": "1",
+									"description": "手机或pc。0为手机，1为pc（int类型）"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						},
+						{
+							"key": "Access-Control-Allow-Headers",
+							"value": "Content-Type, Accept, X-Requested-With, remember-me"
+						},
+						{
+							"key": "Server",
+							"value": "JFinal 4.9"
+						},
+						{
+							"key": "Date",
+							"value": "Fri, 10 Jul 2020 11:45:00 GMT"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Access-Control-Allow-Origin",
+							"value": "*"
+						},
+						{
+							"key": "Access-Control-Allow-Credentials",
+							"value": "true"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json;charset=UTF-8"
+						},
+						{
+							"key": "Content-Length",
+							"value": "456"
+						},
+						{
+							"key": "Access-Control-Allow-Methods",
+							"value": "POST, GET, OPTIONS, DELETE, HEAD"
+						},
+						{
+							"key": "Access-Control-Max-Age",
+							"value": "3600"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"msg\": \"查询成功\",\n    \"data\": [\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:40\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-10 08:40:07\",\n            \"editor_id\": 1,\n            \"id\": 3,\n            \"img_url\": \"upload/cms/banner/20200703/c7c5c219-ea2a-4dbc-b57a-82705cf28286.jpg\", //banner图地址\n            \"is_html\": 0,\n            \"is_pc\": 1, //用于区分是手机端或PC端的banner图。0为手机端，1为PC端\n            \"jump_link\": \"www.zwin.com\", //图片跳转地址\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 3,//banner图排序，顺序由大到小\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        },\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:22\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-03 14:33:08\",\n            \"editor_id\": 1,\n            \"id\": 2,\n            \"img_url\": \"upload/cms/banner/20200703/03bf68e8-b1c3-489f-bd5e-3bf526148b02.jpg\",\n            \"is_html\": 0,\n            \"is_pc\": 1,\n            \"jump_link\": \"www.qq.com\",\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 2,\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        },\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:04\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-03 14:33:16\",\n            \"editor_id\": 1,\n            \"id\": 1,\n            \"img_url\": \"upload/cms/banner/20200703/07b8a941-c5aa-4d4f-9665-e5e0bfd3e635.jpg\",\n            \"is_html\": 0,\n            \"is_pc\": 1,\n            \"jump_link\": \"www.baidu.com\",\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 1,\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        }\n    ],\n    \"state\": \"ok\"\n}"
+				}
+			]
+		},
+		{
+			"name": "菜单请求接口 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/menu/queryMenuList?organizationId=1&chineseOrEnglish=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"menu",
+						"queryMenuList"
+					],
+					"query": [
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id，获取具体机构的有效菜单"
+						},
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文菜单；0：中文，1：英文"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "获取字典常数 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "type_key",
+							"value": "contentType",
+							"type": "text"
+						},
+						{
+							"key": "psn",
+							"value": "SCIENTIFIC_CATEGORY",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "{{url}}/api/common/getDictionaryByPkey",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"common",
+						"getDictionaryByPkey"
+					]
+				},
+				"description": "获取字典常数"
+			},
+			"response": []
+		},
+		{
+			"name": "请求菜单及头部底部 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/menu/queryMenuAndHeaderFooter?organizationId=1&chineseOrEnglish=0",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"menu",
+						"queryMenuAndHeaderFooter"
+					],
+					"query": [
+						{
+							"key": "organizationId",
+							"value": "1",
+							"description": "机构id"
+						},
+						{
+							"key": "chineseOrEnglish",
+							"value": "0",
+							"description": "中文或英文"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "根据父级菜单查询子级菜单列表 Copy",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/common/getSecondMenuList?first_menu_id=55",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"common",
+						"getSecondMenuList"
+					],
+					"query": [
+						{
+							"key": "first_menu_id",
+							"value": "55"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "首页请求主体部分内容（传感中心）",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/cms/content/querySensingIndex?chineseOrEnglish=0&organizationId=1&isPc=1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"cms",
+						"content",
+						"querySensingIndex"
+					],
+					"query": [
+						{
+							"key": "chineseOrEnglish",
+							"value": "0"
+						},
+						{
+							"key": "organizationId",
+							"value": "1"
+						},
+						{
+							"key": "isPc",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"protocolProfileBehavior": {}
+}
