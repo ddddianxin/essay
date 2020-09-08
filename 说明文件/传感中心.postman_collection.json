@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5075ff72-cf34-45ae-8ac5-b9bc86f71bcb",
+		"_postman_id": "13add83f-520e-4718-b3a1-7a75e46568ed",
 		"name": "传感中心",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -11,7 +11,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cms/menu/queryMenuList?chineseOrEnglish=0&organizationId=1",
+					"raw": "{{url}}/cms/menu/queryMenuList?Chinese_or_English=0&organization_id=1",
 					"host": [
 						"{{url}}"
 					],
@@ -22,12 +22,12 @@
 					],
 					"query": [
 						{
-							"key": "chineseOrEnglish",
+							"key": "Chinese_or_English",
 							"value": "0",
 							"description": "中文或英文菜单；0中文，1英文"
 						},
 						{
-							"key": "organizationId",
+							"key": "organization_id",
 							"value": "1",
 							"description": "机构id"
 						}
@@ -124,7 +124,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cms/content/queryContentApi?chineseOrEnglish=0&menuId=20&organizationId=1",
+					"raw": "{{url}}/cms/content/queryContentApi?Chinese_or_English=0&menu_id=6&organization_id=1",
 					"host": [
 						"{{url}}"
 					],
@@ -135,17 +135,17 @@
 					],
 					"query": [
 						{
-							"key": "chineseOrEnglish",
+							"key": "Chinese_or_English",
 							"value": "0",
 							"description": "中文或英文菜单；0中文，1英文（int类型）"
 						},
 						{
-							"key": "menuId",
-							"value": "20",
+							"key": "menu_id",
+							"value": "6",
 							"description": "菜单id（int类型）"
 						},
 						{
-							"key": "organizationId",
+							"key": "organization_id",
 							"value": "1",
 							"description": "机构id（int类型）"
 						}
@@ -247,7 +247,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cms/content/queryContentPageApi?chineseOrEnglish=0&pageNumber=1&pageSize=5&organizationId=1&menuId=8",
+					"raw": "{{url}}/cms/content/queryContentPageApi?Chinese_or_English=0&pageNumber=1&pageSize=5&organization_id=1&menu_id=3",
 					"host": [
 						"{{url}}"
 					],
@@ -258,7 +258,7 @@
 					],
 					"query": [
 						{
-							"key": "chineseOrEnglish",
+							"key": "Chinese_or_English",
 							"value": "0",
 							"description": "中文或英文菜单；0中文，1英文（int类型）"
 						},
@@ -273,13 +273,13 @@
 							"description": "页码（int类型）"
 						},
 						{
-							"key": "organizationId",
+							"key": "organization_id",
 							"value": "1",
 							"description": "机构id（int类型）"
 						},
 						{
-							"key": "menuId",
-							"value": "8",
+							"key": "menu_id",
+							"value": "3",
 							"description": "菜单id，关键词搜索时该参数不用传（int类型）"
 						},
 						{
@@ -402,7 +402,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cms/content/queryDetailContent?id=31&organizationId=1&chineseOrEnglish=0",
+					"raw": "{{url}}/cms/content/queryDetailContent?id=1&organization_id=1&Chinese_or_English=0",
 					"host": [
 						"{{url}}"
 					],
@@ -414,16 +414,16 @@
 					"query": [
 						{
 							"key": "id",
-							"value": "31",
+							"value": "1",
 							"description": "内容id（int类型）"
 						},
 						{
-							"key": "organizationId",
+							"key": "organization_id",
 							"value": "1",
 							"description": "机构id（int类型）"
 						},
 						{
-							"key": "chineseOrEnglish",
+							"key": "Chinese_or_English",
 							"value": "0",
 							"description": "中文或英文菜单；0中文，1英文（int类型）"
 						}
@@ -525,7 +525,7 @@
 				"method": "POST",
 				"header": [],
 				"url": {
-					"raw": "{{url}}/cms/banner/queryBannerList?organizationId=1&chineseOrEnglish=0&isPc=1",
+					"raw": "{{url}}/cms/banner/queryBannerList?organization_id=1&Chinese_or_English=0&is_pc=1",
 					"host": [
 						"{{url}}"
 					],
@@ -536,17 +536,17 @@
 					],
 					"query": [
 						{
-							"key": "organizationId",
+							"key": "organization_id",
 							"value": "1",
 							"description": "机构id（int类型）"
 						},
 						{
-							"key": "chineseOrEnglish",
+							"key": "Chinese_or_English",
 							"value": "0",
 							"description": "中文或英文菜单；0中文，1英文（int类型）"
 						},
 						{
-							"key": "isPc",
+							"key": "is_pc",
 							"value": "1",
 							"description": "手机或pc。0为手机，1为pc（int类型）"
 						}
@@ -641,39 +641,6 @@
 					"body": "{\n    \"msg\": \"查询成功\",\n    \"data\": [\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:40\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-10 08:40:07\",\n            \"editor_id\": 1,\n            \"id\": 3,\n            \"img_url\": \"upload/cms/banner/20200703/c7c5c219-ea2a-4dbc-b57a-82705cf28286.jpg\", //banner图地址\n            \"is_html\": 0,\n            \"is_pc\": 1, //用于区分是手机端或PC端的banner图。0为手机端，1为PC端\n            \"jump_link\": \"www.zwin.com\", //图片跳转地址\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 3,//banner图排序，顺序由大到小\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        },\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:22\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-03 14:33:08\",\n            \"editor_id\": 1,\n            \"id\": 2,\n            \"img_url\": \"upload/cms/banner/20200703/03bf68e8-b1c3-489f-bd5e-3bf526148b02.jpg\",\n            \"is_html\": 0,\n            \"is_pc\": 1,\n            \"jump_link\": \"www.qq.com\",\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 2,\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        },\n        {\n            \"chinese_or_english\": 0,\n            \"create_time\": \"2020-07-03 14:32:04\",\n            \"creator_id\": 1,\n            \"edit_time\": \"2020-07-03 14:33:16\",\n            \"editor_id\": 1,\n            \"id\": 1,\n            \"img_url\": \"upload/cms/banner/20200703/07b8a941-c5aa-4d4f-9665-e5e0bfd3e635.jpg\",\n            \"is_html\": 0,\n            \"is_pc\": 1,\n            \"jump_link\": \"www.baidu.com\",\n            \"module_id\": 7,\n            \"organization_id\": 1,\n            \"sort_rank\": 1,\n            \"state\": 1,\n            \"template_name\": \"轮播图组件1\",\n            \"template_url\": \"banner_01\",\n            \"user\": \"总管理\",\n            \"valid\": 1\n        }\n    ],\n    \"state\": \"ok\"\n}"
 				}
 			]
-		},
-		{
-			"name": "首页请求主体部分内容（传感中心）",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"url": {
-					"raw": "{{url}}/cms/content/querySensingIndex?chineseOrEnglish=0&organizationId=1&isPc=1",
-					"host": [
-						"{{url}}"
-					],
-					"path": [
-						"cms",
-						"content",
-						"querySensingIndex"
-					],
-					"query": [
-						{
-							"key": "chineseOrEnglish",
-							"value": "0"
-						},
-						{
-							"key": "organizationId",
-							"value": "1"
-						},
-						{
-							"key": "isPc",
-							"value": "1"
-						}
-					]
-				}
-			},
-			"response": []
 		}
 	],
 	"protocolProfileBehavior": {}
