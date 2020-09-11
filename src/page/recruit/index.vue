@@ -11,7 +11,7 @@
                     <div class="recInfo">
                         <div class="recName">{{item.contentTitle}}</div>
                         <div>
-                            <span class="wrecSalary">{{item.contentSubtitle}}</span>
+                            <span class="webrecSalary">{{item.contentSubtitle}}</span>
                             <span class="recExp">{{item.remark}}</span>
                         </div>
                         <p>岗位简介：</p>
@@ -137,17 +137,17 @@
         cursor:pointer;
         text-decoration: underline;
     }
-    .wrecSalary{
+    .webrecSalary{
         color:#b12b6e;
         font-size:16px;
         margin-right:15px;
     }
     .recText{
         overflow : hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
         max-height: 125px;
     }
     

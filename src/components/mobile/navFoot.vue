@@ -4,6 +4,7 @@
             <p @click="toLink(pcData.copyrightUrl)">{{mobileData.copyright}}</p>
             <p @click="toLink(pcData.icpUrl)">{{mobileData.icp}}</p>
             <p>{{mobileData.address}}</p>
+            <p>技术支持：志晟科技（广州）有限公司</p>
         </div>
         <div class="contact">
             <div class="ercode">

@@ -1,20 +1,20 @@
 <template>
     <div class="bg">
         <head-top webActive="人才招聘" webChildActive=""></head-top>
-        <div class="newsBg">
+        <div class="web_newsBg">
             <div class="container">
-                <h2 class="newsH2">{{val.contentTitle}}</h2>
-                <div class="newsSource"> 
+                <h2 class="web_newsH2">{{val.contentTitle}}</h2>
+                <div class="web_newsSource"> 
                     <div>
-                        <span class="wdrecSalary">{{val.contentSubtitle}}</span>
-                        <span class="recExp">{{val.remark}}</span> 
+                        <span class="web_detail_recSalary">{{val.contentSubtitle}}</span>
+                        <span class="web_recExp">{{val.remark}}</span> 
                     </div>
                     <span>{{val.publishTime}}</span>
                 </div>
                 <div>
                     
                 </div>
-                <div class="newsText" v-html="val.contentHtml"></div>
+                <div class="web_newsText" v-html="val.contentHtml"></div>
             </div>
         </div>
     </div>
@@ -65,18 +65,18 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    .newsBg{
+    .web_newsBg{
         background-color: #f7f7f7;
         padding:36px 0;
     }
-    .newsH2{
+    .web_newsH2{
         text-align:center;
         font-size:30px;
         line-height: 40px;
         margin:20px 0 60px 0;
         color:#152b59;
     }
-    .newsSource{
+    .web_newsSource{
         display: flex;
         flex-wrap: nowrap;
         justify-content: space-between;
@@ -84,16 +84,20 @@
         border-bottom:2px solid #a9a9a9;
         color:#152b59;
     }
-    .newsText{
+    .web_newsText{
         font-size:16px;
         padding:35px 80px;
         color:#152b59;
         line-height: 36px;
     }
-    .wdrecSalary{
+    .web_detail_recSalary{
         color:#b12b6e;
         font-size:16px;
         margin-right:15px;
+    }
+    .web_recExp{
+        color:#152b59;
+        font-size:16px;
     }
 
 </style>

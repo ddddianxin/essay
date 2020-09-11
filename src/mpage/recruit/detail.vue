@@ -5,8 +5,8 @@
             <h2 class="mDetailTit">{{val.contentTitle}}</h2>
             <div class="mDetailRecSource">
                 <div>
-                    <span class="recSalary">{{val.contentSubtitle}}</span>
-                    <span class="recExp">{{val.remark}}</span> 
+                    <span class="wap_recSalary">{{val.contentSubtitle}}</span>
+                    <span class="wap_recExp">{{val.remark}}</span> 
                 </div>
                 <span>{{val.publishTime}}</span>
             </div>
@@ -80,7 +80,7 @@
         padding:px2rem(30) 0;
         line-height: px2rem(60);;
     }
-    .recSalary{
+    .wap_recSalary{
         color:#b12b6e;
         margin-right:px2rem(30);
         font-size:px2rem(28);

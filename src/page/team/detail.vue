@@ -16,7 +16,7 @@
                     <span :class="tab==1?'active':''" @click="clickTab(1)">个人简介</span>
                     <span :class="tab==2?'active':''" @click="clickTab(2)">代表性项目</span>
                     <span :class="tab==3?'active':''" @click="clickTab(3)">代表性成果</span>
-                    <span :class="tab==4?'active':''" @click="clickTab(4)">团队成员</span>
+                    <span v-if="plainArr[7]=='团队成员'" :class="tab==4?'active':''" @click="clickTab(4)">团队成员</span>
                 </div>
                 <div class="desPanel">
                     <div v-if="tab==1">
@@ -57,6 +57,7 @@
                 val:'',
                 valArr:'',
                 plainArr:'',
+                
             }
         },
         components:{
@@ -82,8 +83,6 @@
             }
         },
         created(){
-
-
         },
     }
 

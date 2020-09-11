@@ -1,9 +1,9 @@
 <template>
     <div class="m_bg">
         <head-top webActive="recruit" title="人才招聘"></head-top>
-        <div class="webRecBg">
+        <div class="wapRecBg">
             <img class="m_bgTop" src="../../images/mCtIntro.png">
-            <div class="webRecList">
+            <div class="wapRecList">
                 <scroll class="wrapper" :style="'height:'+scrollH+'px;'"
                     :data="listData"
                     :listenScroll="true"
@@ -137,10 +137,10 @@
 
 <style lang="scss">
     @import '../../style/mixin';
-    // .webRecBg{
-    //     padding-top:px2rem(180);
-    // }
-    .webRecList{
+    .wapRecBg{
+        padding-top:px2rem(180);
+    }
+    .wapRecList{
         display: block;
         background-color: #f7f7f7;
         overflow: hidden;
@@ -176,10 +176,10 @@
     }
     .mrecText{
         overflow : hidden;
-text-overflow: ellipsis;
-display: -webkit-box;
--webkit-line-clamp: 4;
--webkit-box-orient: vertical;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
         max-height: 125px;
         color:#152b59;
     }

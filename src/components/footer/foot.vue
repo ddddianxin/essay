@@ -13,7 +13,8 @@
         <div class="container footText">
             <span class="mr15 hoverStyle" @click="toLink(pcData.copyrightUrl)">{{pcData.copyright}}</span>
             <span class="mr15 hoverStyle" @click="toLink(pcData.icpUrl)">{{pcData.icp}}</span>
-            <span>{{pcData.address}}</span>
+            <span class="mr15">{{pcData.address}}</span>
+            <p>技术支持：志晟科技（广州）有限公司</p>
         </div>
     </div>
     
